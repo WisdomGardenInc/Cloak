@@ -1,0 +1,9 @@
+/node_modules
+/oh_modules
+/.preview
+/build
+/.cxx
+/.test
+
+/src/main/resources/rawfile/www/
+/src/main/resources/rawfile/www/
