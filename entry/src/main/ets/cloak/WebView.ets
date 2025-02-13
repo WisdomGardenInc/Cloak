@@ -2,7 +2,7 @@ import { webview } from '@kit.ArkWeb';
 import { BusinessError } from '@kit.BasicServicesKit';
 import { url } from '@kit.ArkTS';
 import Config from './Config';
-// import * as DevUtils from './DevUtils';
+import * as DialogUtils from './DialogUtils';
 import * as Utils from './Utils';
 
 @Component
@@ -11,7 +11,7 @@ export default struct CloakWebView {
 
   aboutToAppear(): void {
     try {
-      webview.WebviewController.setWebDebuggingAccess(true);
+      webview.WebviewController.setWebDebuggingAccess(Config.IS_DEBUG);
     } catch (error) {
       console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
     }
@@ -48,14 +48,26 @@ export default struct CloakWebView {
         .allowWindowOpenMethod(true)// ?
         .mediaOptions({
           resumeInterval: 0, audioExclusive: true
-        })// .onAlert((event) => {
-          //   DevUtils.showAlert(event.message);
-          //   return true;
-          // })
-          // .onPrompt((event) => {
-          //   DevUtils.showAlert(event.message);
-          //   return true;
-          // })
+        })
+        .onAlert((event) => {
+          event && event.message && DialogUtils.showAlert(event.message, () => {
+            event.result.handleConfirm();
+          });
+          return true;
+        })
+        .onConfirm((event) => {
+          event && event.message && DialogUtils.showConfirm(event.message, (success: boolean) => {
+            if (success) {
+              event.result.handleConfirm();
+            } else {
+              event.result.handleCancel();
+            }
+          });
+          return true;
+        })
+        .onPrompt(() => {
+          return false;
+        })
         .onInterceptRequest((event) => {
           if (!event) {
             return null;
@@ -94,7 +106,6 @@ export default struct CloakWebView {
             console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
           }
         })
-
       // .onPageEnd((event) => {
       //   if (event) {
       //     console.log('onPageEnd url:' + event.url);
