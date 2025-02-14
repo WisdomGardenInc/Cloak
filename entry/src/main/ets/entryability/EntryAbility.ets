@@ -1,11 +1,19 @@
 import { AbilityConstant, ConfigurationConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
+import PluginManager from '../cloak/pluginsCore/PluginManager';
+import DeviceInfo from '../cloak/plugins/DeviceInfo';
+import Geolocation from '../cloak/plugins/Geolocation';
 
 export default class EntryAbility extends UIAbility {
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
     this.context.getApplicationContext().setColorMode(ConfigurationConstant.ColorMode.COLOR_MODE_NOT_SET);
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onCreate');
+
+
+    // TODO: 插件注册地方，要移动
+    PluginManager.addPlugin(new DeviceInfo());
+    PluginManager.addPlugin(new Geolocation());
   }
 
   onDestroy(): void {

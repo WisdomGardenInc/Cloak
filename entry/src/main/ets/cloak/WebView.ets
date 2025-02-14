@@ -4,6 +4,7 @@ import { url } from '@kit.ArkTS';
 import Config from './Config';
 import * as DialogUtils from './DialogUtils';
 import * as Utils from './Utils';
+import PluginManager from './pluginsCore/PluginManager';
 
 @Component
 export default struct CloakWebView {
@@ -19,6 +20,7 @@ export default struct CloakWebView {
 
   build() {
     Column() {
+      // TODO: 如何拿到 web 实例，并且能暴露给外边？
       Web({
         src: Config.APP_HOST,
         controller: this.webviewController,
@@ -105,18 +107,15 @@ export default struct CloakWebView {
           } catch (error) {
             console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
           }
+
+          PluginManager.registerPlugins(this.webviewController, this.getUIContext().getHostContext()?.resourceManager);
         })
+
       // .onPageEnd((event) => {
+      // // 每次页面url 变动都调用
       //   if (event) {
       //     console.log('onPageEnd url:' + event.url);
       //   }
-      // })
-
-      // .javaScriptProxy({
-      //   object: this.testNativeObj,
-      //   name: "testNativeObj",
-      //   methodList: ["test"],
-      //   controller: this.controller,
       // })
     }
     .width("100%")
