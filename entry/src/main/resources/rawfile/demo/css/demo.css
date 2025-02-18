@@ -4,14 +4,83 @@
 }
 
 html, body {
-    width: 100%;
+    width: 100vw;
     color: black;
     font-size: 16px;
 }
 
 body {
+    height: 100vh;
+    scroll: auto;
     padding: 1rem;
     box-sizing: border-box;
+}
+
+section {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    scroll: auto;
+}
+
+h2 {
+    margin-bottom: 1rem;
+}
+
+button {
+    margin: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#mediaPreview {
+    margin-top: 1rem;
+    max-width: 100%;
+}
+
+#mediaPreview img, 
+#mediaPreview video, 
+#mediaPreview audio {
+    max-width: 100%;
+    margin-top: 0.5rem;
+}
+
+#locationInfo, #qrResult {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    background-color: #f0f0f0;
+    overflow: scroll;
+    word-wrap: break-word;
+    line-break: auto;
+    width: 100%;
+    height: auto;
+}
+
+#qrVideo {
+    width: 100%;
+    position: relative;
+}
+
+#notesList {
+    margin-top: 1rem;
+}
+
+.note-item {
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .demo {

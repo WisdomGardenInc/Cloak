@@ -1,6 +1,20 @@
 {
   "app": {
-    "signingConfigs": [],
+    "signingConfigs": [
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "storePassword": "000000217C4166A8471876ED795B62D18540578034B9465D58EEDFA6A2297E9706C1714B14E28A664CB5563A18EC8C7C16",
+          "certpath": "./signing/cloak_development.cer",
+          "keyAlias": "cloak",
+          "keyPassword": "00000021A7155D5B42242BCDFBBC7EAEE7BD3EA42802078A2F1760723FDB69AD6F98FB3F1C8A2977FB365520A23BEBA272",
+          "profile": "./signing/CloakDevelopmentDebug.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "./signing/cloak.p12"
+        }
+      }
+    ],
     "products": [
       {
         "name": "default",

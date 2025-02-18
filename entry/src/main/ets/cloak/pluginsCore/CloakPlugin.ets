@@ -4,7 +4,10 @@
 // name 可能注入懂啊 window 上的某个对象上
 
 
-interface PluginMataData {
+// TODO: arkts-limited-esobj
+// native debug 就不能  webview debug
+// run app 之后 自动运行 ./scripts/remote-debug.sh
+export interface PluginMetadata extends ESObject {
   name: string;
   version: string;
   description: string;
@@ -16,6 +19,7 @@ export default abstract class CloakPlugin {
   protected abstract _name: string;
   protected abstract _version: string;
   protected _description: string = '';
+  // TODO:  Definite assignment assertions are not supported (arkts-no-definite-assignment)
   protected _pluginMethods!: string[];
 
   public get name() {
@@ -38,13 +42,13 @@ export default abstract class CloakPlugin {
     // TODO: name 能否注入到 window.xxx.yyy 上?
     try {
       webviewController.registerJavaScriptProxy(this, `${CloakPlugin.pluginNamePrefix}${this._name}`,
-        this._pluginMethods.concat('getMataData'))
+        this._pluginMethods.concat('getMetadata'))
     } catch (error) {
       console.error(`registerJavaScriptProxy error: ${error}`);
     }
   }
 
-  public getMataData(): PluginMataData {
+  public getMetadata():PluginMetadata {
     return {
       name: this._name,
       version: this._version,

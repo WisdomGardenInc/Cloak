@@ -17,7 +17,7 @@ export default class PluginManager {
 
     const cloakGlobalObject = new CloakGlobalObject();
 
-    webviewController.registerJavaScriptProxy(cloakGlobalObject, "Cloak", ["getMataData", "registerPlugins"])
+    webviewController.registerJavaScriptProxy(cloakGlobalObject, "Cloak", ["getMetadata", "registerPlugins"])
 
 
     // resourceManager?.getStringValue($rawfile('CloakClient.js'), (err, jsFileContent) => {
@@ -38,11 +38,11 @@ export default class PluginManager {
 (function () {
     const clockPlugins = Object.keys(window).filter(key => key.startsWith('_cloak_plugin_'))
     Cloak.plugins = {};
-    Cloak.matadata = Cloak.getMataData();
+    Cloak.metadata = Cloak.getMetadata();
     clockPlugins.forEach(pluginName => {
         const newName = pluginName.substr(14);
         Cloak.plugins[newName] = window[pluginName];
-        Cloak.plugins[newName].matadata = Cloak.plugins[newName].getMataData();
+        Cloak.plugins[newName].metadata = Cloak.plugins[newName].getMetadata();
     })
 })()
 `)

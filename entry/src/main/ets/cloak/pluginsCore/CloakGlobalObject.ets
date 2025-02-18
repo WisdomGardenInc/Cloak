@@ -1,11 +1,17 @@
-interface CloakGlobalObjectMataData {
+import CloakPlugin, { PluginMetadata } from "./CloakPlugin";
+
+interface CloakGlobalObjectMetadata extends PluginMetadata {
   name: string;
   version: string;
   description: string;
   platform: string;
 }
 
-export default class CloakGlobalObject {
+export default class CloakGlobalObject extends CloakPlugin {
+  protected _name = "Cloak";
+  protected _version = "0.0.1";
+  protected _description = "Cloak is a Hybrid Framework for HarmonyOS";
+
   /**
    * window.Cloak {
    *   plugins: {
@@ -27,20 +33,20 @@ export default class CloakGlobalObject {
    *
    **/
 
-  private name = 'Cloak'
-  private version = "0.0.1"
-  private description = 'Cloak is a Hybrid Framework for HarmonyOS'
 
-  public getMataData(): CloakGlobalObjectMataData {
+  public getMetadata(): CloakGlobalObjectMetadata {
+    const superMetaData = super.getMetadata();
+
     return {
-      name: this.name,
-      version: this.version,
-      description: this.description,
+      name: superMetaData.name,
+      version: superMetaData.version,
+      description: superMetaData.description,
+      methods: superMetaData.methods,
       platform: "HarmonyOS"
-    }
+    };
   }
 
-  public registerPlugins() {
-
+  registerPlugins() {
+    // client logic
   }
 }

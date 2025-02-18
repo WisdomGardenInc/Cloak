@@ -1,6 +1,8 @@
 export const showAlert =
-  (message: string, gotResult: (success: boolean, message: string | null) => void) => {
+  (message: string | Resource, gotResult: (success: boolean, message: string | null,) => void,
+    title: string | Resource = "") => {
     AlertDialog.show({
+      title,
       message,
       autoCancel: false,
       isModal: true,
@@ -8,7 +10,7 @@ export const showAlert =
         gotResult(false, null)
       },
       confirm: {
-        value: "OK",
+        value: $r('app.string.common_ui_dialog_ok'),
         action: () => {
           gotResult(true, null)
         }
@@ -17,24 +19,27 @@ export const showAlert =
   }
 
 
-export const showConfirm = (message: string, gotResult: (success: boolean, message: string | null) => void) => {
-  AlertDialog.show({
-    message: message,
-    autoCancel: false,
-    primaryButton: {
-      value: 'Confirm',
-      action: () => {
-        gotResult(true, null)
-      }
-    },
-    secondaryButton: {
-      value: 'Cancel',
-      action: () => {
+export const showConfirm =
+  (message: string | Resource, gotResult: (success: boolean, message: string | null) => void,
+    title: string | Resource = "") => {
+    AlertDialog.show({
+      title,
+      message,
+      autoCancel: false,
+      primaryButton: {
+        value: $r('app.string.common_ui_dialog_confirm'),
+        action: () => {
+          gotResult(true, null)
+        }
+      },
+      secondaryButton: {
+        value: $r('app.string.common_ui_dialog_cancel'),
+        action: () => {
+          gotResult(false, null)
+        }
+      },
+      cancel: () => {
         gotResult(false, null)
       }
-    },
-    cancel: () => {
-      gotResult(false, null)
-    }
-  })
-}
+    })
+  }

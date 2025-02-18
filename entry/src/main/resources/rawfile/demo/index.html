@@ -5,15 +5,72 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cloak</title>
+    <title>Clock</title>
     <link rel="stylesheet" href="/css/demo.css">
     <script src="/js/demo.js"></script>
 </head>
 <body>
-<h1>Hello Cloak</h1>
+    <div>
 
-<div class="demo"></div>
-<button onclick="onAlert()">Alert</button>
-<button onclick="onConfirm()">Confirm</button>
+        <h1>HTML5 Feature Demo</h1>
+        <section>
+            <div class="demo"></div>
+        </section>
+        <section id="common-section">
+            <h2>Common Operations</h2>
+            <button onclick="onAlert()">Alert</button>
+            <button onclick="onConfirm()">Confirm</button>
+        </section>
+
+        <section id="media-section">
+            <h2>Media Operations</h2>
+            <button onclick="takePhoto()">Take Photo using mediaDevices</button>
+            <button onclick="recordVideo()">Record 5s Video using mediaDevices</button>
+            <button onclick="recordAudio()">Record 5s Audio using mediaDevices</button>
+            <hr />
+            <button onclick="takeMedia('image/*')">Take Photo using input</button>
+            <button onclick="takeMedia('video/*')">Record Video using input</button>
+            <button onclick="takeMedia('audio/*')">Record Audio using input</button>
+            <hr />
+            <button onclick="selectFile('image/*')">Select Image using input</button>
+            <button onclick="selectFile('video/*')">Select Video using input</button>
+            <button onclick="selectFile('audio/*')">Select Audio using input</button>
+            <button onclick="selectFile('')">Select File</button>
+            <div id="mediaPreview"></div>
+        </section>
+
+        <section id="location-section">
+            <h2>Location Services</h2>
+            <button onclick="getLocation()">Get Location</button>
+            <button onclick="startWatchLocation()">Start Watching Location</button>
+            <button onclick="stopWatchLocation()">Stop Watching Location</button>
+            <hr />
+            <button onclick="getLocationNative()">Get Location Native</button>
+            <div id="locationInfo"></div>
+        </section>
+
+        <section id="qr-section">
+            <h2>QR Code Scan</h2>
+            <button onclick="startQRScan()">Start QR Scan</button>
+            <button onclick="stopQRScan()">Stop QR Scan</button>
+            <video id="qrVideo" style="display: none"></video>
+            <canvas id="qrCanvas" style="display: none"></canvas>
+            <div id="qrResult"></div>
+        </section>
+
+        <section id="vibration-section">
+            <h2>Other Features</h2>
+            <button onclick="vibrate()">Vibrate</button>
+        </section>
+
+        <section id="indexeddb-section">
+            <h2>IndexedDB Demo</h2>
+            <div>
+                <input type="text" id="noteInput" placeholder="Enter note content">
+                <button onclick="addNote()">Add Note</button>
+            </div>
+            <div id="notesList"></div>
+        </section>
+    </div>
 </body>
 </html>

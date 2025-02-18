@@ -92,3 +92,5 @@ $RECYCLE.BIN/
 /.clang-tidy
 **/.test
 /.appanalyzer
+
+signing

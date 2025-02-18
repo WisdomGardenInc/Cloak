@@ -1,5 +1,6 @@
 import CloakPlugin from '../pluginsCore/CloakPlugin';
 import { PluginMethod } from '../pluginsCore/utils';
+import geoLocationManager from '@ohos.geoLocationManager';
 
 interface LocationResult {
   latitude: number,
@@ -12,11 +13,9 @@ export default class Geolocation extends CloakPlugin {
   protected _description = ''
 
   @PluginMethod
-  public async getLocation(): Promise<LocationResult> {
-    // const result = await geoLocationManager.getCurrentLocation()
-    // console.log(result.latitude.toString(), result.longitude.toString());
-    return {
-      latitude: Math.random(), longitude: Math.random()
-    };
+  public async getLocation(): Promise<geoLocationManager.Location> {
+    const result = await geoLocationManager.getCurrentLocation()
+    console.log(result.latitude.toString(), result.longitude.toString());
+    return result;
   }
 }
