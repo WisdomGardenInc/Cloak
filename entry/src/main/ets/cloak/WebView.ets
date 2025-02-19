@@ -7,6 +7,8 @@ import * as DialogUtils from './DialogUtils';
 import * as Utils from './Utils';
 import PluginManager from './pluginsCore/PluginManager';
 
+
+// should expose webview, controller, context to plugins
 @Component
 export default struct CloakWebView {
   webviewController = new webview.WebviewController();
@@ -167,16 +169,11 @@ export default struct CloakWebView {
           } catch (error) {
             console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
           }
-
-          PluginManager.registerPlugins(this.webviewController, this.getUIContext().getHostContext()?.resourceManager);
+          PluginManager.registerPlugins(this.webviewController);
         })
-
-      // .onPageEnd((event) => {
-      // // 每次页面url 变动都调用
-      //   if (event) {
-      //     console.log('onPageEnd url:' + event.url);
-      //   }
-      // })
+        .onPageEnd((event) => {
+          PluginManager.initCloakClient(this.webviewController, this.getUIContext().getHostContext()?.resourceManager);
+        })
     }
     .width("100%")
     .height("100%")

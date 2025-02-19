@@ -9,8 +9,7 @@ export default class PluginManager {
     PluginManager._plugins.set(plugin.name, plugin)
   }
 
-  public static registerPlugins(webviewController: WebviewController,
-    resourceManager?: resourceManager.ResourceManager) {
+  public static registerPlugins(webviewController: WebviewController) {
     PluginManager._plugins.forEach(plugin => {
       plugin.register(webviewController);
     })
@@ -18,7 +17,14 @@ export default class PluginManager {
     const cloakGlobalObject = new CloakGlobalObject();
 
     webviewController.registerJavaScriptProxy(cloakGlobalObject, "Cloak", ["getMetadata", "registerPlugins"])
+    webviewController.refresh();
+  }
 
+  public static initCloakClient(webviewController: WebviewController,
+    resourceManager?: resourceManager.ResourceManager) {
+    PluginManager._plugins.forEach(plugin => {
+      plugin.register(webviewController);
+    })
 
     // resourceManager?.getStringValue($rawfile('CloakClient.js'), (err, jsFileContent) => {
     //   if (err) {
@@ -28,10 +34,8 @@ export default class PluginManager {
     //   }
     // })
 
-    webviewController.refresh();
 
-    setTimeout(() => {
-      webviewController.runJavaScript(`
+    webviewController.runJavaScript(`
 (function () {
     const cloakPlugins = Object.keys(window).filter(key => key.startsWith('_cloak_plugin_'))
     Cloak.plugins = {};
@@ -43,9 +47,6 @@ export default class PluginManager {
     })
 })()
 `)
-      webviewController.runJavaScript('window.document.body.dispatchEvent(new Event("CloakReady"));')
-    }, 1000)
-
-
+    webviewController.runJavaScript('window.document.body.dispatchEvent(new Event("CloakReady"));')
   }
 }
