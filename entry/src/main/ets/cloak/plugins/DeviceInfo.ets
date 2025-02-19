@@ -1,5 +1,4 @@
-import CloakPlugin from '../pluginsCore/CloakPlugin';
-import { PluginMethod } from '../pluginsCore/utils';
+import CloakPlugin, { PluginMethod } from '../pluginsCore/CloakPlugin';
 
 interface DeviceInfoResult {
   platform: string,

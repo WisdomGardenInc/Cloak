@@ -1,9 +1,6 @@
 import CloakPlugin, { PluginMetadata } from "./CloakPlugin";
 
 interface CloakGlobalObjectMetadata extends PluginMetadata {
-  name: string;
-  version: string;
-  description: string;
   platform: string;
 }
 
@@ -42,11 +39,11 @@ export default class CloakGlobalObject extends CloakPlugin {
       version: superMetaData.version,
       description: superMetaData.description,
       methods: superMetaData.methods,
-      platform: "HarmonyOS"
+      platform: "HarmonyOS",
     };
   }
 
   registerPlugins() {
-    // client logic
+    // move to client logic
   }
 }

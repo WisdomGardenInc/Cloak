@@ -1,11 +1,6 @@
-import CloakPlugin from '../pluginsCore/CloakPlugin';
-import { PluginMethod } from '../pluginsCore/utils';
+import CloakPlugin, { PluginMethod } from '../pluginsCore/CloakPlugin';
 import geoLocationManager from '@ohos.geoLocationManager';
 
-interface LocationResult {
-  latitude: number,
-  longitude: number
-}
 
 export default class Geolocation extends CloakPlugin {
   protected _name = "Geolocation";

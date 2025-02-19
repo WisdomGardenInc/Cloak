@@ -30,16 +30,13 @@ export default class PluginManager {
 
     webviewController.refresh();
 
-
-    // TODO: 生命周期， 页面刷新后还得调用
-    // TODO: 从文件读取
     setTimeout(() => {
       webviewController.runJavaScript(`
 (function () {
-    const clockPlugins = Object.keys(window).filter(key => key.startsWith('_cloak_plugin_'))
+    const cloakPlugins = Object.keys(window).filter(key => key.startsWith('_cloak_plugin_'))
     Cloak.plugins = {};
     Cloak.metadata = Cloak.getMetadata();
-    clockPlugins.forEach(pluginName => {
+    cloakPlugins.forEach(pluginName => {
         const newName = pluginName.substr(14);
         Cloak.plugins[newName] = window[pluginName];
         Cloak.plugins[newName].metadata = Cloak.plugins[newName].getMetadata();

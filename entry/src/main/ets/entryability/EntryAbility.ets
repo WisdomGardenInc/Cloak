@@ -11,7 +11,7 @@ export default class EntryAbility extends UIAbility {
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onCreate');
 
 
-    // TODO: 插件注册地方，要移动
+    // TODO: add plugin will move to other place
     PluginManager.addPlugin(new DeviceInfo());
     PluginManager.addPlugin(new Geolocation());
   }

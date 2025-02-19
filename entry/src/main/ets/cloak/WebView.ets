@@ -41,7 +41,6 @@ export default struct CloakWebView {
 
   build() {
     Column() {
-      // TODO: 如何拿到 web 实例，并且能暴露给外边？
       Web({
         src: Config.APP_HOST,
         controller: this.webviewController,
