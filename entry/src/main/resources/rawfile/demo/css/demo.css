@@ -87,3 +87,24 @@ button:hover {
     background-color: green;
     margin: 1rem 0;
 }
+
+.plugin-item {
+    margin: 1rem 0;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.plugin-item h3 {
+    margin-bottom: 0.5rem;
+    color: #2196F3;
+    font-family: 'monospace';
+}
+
+.plugin-item p {
+    margin: 0.5rem 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    word-break: break-word;
+}
