@@ -17,12 +17,12 @@ export default class DeviceInfo extends CloakPlugin {
   protected _version = "0.0.1";
   protected _description = ''
 
-  // @PluginMethod
+  // @PluginMethod()
   // public getInnerObj(): ESObject {
   //   return new TestInnerObj();
   // };
 
-  @PluginMethod
+  @PluginMethod()
   public async getDeviceInfo(): Promise<DeviceInfoResult> {
 
     return {

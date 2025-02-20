@@ -1,6 +1,6 @@
 import { common } from "@kit.AbilityKit";
 
-// Decorator
+
 export interface PluginMetadata extends ESObject {
   name: string;
   version: string;
@@ -8,27 +8,35 @@ export interface PluginMetadata extends ESObject {
   methods: string[];
 }
 
-export function PluginMethod(target: CloakPlugin, propertyName: string, descriptor: PropertyDescriptor) {
-  target.addPluginMethodName(propertyName);
+
+// Decorator
+export function PluginMethod() {
+  return (target: CloakPlugin, propertyName: string, descriptor: PropertyDescriptor) => {
+    target.addPluginMethodName(propertyName);
+  }
 }
 
 export default abstract class CloakPlugin {
   private static pluginNamePrefix = "_cloak_plugin_"
+  protected static applicationContext: common.ApplicationContext;
+  protected static webviewController: WebviewController;
+  private static pluginsMethodsMap = new Map<string, string[]>();
   protected abstract _name: string;
   protected abstract _version: string;
   protected _description: string = '';
-
-  protected static applicationContext: common.ApplicationContext;
-  protected static webviewController: WebviewController;
-
-  protected _pluginMethods!: string[];
+  private _pluginMethods: string[];
 
   public addPluginMethodName(methodName: string) {
     // Decorator before class instance constructor
-    if (!this._pluginMethods) {
-      this._pluginMethods = [];
+    if (!CloakPlugin.pluginsMethodsMap.has(this.constructor.name)) {
+      CloakPlugin.pluginsMethodsMap.set(this.constructor.name, [methodName]);
+    } else {
+      CloakPlugin.pluginsMethodsMap.get(this.constructor.name)!.push(methodName);
     }
-    this._pluginMethods.push(methodName);
+  }
+
+  constructor() {
+    this._pluginMethods = CloakPlugin.pluginsMethodsMap.get(this.constructor.name) ?? [];
   }
 
   public get name() {
