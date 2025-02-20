@@ -12,6 +12,7 @@ export default class EntryAbility extends UIAbility {
 
 
     // TODO: add plugin will move to other place
+    PluginManager.setApplicationContext(this.context.getApplicationContext());
     PluginManager.addPlugin(new DeviceInfo());
     PluginManager.addPlugin(new Geolocation());
   }

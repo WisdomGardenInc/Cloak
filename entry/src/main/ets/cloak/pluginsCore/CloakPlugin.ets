@@ -1,3 +1,5 @@
+import { common } from "@kit.AbilityKit";
+
 // Decorator
 export interface PluginMetadata extends ESObject {
   name: string;
@@ -15,6 +17,10 @@ export default abstract class CloakPlugin {
   protected abstract _name: string;
   protected abstract _version: string;
   protected _description: string = '';
+
+  protected static applicationContext: common.ApplicationContext;
+  protected static webviewController: WebviewController;
+
   protected _pluginMethods!: string[];
 
   public addPluginMethodName(methodName: string) {
@@ -34,7 +40,9 @@ export default abstract class CloakPlugin {
     return this._pluginMethods.slice();
   }
 
-  public register(webviewController: WebviewController) {
+  public register(context: common.ApplicationContext, webviewController: WebviewController) {
+    CloakPlugin.applicationContext = context;
+    CloakPlugin.webviewController = webviewController;
     try {
       webviewController.registerJavaScriptProxy(this, `${CloakPlugin.pluginNamePrefix}${this._name}`,
         this._pluginMethods.concat('getMetadata'))

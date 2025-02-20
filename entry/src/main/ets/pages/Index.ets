@@ -1,11 +1,12 @@
-import CloakWebView from '../cloak/WebView';
+import CloakWebview from '../cloak/Webview';
+
 
 @Entry
-@Component
+@ComponentV2
 struct CloakIndex {
   build() {
     Column() {
-      CloakWebView()
+      CloakWebview()
     }
   }
 }

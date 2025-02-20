@@ -1,5 +1,5 @@
 import CloakPlugin, { PluginMethod } from '../pluginsCore/CloakPlugin';
-import geoLocationManager from '@ohos.geoLocationManager';
+import { geoLocationManager } from '@kit.LocationKit';
 
 
 export default class Geolocation extends CloakPlugin {

@@ -10,7 +10,7 @@ import PluginManager from './pluginsCore/PluginManager';
 
 // should expose webview, controller, context to plugins
 @Component
-export default struct CloakWebView {
+export default struct CloakWebview {
   webviewController = new webview.WebviewController();
 
   aboutToAppear(): void {
@@ -169,10 +169,11 @@ export default struct CloakWebView {
           } catch (error) {
             console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
           }
-          PluginManager.registerPlugins(this.webviewController);
+          PluginManager.setWebviewController(this.webviewController);
+          PluginManager.registerPlugins();
         })
         .onPageEnd((event) => {
-          PluginManager.initCloakClient(this.webviewController, this.getUIContext().getHostContext()?.resourceManager);
+          PluginManager.initCloakClient();
         })
     }
     .width("100%")

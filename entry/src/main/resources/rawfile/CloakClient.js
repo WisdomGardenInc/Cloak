@@ -7,4 +7,6 @@
         Cloak.plugins[newName] = window[pluginName];
         Cloak.plugins[newName].metadata = Cloak.plugins[newName].getMetadata();
     })
+
+    window.document.body.dispatchEvent(new Event("CloakReady"));
 })()
