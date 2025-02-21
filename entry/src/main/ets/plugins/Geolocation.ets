@@ -1,4 +1,4 @@
-import CloakPlugin, { PluginMethod } from '../pluginsCore/CloakPlugin';
+import { CloakPlugin, PluginMethod } from '@wisdomgarden/cloak';
 import { geoLocationManager } from '@kit.LocationKit';
 
 

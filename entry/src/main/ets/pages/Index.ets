@@ -1,4 +1,4 @@
-import CloakWebview from '../cloak/Webview';
+import { CloakWebview } from "@wisdomgarden/cloak"
 
 
 @Entry

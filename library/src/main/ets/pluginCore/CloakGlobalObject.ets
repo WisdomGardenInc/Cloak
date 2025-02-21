@@ -1,4 +1,4 @@
-import CloakPlugin, { PluginMetadata } from "./CloakPlugin";
+import  { CloakPlugin, PluginMetadata } from "./CloakPlugin";
 
 interface CloakGlobalObjectMetadata extends PluginMetadata {
   platform: string;

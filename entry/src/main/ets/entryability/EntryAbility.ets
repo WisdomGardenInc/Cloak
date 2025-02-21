@@ -1,9 +1,10 @@
 import { AbilityConstant, ConfigurationConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
-import PluginManager from '../cloak/pluginsCore/PluginManager';
-import DeviceInfo from '../cloak/plugins/DeviceInfo';
-import Geolocation from '../cloak/plugins/Geolocation';
+import { PluginManager } from "@wisdomgarden/cloak"
+import DeviceInfo from '../plugins/DeviceInfo';
+import Geolocation from '../plugins/Geolocation';
+
 
 export default class EntryAbility extends UIAbility {
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {

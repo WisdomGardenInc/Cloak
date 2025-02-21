@@ -1,4 +1,4 @@
-import CloakPlugin, { PluginMethod } from '../pluginsCore/CloakPlugin';
+import { CloakPlugin, PluginMethod } from '@wisdomgarden/cloak';
 
 interface DeviceInfoResult {
   platform: string,

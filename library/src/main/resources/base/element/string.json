@@ -1,0 +1,48 @@
+{
+  "string": [
+    {
+      "name": "permission_location_reason",
+      "value": "We need access to your location to offer personalized attendance services, making it easier for you to check in wherever you are."
+    },
+    {
+      "name": "permission_network_reason",
+      "value": "To ensure the best service quality, we request permission to monitor your network status. This helps us optimize your experience based on your connection type."
+    },
+    {
+      "name": "permission_internet_reason",
+      "value": "Our app requires internet access to deliver up-to-date information and services. Your privacy and security are our priority."
+    },
+    {
+      "name": "permission_camera_reason",
+      "value": "Allow camera access so you can use visual features such as scanning QR codes or capturing photos directly within the app."
+    },
+    {
+      "name": "permission_microphone_reason",
+      "value": "Grant microphone access to enable voice interaction features, allowing for a hands-free experience when using the app."
+    },
+    {
+      "name": "permission_vibrate_reason",
+      "value": "We request permission to use vibration features to provide tactile feedback for notifications and in-app actions, enhancing your interactive experience without disturbing others around you."
+    },
+    {
+      "name": "common_ui_dialog_request_permission_title",
+      "value": "Request Permission"
+    },
+    {
+      "name": "common_ui_dialog_webview_request_permission_title",
+      "value": "Webview Request Permission"
+    },
+    {
+      "name": "common_ui_dialog_confirm",
+      "value": "Confirm"
+    },
+    {
+      "name": "common_ui_dialog_ok",
+      "value": "OK"
+    },
+    {
+      "name": "common_ui_dialog_cancel",
+      "value": "Cancel"
+    }
+  ]
+}

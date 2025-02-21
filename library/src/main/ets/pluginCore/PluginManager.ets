@@ -1,5 +1,5 @@
 import CloakGlobalObject from './CloakGlobalObject';
-import CloakPlugin from './CloakPlugin';
+import { CloakPlugin } from './CloakPlugin';
 import { common } from '@kit.AbilityKit';
 import { util } from '@kit.ArkTS';
 

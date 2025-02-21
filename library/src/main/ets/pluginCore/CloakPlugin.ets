@@ -1,13 +1,12 @@
 import { common } from "@kit.AbilityKit";
 
 
-export interface PluginMetadata extends ESObject {
+export interface PluginMetadata {
   name: string;
   version: string;
   description: string;
   methods: string[];
 }
-
 
 // Decorator
 export function PluginMethod() {
@@ -16,7 +15,7 @@ export function PluginMethod() {
   }
 }
 
-export default abstract class CloakPlugin {
+export abstract class CloakPlugin {
   private static pluginNamePrefix = "_cloak_plugin_"
   protected static applicationContext: common.ApplicationContext;
   protected static webviewController: WebviewController;

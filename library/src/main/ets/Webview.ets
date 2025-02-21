@@ -5,7 +5,7 @@ import Config from './Config';
 import { abilityAccessCtrl, common } from '@kit.AbilityKit';
 import * as DialogUtils from './DialogUtils';
 import * as Utils from './Utils';
-import PluginManager from './pluginsCore/PluginManager';
+import PluginManager from './pluginCore/PluginManager';
 
 
 // should expose webview, controller, context to plugins
