@@ -54,6 +54,10 @@
     {
       "name": "library",
       "srcPath": "./library",
+    },
+    {
+      "name": "CloakPluginPermission",
+      "srcPath": "./plugins/CloakPluginPermission"
     }
   ]
 }

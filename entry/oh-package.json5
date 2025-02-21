@@ -6,7 +6,8 @@
   "author": "WisdomGarden",
   "license": "Apache-2.0",
   "dependencies": {
-    "@wisdomgarden/cloak": "file:../library"
+    "@wisdomgarden/cloak": "file:../library",
+    "@wisdomgarden/cloak-plugin-permission": "file:../plugins/CloakPluginPermission"
   }
 }
 

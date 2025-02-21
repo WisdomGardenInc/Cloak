@@ -4,6 +4,7 @@ import { window } from '@kit.ArkUI';
 import { PluginManager } from "@wisdomgarden/cloak"
 import DeviceInfo from '../plugins/DeviceInfo';
 import Geolocation from '../plugins/Geolocation';
+import { CloakPluginPermission } from '@wisdomgarden/cloak-plugin-permission'
 
 
 export default class EntryAbility extends UIAbility {
@@ -16,6 +17,7 @@ export default class EntryAbility extends UIAbility {
     PluginManager.setApplicationContext(this.context.getApplicationContext());
     PluginManager.addPlugin(new DeviceInfo());
     PluginManager.addPlugin(new Geolocation());
+    PluginManager.addPlugin(new CloakPluginPermission());
   }
 
   onDestroy(): void {
