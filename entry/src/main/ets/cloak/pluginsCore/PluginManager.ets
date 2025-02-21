@@ -30,7 +30,6 @@ export default class PluginManager {
     const cloakGlobalObject = new CloakGlobalObject();
     PluginManager._webviewController.registerJavaScriptProxy(cloakGlobalObject, "Cloak",
       ["getMetadata", "registerPlugins"])
-    PluginManager._webviewController.refresh();
   }
 
   public static initCloakClient() {

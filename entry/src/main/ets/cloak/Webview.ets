@@ -171,6 +171,9 @@ export default struct CloakWebview {
           }
           PluginManager.setWebviewController(this.webviewController);
           PluginManager.registerPlugins();
+
+          // in onControllerAttached function don't need refresh
+          // this.webviewController.refresh();
         })
         .onPageEnd((event) => {
           PluginManager.initCloakClient();
