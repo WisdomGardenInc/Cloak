@@ -1,6 +1,6 @@
 {
   "module": {
-    "name": "library",
+    "name": "framework",
     "type": "har",
     "deviceTypes": [
       "default",

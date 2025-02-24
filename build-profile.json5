@@ -52,8 +52,8 @@
       ]
     },
     {
-      "name": "library",
-      "srcPath": "./library",
+      "name": "framework",
+      "srcPath": "./framework"
     },
     {
       "name": "CloakPluginPermission",
