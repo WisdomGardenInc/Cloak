@@ -1,14 +1,16 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Cloak</title>
     <link rel="stylesheet" href="/css/demo.css">
     <script src="/js/demo.js"></script>
 </head>
+
 <body>
     <div>
         <h1>HTML5 Feature Demo</h1>
@@ -23,6 +25,12 @@
             <h2>Common Operations</h2>
             <button onclick="onAlert()">Alert</button>
             <button onclick="onConfirm()">Confirm</button>
+            <button
+                onclick="queryPermissions(['ohos.permission.LOCATION', 'ohos.permission.APPROXIMATELY_LOCATION', 'ohos.permission.CAMERA','ohos.permission.MICROPHONE'])">Query
+                Permissions</button>
+            <button
+                onclick="requestPermissions(['ohos.permission.LOCATION', 'ohos.permission.APPROXIMATELY_LOCATION', 'ohos.permission.CAMERA','ohos.permission.MICROPHONE'])">Request
+                Permissions</button>
         </section>
 
         <section id="media-section">
@@ -76,4 +84,5 @@
         </section>
     </div>
 </body>
+
 </html>

@@ -2,7 +2,6 @@ import { webview } from '@kit.ArkWeb';
 import { BusinessError } from '@kit.BasicServicesKit';
 import { url } from '@kit.ArkTS';
 import Config from './Config';
-import { abilityAccessCtrl, common } from '@kit.AbilityKit';
 import * as DialogUtils from './DialogUtils';
 import * as Utils from './Utils';
 import PluginManager from './plugin/PluginManager';
@@ -19,26 +18,6 @@ export default struct CloakWebview {
     } catch (error) {
       console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
     }
-  }
-
-  onDidBuild(): void {
-    this.requestPermissionForTest();
-  }
-
-  requestPermissionForTest() {
-    let context = getContext(this) as common.UIAbilityContext;
-    let atManager = abilityAccessCtrl.createAtManager();
-
-    atManager.requestPermissionsFromUser(context,
-      ["ohos.permission.LOCATION", "ohos.permission.APPROXIMATELY_LOCATION", "ohos.permission.CAMERA",
-        "ohos.permission.MICROPHONE",
-      ]).then((data) => {
-      console.info('data:' + JSON.stringify(data));
-      console.info('data permissions:' + data.permissions);
-      console.info('data authResults:' + data.authResults);
-    }).catch((error: BusinessError) => {
-      console.error(`Failed to request permissions from user. Code is ${error.code}, message is ${error.message}`);
-    })
   }
 
   build() {
