@@ -1,5 +1,5 @@
 {
-  "name": "@wisdomgarden/cloak-plugin-permission",
+  "name": "@wisdomgarden/cloak-plugin-device",
   "version": "0.0.1",
   "description": "Please describe the basic information.",
   "main": "Index.ets",
@@ -7,8 +7,5 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@wisdomgarden/cloak": "file:../../framework"
-  },
-//  "devDependencies": {
-//    "@wisdomgarden/cloak": "file:../../library"
-//  }
+  }
 }

@@ -1,10 +1,10 @@
 import { AbilityConstant, ConfigurationConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
-import { PluginManager } from "@wisdomgarden/cloak"
-import DeviceInfo from '../plugins/DeviceInfo';
-import Geolocation from '../plugins/Geolocation';
-import { CloakPluginPermission } from '@wisdomgarden/cloak-plugin-permission'
+import { PluginManager } from '@wisdomgarden/cloak';
+import { CloakPluginDevice } from '@wisdomgarden/cloak-plugin-device';
+import { CloakPluginPermission } from '@wisdomgarden/cloak-plugin-permission';
+import { CloakPluginGeolocation } from '@wisdomgarden/cloak-plugin-geolocation';
 
 
 export default class EntryAbility extends UIAbility {
@@ -15,9 +15,10 @@ export default class EntryAbility extends UIAbility {
 
     // TODO: add plugin will move to other place
     PluginManager.setApplicationContext(this.context.getApplicationContext());
-    PluginManager.addPlugin(new DeviceInfo());
-    PluginManager.addPlugin(new Geolocation());
+
+    PluginManager.addPlugin(new CloakPluginDevice());
     PluginManager.addPlugin(new CloakPluginPermission());
+    PluginManager.addPlugin(new CloakPluginGeolocation());
   }
 
   onDestroy(): void {

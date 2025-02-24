@@ -58,6 +58,14 @@
     {
       "name": "CloakPluginPermission",
       "srcPath": "./plugins/CloakPluginPermission"
+    },
+    {
+      "name": "CloakPluginDevice",
+      "srcPath": "./plugins/CloakPluginDevice",
+    },
+    {
+      "name": "CloakPluginGeolocation",
+      "srcPath": "./plugins/CloakPluginGeolocation",
     }
   ]
 }
