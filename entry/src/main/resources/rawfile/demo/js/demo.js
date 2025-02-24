@@ -321,7 +321,8 @@ const displayPluginsInfo = () => {
         const pluginInfo = document.createElement("div");
         pluginInfo.className = "plugin-item";
         pluginInfo.innerHTML = `
-                    <h3>📦 ${metadata.name} (v${metadata.version})</h3>
+                    <h3>📦 ${metadata.name}</h3>
+                    <p>Version: ${metadata.version}</p>
                     <p>Methods: ${metadata.methods.join(", ")}</p>
                     <p>${metadata.description}</p>
                 `;

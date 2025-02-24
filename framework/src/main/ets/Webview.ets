@@ -5,7 +5,7 @@ import Config from './Config';
 import { abilityAccessCtrl, common } from '@kit.AbilityKit';
 import * as DialogUtils from './DialogUtils';
 import * as Utils from './Utils';
-import PluginManager from './pluginCore/PluginManager';
+import PluginManager from './plugin/PluginManager';
 
 
 // should expose webview, controller, context to plugins
@@ -164,7 +164,11 @@ export default struct CloakWebview {
         .onControllerAttached(() => {
           // user agent
           try {
-            let userAgent = this.webviewController.getUserAgent() + " " + Config.APP_IDENTITY_USER_AGENT;
+            const custom_agent_items = [Config.CLOAK_IDENTITY_USER_AGENT]
+            if (Config.APP_IDENTITY_USER_AGENT) {
+              custom_agent_items.push(Config.APP_IDENTITY_USER_AGENT);
+            }
+            let userAgent = this.webviewController.getUserAgent() + " " + custom_agent_items.join(" ");
             this.webviewController.setCustomUserAgent(userAgent);
           } catch (error) {
             console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);

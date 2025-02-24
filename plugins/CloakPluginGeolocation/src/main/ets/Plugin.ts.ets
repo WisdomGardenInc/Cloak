@@ -3,7 +3,7 @@ import { geoLocationManager } from '@kit.LocationKit';
 
 
 export default class Geolocation extends CloakPlugin {
-  protected _name = "CloakPluginGeolocation";
+  protected _name = "Geolocation";
   protected _version = "0.0.1";
   protected _description = ''
 

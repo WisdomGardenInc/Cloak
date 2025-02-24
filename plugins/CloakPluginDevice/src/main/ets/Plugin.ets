@@ -13,7 +13,7 @@ interface DeviceInfoResult {
 // }
 
 export default class Device extends CloakPlugin {
-  protected _name = "CloakPluginDevice";
+  protected _name = "Device";
   protected _version = "0.0.1";
   protected _description = ''
 

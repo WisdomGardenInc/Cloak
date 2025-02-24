@@ -15,12 +15,23 @@ export function PluginMethod() {
   }
 }
 
-export abstract class CloakPlugin {
+
+export interface ICloakPlugin {
+  name: string;
+
+  pluginMethods(): string[];
+
+  getMetadata(): PluginMetadata;
+
+  register(context: common.ApplicationContext, webviewController: WebviewController): void;
+}
+
+export abstract class CloakPlugin implements ICloakPlugin {
   private static pluginNamePrefix = "_cloak_plugin_"
   protected static applicationContext: common.ApplicationContext;
   protected static webviewController: WebviewController;
   private static pluginsMethodsMap = new Map<string, string[]>();
-  protected abstract _name: string;
+  protected _name: string = this.constructor.name;
   protected abstract _version: string;
   protected _description: string = '';
   private _pluginMethods: string[];
