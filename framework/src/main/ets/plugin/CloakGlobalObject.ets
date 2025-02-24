@@ -6,7 +6,7 @@ interface CloakGlobalObjectMetadata extends PluginMetadata {
 
 export default class CloakGlobalObject extends CloakPlugin {
   protected _name = "Cloak";
-  protected _version = "0.0.1";
+  protected _version = "1.0.0";
   protected _description = "Cloak is a Hybrid Framework for HarmonyOS";
 
   /**

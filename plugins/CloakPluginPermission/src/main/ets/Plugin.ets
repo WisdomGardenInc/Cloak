@@ -2,7 +2,7 @@ import {PluginMethod, CloakPlugin} from '@wisdomgarden/cloak';
 
 export default class Permission extends CloakPlugin {
   protected _name = "Permission";
-  protected _version = "0.0.1";
+  protected _version = "1.0.0";
 
   @PluginMethod()
   query() {

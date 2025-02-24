@@ -1,14 +1,11 @@
 {
   "name": "@wisdomgarden/cloak-plugin-permission",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Please describe the basic information.",
   "main": "Index.ets",
   "author": "WisdomGarden",
   "license": "Apache-2.0",
   "dependencies": {
     "@wisdomgarden/cloak": "file:../../framework"
-  },
-//  "devDependencies": {
-//    "@wisdomgarden/cloak": "file:../../library"
-//  }
+  }
 }

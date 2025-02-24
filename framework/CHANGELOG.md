@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.0.1
+## 1.0.0
 
 - Simple webview and plugin mechanism
 - Initial release
