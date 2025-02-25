@@ -1,6 +1,7 @@
 import CloakWebview from './src/main/ets/Webview'
-import { CloakPlugin, PluginMethod, PluginMetadata } from './src/main/ets/plugin/CloakPlugin'
+import Cloak from './src/main/ets/Cloak'
+import { CloakPlugin, PluginMethod, PluginMetadata, ICloakPlugin } from './src/main/ets/plugin/CloakPlugin'
 import PluginManager from './src/main/ets/plugin/PluginManager';
 
 
-export { CloakWebview, CloakPlugin, PluginMethod, PluginMetadata, PluginManager }
+export { Cloak, CloakWebview, CloakPlugin, ICloakPlugin, PluginMethod, PluginMetadata, PluginManager }

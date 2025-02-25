@@ -17,7 +17,7 @@ const onAlert = () => {
 };
 
 const onConfirm = () => {
-  const result = confirm("confirm");
+  const result = confirm("confirm content");
   console.log(result);
 };
 

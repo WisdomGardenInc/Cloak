@@ -1,0 +1,60 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "Cloak Frame 演示"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "Cloak 應用程式"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "Cloak"
+    },
+    {
+      "name": "permission_location_reason",
+      "value": "我們需要存取您的位置以提供個性化的簽到服務，讓您無論身在何處都能輕鬆簽到。"
+    },
+    {
+      "name": "permission_network_reason",
+      "value": "為了確保最佳的服務質量，我們請求監控您的網絡狀態。這有助於我們根據您的連接類型優化您的體驗。"
+    },
+    {
+      "name": "permission_internet_reason",
+      "value": "我們的應用程式需要互聯網連接以提供最新的信息和服務。您的隱私和安全是我們的首要任務。"
+    },
+    {
+      "name": "permission_camera_reason",
+      "value": "允許相機存取，以便您可以使用掃描二維碼或在應用程式內直接拍攝照片等視覺功能。"
+    },
+    {
+      "name": "permission_microphone_reason",
+      "value": "授予麥克風存取權限以啟用語音交互功能，讓您在使用應用程式時享受免提體驗。"
+    },
+    {
+      "name": "permission_vibrate_reason",
+      "value": "我們請求使用振動功能，以提供通知和應用內操作的觸覺反饋，增強您的互動體驗，同時不會打擾周圍的人。"
+    },
+    {
+      "name": "common_ui_dialog_request_permission_title",
+      "value": "請求權限"
+    },
+    {
+      "name": "common_ui_dialog_webview_request_permission_title",
+      "value": "Webview 請求權限"
+    },
+    {
+      "name": "common_ui_dialog_confirm",
+      "value": "確認"
+    },
+    {
+      "name": "common_ui_dialog_ok",
+      "value": "確定"
+    },
+    {
+      "name": "common_ui_dialog_cancel",
+      "value": "取消"
+    }
+  ]
+}

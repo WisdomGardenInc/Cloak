@@ -2,23 +2,23 @@
   "string": [
     {
       "name": "common_ui_dialog_request_permission_title",
-      "value": "Request Permission"
+      "value": "请求权限"
     },
     {
       "name": "common_ui_dialog_webview_request_permission_title",
-      "value": "Webview Request Permission"
+      "value": "Webview 请求权限"
     },
     {
       "name": "common_ui_dialog_confirm",
-      "value": "Confirm"
+      "value": "确认"
     },
     {
       "name": "common_ui_dialog_ok",
-      "value": "OK"
+      "value": "确定"
     },
     {
       "name": "common_ui_dialog_cancel",
-      "value": "Cancel"
+      "value": "取消"
     }
   ]
 }

@@ -1,5 +1,7 @@
-interface APPConfig {
-  PAGE_FOLDER: string;
+import BuildProfile from '../../../BuildProfile';
+
+export interface APPConfig {
+  APP_FOLDER: string;
   APP_HOST: string;
   APP_IDENTITY_USER_AGENT: string;
   CLOAK_IDENTITY_USER_AGENT: string;
@@ -7,11 +9,11 @@ interface APPConfig {
 }
 
 const config: APPConfig = {
-  PAGE_FOLDER: 'demo',
+  APP_FOLDER: 'demo',
   APP_HOST: 'http://localhost',
-  APP_IDENTITY_USER_AGENT: 'Cloak/harmony',
+  APP_IDENTITY_USER_AGENT: 'Cloak/HarmonyOS',
   // version should read from oh-package.json5 in module
-  CLOAK_IDENTITY_USER_AGENT: 'Cloak/1.0.0',
+  CLOAK_IDENTITY_USER_AGENT: `Cloak/${BuildProfile.HAR_VERSION}`,
   IS_DEBUG: true
 }
 

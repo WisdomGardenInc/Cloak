@@ -10,7 +10,7 @@ export default class Permission extends CloakPlugin {
   protected _name = "Permission";
   protected _version = "1.0.0";
 
-  private unionParameters(permissions: Permissions | Permissions[]): Permissions[] {
+  private unifyPermissions(permissions: Permissions | Permissions[]): Permissions[] {
     if (typeof permissions === "string") {
       return [permissions]
     }
@@ -34,7 +34,7 @@ export default class Permission extends CloakPlugin {
 
   @PluginMethod()
   async query(_permissions: Permissions | Permissions[]): Promise<Map<Permissions, abilityAccessCtrl.GrantStatus>> {
-    const permissions = this.unionParameters(_permissions);
+    const permissions = this.unifyPermissions(_permissions);
     const result = new Map<Permissions, abilityAccessCtrl.GrantStatus>(permissions.map((p) => [p,
       abilityAccessCtrl.GrantStatus.PERMISSION_DENIED]))
 
@@ -65,7 +65,7 @@ export default class Permission extends CloakPlugin {
   @PluginMethod()
   async request(_permissions: Permissions | Permissions[]): Promise<Map<Permissions, abilityAccessCtrl.GrantStatus>> {
 
-    const permissions = this.unionParameters(_permissions);
+    const permissions = this.unifyPermissions(_permissions);
 
     const result = new Map<Permissions, abilityAccessCtrl.GrantStatus>(permissions.map((p) => [p,
       abilityAccessCtrl.GrantStatus.PERMISSION_DENIED]))

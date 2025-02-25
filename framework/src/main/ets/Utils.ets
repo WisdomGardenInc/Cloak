@@ -3,9 +3,9 @@ import Config from './Config';
 
 export const getResourcePath = (pathName: string): string => {
   if (pathName === "/") {
-    return `${Config.PAGE_FOLDER}${pathName}index.html`
+    return `${Config.APP_FOLDER}${pathName}index.html`
   } else {
-    return `${Config.PAGE_FOLDER}${pathName}`
+    return `${Config.APP_FOLDER}${pathName}`
   }
 }
 

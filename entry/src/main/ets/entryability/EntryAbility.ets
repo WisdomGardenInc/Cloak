@@ -1,24 +1,21 @@
 import { AbilityConstant, ConfigurationConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
-import { PluginManager } from '@wisdomgarden/cloak';
+import { Cloak } from '@wisdomgarden/cloak';
 import { CloakPluginDevice } from '@wisdomgarden/cloak-plugin-device';
 import { CloakPluginPermission } from '@wisdomgarden/cloak-plugin-permission';
 import { CloakPluginGeolocation } from '@wisdomgarden/cloak-plugin-geolocation';
-
 
 export default class EntryAbility extends UIAbility {
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
     this.context.getApplicationContext().setColorMode(ConfigurationConstant.ColorMode.COLOR_MODE_NOT_SET);
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onCreate');
 
-
-    // TODO: add plugin will move to other place
-    PluginManager.setApplicationContext(this.context.getApplicationContext());
-
-    PluginManager.addPlugin(new CloakPluginDevice());
-    PluginManager.addPlugin(new CloakPluginPermission());
-    PluginManager.addPlugin(new CloakPluginGeolocation());
+    new Cloak(this.context.getApplicationContext(), [
+      new CloakPluginDevice(),
+      new CloakPluginPermission(),
+      new CloakPluginGeolocation()
+    ])
   }
 
   onDestroy(): void {

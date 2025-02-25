@@ -1,0 +1,36 @@
+import { CloakPlugin } from "./plugin/CloakPlugin";
+import PluginManager from "./plugin/PluginManager";
+import { common } from "@kit.AbilityKit";
+import { util } from "@kit.ArkTS";
+import Config, { APPConfig } from './Config';
+
+export default class Cloak {
+  private static APP_CONTEXT: common.ApplicationContext
+
+  constructor(context: common.ApplicationContext, plugins: CloakPlugin[]) {
+    Cloak.APP_CONTEXT = context;
+    this.parseConfig();
+    PluginManager.setApplicationContext(context);
+    plugins.forEach(plugin => {
+      PluginManager.addPlugin(plugin)
+    })
+  }
+
+  public static getAppContext() {
+    return Cloak.APP_CONTEXT;
+  }
+
+  private parseConfig() {
+    const content = Cloak.APP_CONTEXT.resourceManager.getRawFileContentSync('config.json');
+
+    const textDecoder = util.TextDecoder.create('utf-8', {
+      ignoreBOM: true
+    });
+    const config = JSON.parse(textDecoder.decodeToString(content)) as APPConfig
+
+    Config.APP_FOLDER = config.APP_FOLDER;
+    Config.APP_HOST = config.APP_HOST;
+    Config.APP_IDENTITY_USER_AGENT = config.APP_IDENTITY_USER_AGENT;
+    Config.IS_DEBUG = config.IS_DEBUG;
+  }
+}
