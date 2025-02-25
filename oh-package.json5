@@ -2,6 +2,8 @@
   "modelVersion": "5.0.1",
   "description": "Cloak - A Hybrid Development Framework for HarmonyOS",
   "author": "WisdomGarden",
+  "repository": "https://github.com/WisdomGardenInc/cloak",
+  "homepage": "https://tronclass.com.cn/",
   "license": "Apache-2.0",
   "dependencies": {},
   "devDependencies": {
