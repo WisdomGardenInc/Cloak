@@ -9,7 +9,7 @@ export interface APPConfig {
 }
 
 const config: APPConfig = {
-  APP_FOLDER: 'demo',
+  APP_FOLDER: 'www',
   APP_HOST: 'http://localhost',
   APP_IDENTITY_USER_AGENT: 'Cloak/HarmonyOS',
   // version should read from oh-package.json5 in module

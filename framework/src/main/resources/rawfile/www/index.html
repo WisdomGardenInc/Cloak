@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Cloak Plugins</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      width: 100vw;
+      color: black;
+      font-size: 16px;
+    }
+
+    body {
+      height: 100vh;
+      scroll: auto;
+      padding: 1rem;
+      box-sizing: border-box;
+    }
+
+    section {
+      margin: 1.5rem 0;
+      padding: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      scroll: auto;
+    }
+
+    h2 {
+      margin-bottom: 1rem;
+    }
+
+    button {
+      margin: 0.5rem;
+      padding: 0.5rem 1rem;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .code-area {
+      background-color: green;
+      margin: 1rem 0;
+      white-space: break-spaces;
+      word-break: break-word;
+      line-break: auto;
+      overflow: scroll;
+    }
+  </style>
+
+  <script language="javascript">
+    window.document.addEventListener(
+      "CloakReady",
+      () => {
+        showUserAgent();
+        displayFrameworkInfo();
+      },
+      { once: true }
+    );
+
+    const showUserAgent = () => {
+      document.getElementById("userAgent").innerText = window.location.href + "\n" + window.navigator.userAgent;
+    };
+
+    const displayFrameworkInfo = () => {
+      const pluginsInfoDiv = document.getElementById("frameworkInfo");
+      if (!window.Cloak) {
+        return;
+      }
+      pluginsInfoDiv.innerHTML = JSON.stringify(Cloak.metadata, null, 2);
+    };
+
+    const onAlert = () => {
+      const result = alert("Hello Cloak!");
+    };
+
+    const onConfirm = () => {
+      const result = confirm("Are you sure?");
+      if (result) {
+        alert("You clicked OK!");
+      } else {
+        alert("You clicked Cancel!");
+      }
+    };
+  </script>
+</head>
+
+<body>
+  <div>
+    <h1>Cloak Demo</h1>
+    <section>
+      <h2>Framework Information</h2>
+      <div id="frameworkInfo" class="code-area"></div>
+    </section>
+    <section>
+      <div id="userAgent" class="code-area"></div>
+    </section>
+    <section>
+      <h2>Common Operations</h2>
+      <button onclick="onAlert()">Alert</button>
+      <button onclick="onConfirm()">Confirm</button>
+    </section>
+  </div>
+</body>
+
+</html>

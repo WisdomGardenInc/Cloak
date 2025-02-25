@@ -1,4 +1,4 @@
-[**English Version**](./README-EN.md) | [中文版](./README.md)
+<!-- [**English Version**](./README-EN.md) | [中文版](./README.md) -->
 
 # **Cloak** - HarmonyOS 混合开发框架
 
@@ -57,3 +57,7 @@
 
 6. **插件开发**
    根据需求开发自定义插件，或通过[社区](https://ohpm.openharmony.cn)获取适配 HarmonyOS 的插件。
+
+## 示例
+
+完成[使用方法](#使用方法)步骤，其他可参照: https://github.com/WisdomGardenInc/cloak
