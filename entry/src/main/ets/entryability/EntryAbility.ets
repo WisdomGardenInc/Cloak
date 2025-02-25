@@ -3,7 +3,6 @@ import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
 import { Cloak } from '@wisdomgarden/cloak';
 import { CloakPluginDevice } from '@wisdomgarden/cloak-plugin-device';
-import { CloakPluginPermission } from '@wisdomgarden/cloak-plugin-permission';
 import { CloakPluginGeolocation } from '@wisdomgarden/cloak-plugin-geolocation';
 
 export default class EntryAbility extends UIAbility {
@@ -13,7 +12,6 @@ export default class EntryAbility extends UIAbility {
 
     new Cloak(this.context.getApplicationContext(), [
       new CloakPluginDevice(),
-      new CloakPluginPermission(),
       new CloakPluginGeolocation()
     ])
   }

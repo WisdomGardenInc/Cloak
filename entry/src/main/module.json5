@@ -50,8 +50,6 @@
         ],
       }
     ],
-    // 权限卸载插件模块里，合并？
-    // string 也写在插件 module.json5 里面
     "requestPermissions": [
       {
         "name": "ohos.permission.INTERNET",

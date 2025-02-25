@@ -9,7 +9,6 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@wisdomgarden/cloak": "file:../framework",
-    "@wisdomgarden/cloak-plugin-permission": "file:../plugins/CloakPluginPermission",
     "@wisdomgarden/cloak-plugin-device": "file:../plugins/CloakPluginDevice",
     "@wisdomgarden/cloak-plugin-geolocation": "file:../plugins/CloakPluginGeolocation",
   }
