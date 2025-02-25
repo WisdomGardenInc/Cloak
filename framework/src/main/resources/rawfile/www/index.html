@@ -54,12 +54,32 @@
     }
 
     .code-area {
-      background-color: green;
       margin: 1rem 0;
       white-space: break-spaces;
       word-break: break-word;
       line-break: auto;
       overflow: scroll;
+    }
+
+    .plugin-item {
+      margin: 1rem 0;
+      padding: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+    }
+
+    .plugin-item h3 {
+      margin-bottom: 0.5rem;
+      color: #2196F3;
+      font-family: 'monospace';
+    }
+
+    .plugin-item p {
+      margin: 0.5rem 0;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      word-break: break-word;
     }
   </style>
 
@@ -69,6 +89,7 @@
       () => {
         showUserAgent();
         displayFrameworkInfo();
+        displayPluginsInfo();
       },
       { once: true }
     );
@@ -83,6 +104,32 @@
         return;
       }
       pluginsInfoDiv.innerHTML = JSON.stringify(Cloak.metadata, null, 2);
+    };
+
+    const displayPluginsInfo = () => {
+      const pluginsInfoDiv = document.getElementById("pluginsInfo");
+      pluginsInfoDiv.innerHTML = "";
+
+      if (window.Cloak && window.Cloak.plugins) {
+        const plugins = window.Cloak.plugins;
+        for (const pluginName in plugins) {
+          if (plugins.hasOwnProperty(pluginName)) {
+            const plugin = plugins[pluginName];
+            const metadata = plugin.getMetadata();
+            const pluginInfo = document.createElement("div");
+            pluginInfo.className = "plugin-item";
+            pluginInfo.innerHTML = `
+                    <h3>📦 ${metadata.name}</h3>
+                    <p>Version: ${metadata.version}</p>
+                    <p>Methods: ${metadata.methods.join(", ")}</p>
+                    <p>${metadata.description}</p>
+                `;
+            pluginsInfoDiv.appendChild(pluginInfo);
+          }
+        }
+      } else {
+        pluginsInfoDiv.textContent = "No plugins installed.";
+      }
     };
 
     const onAlert = () => {
@@ -108,7 +155,12 @@
       <div id="frameworkInfo" class="code-area"></div>
     </section>
     <section>
+      <h2>UserAgent</h2>
       <div id="userAgent" class="code-area"></div>
+    </section>
+    <section id="plugins-section">
+      <h2>Installed Plugins</h2>
+      <div id="pluginsInfo"></div>
     </section>
     <section>
       <h2>Common Operations</h2>
