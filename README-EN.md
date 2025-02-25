@@ -65,3 +65,7 @@ Enables rapid conversion of web applications to native HarmonyOS apps with plugi
 
 6. **Plugin Development**
    Develop custom plugins or find community plugins via [OHPM registry](https://ohpm.openharmony.cn)
+
+## Example
+
+Complete the [Getting Started](#getting-started) steps, and refer to: https://github.com/WisdomGardenInc/cloak for more details.
