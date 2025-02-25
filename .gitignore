@@ -253,3 +253,4 @@ dist
 /.appanalyzer
 
 /signing
+BuildProfile.ets
