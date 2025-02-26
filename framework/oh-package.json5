@@ -4,7 +4,7 @@
   "description": "Cloak is a hybrid development framework for HarmonyOS, enabling quick packaging of H5 applications and native capability access",
   "main": "Index.ets",
   "author": "WisdomGarden",
-  "repository": "https://github.com/WisdomGardenInc/cloak",
+  "repository": "https://github.com/WisdomGardenInc/Cloak",
   "homepage": "https://tronclass.com.cn/",
   "license": "Apache-2.0",
   "dependencies": {

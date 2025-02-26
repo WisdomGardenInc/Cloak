@@ -4,7 +4,7 @@
   "description": "This is a demo application of the Cloak framework.",
   "main": "entry",
   "author": "WisdomGarden",
-  "repository": "https://github.com/WisdomGardenInc/cloak",
+  "repository": "https://github.com/WisdomGardenInc/Cloak",
   "homepage": "https://tronclass.com.cn/",
   "license": "Apache-2.0",
   "dependencies": {

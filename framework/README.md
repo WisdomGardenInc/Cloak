@@ -60,4 +60,4 @@
 
 ## 示例
 
-完成[使用方法](#使用方法)步骤，其他可参照: https://github.com/WisdomGardenInc/cloak
+完成[使用方法](#使用方法)步骤，其他可参照: https://github.com/WisdomGardenInc/Cloak
