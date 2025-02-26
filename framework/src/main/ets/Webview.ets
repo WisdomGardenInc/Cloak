@@ -42,38 +42,41 @@ export default struct CloakWebview {
         .databaseAccess(true)
         .geolocationAccess(true)
         .onGeolocationShow(event => {
-          event?.geolocation.invoke(event.origin, true, true);
-          // if (event) {
-          //   DialogUtils.showConfirm($r('app.string.permission_location_reason'), (isConfirmed) => {
-          //     if (isConfirmed) {
-          //       event.geolocation.invoke(event.origin, true, true);
-          //     } else {
-          //       event.geolocation.invoke(event.origin, false, true);
-          //     }
-          //
-          //   }, $r('app.string.common_ui_dialog_webview_request_permission_title'))
-          // }
+          if (Config.WEB_VIEW_USE_APP_PERMISSION || !event) {
+            event?.geolocation.invoke(event.origin, true, true);
+          } else {
+            DialogUtils.showConfirm($r('app.string.permission_location_reason'), (isConfirmed) => {
+              if (isConfirmed) {
+                event.geolocation.invoke(event.origin, true, true);
+              } else {
+                event.geolocation.invoke(event.origin, false, true);
+              }
+
+            }, $r('app.string.common_ui_dialog_webview_request_permission_title'))
+          }
+
         })
         .onPermissionRequest(event => {
-          event?.request.grant(event.request.getAccessibleResource());
-          // if (event) {
-          //   const accessible = event.request.getAccessibleResource();
-          //   let message: string | Resource = `request permisson ${accessible.join(", ")}`
-          //
-          //   if (accessible.includes("TYPE_VIDEO_CAPTURE")) {
-          //     message = $r('app.string.permission_camera_reason')
-          //   } else if (accessible.includes("TYPE_AUDIO_CAPTURE")) {
-          //     message = $r('app.string.permission_microphone_reason')
-          //   }
-          //
-          //   DialogUtils.showConfirm(message, (isConfirmed) => {
-          //     if (isConfirmed) {
-          //       event.request.grant(accessible);
-          //     } else {
-          //       event.request.deny();
-          //     }
-          //   }, $r('app.string.common_ui_dialog_webview_request_permission_title'))
-          // }
+          if (Config.WEB_VIEW_USE_APP_PERMISSION || !event) {
+            event?.request.grant(event.request.getAccessibleResource());
+          } else {
+            const accessible = event.request.getAccessibleResource();
+            let message: string | Resource = `request permisson ${accessible.join(", ")}`
+
+            if (accessible.includes("TYPE_VIDEO_CAPTURE")) {
+              message = $r('app.string.permission_camera_reason')
+            } else if (accessible.includes("TYPE_AUDIO_CAPTURE")) {
+              message = $r('app.string.permission_microphone_reason')
+            }
+
+            DialogUtils.showConfirm(message, (isConfirmed) => {
+              if (isConfirmed) {
+                event.request.grant(accessible);
+              } else {
+                event.request.deny();
+              }
+            }, $r('app.string.common_ui_dialog_webview_request_permission_title'))
+          }
         })
         .zoomAccess(false)
         .overviewModeAccess(false)

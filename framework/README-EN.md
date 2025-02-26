@@ -29,42 +29,49 @@ Enables rapid conversion of web applications to native HarmonyOS apps with plugi
 - **No Compatibility** with existing Cordova/Capacitor plugins
   All plugins must be **redeveloped** using HarmonyOS native APIs
 
+### Existing Plugins
+
+- **[CloakPluginPermission](./plugins/CloakPluginPermission/README.md)** `ohpm i @wisdomgarden/cloak-plugin-permission`
+  
+  Used to check and request HarmonyOS permissions.
+
 ---
 
 ## Getting Started
 
 ### Run Demo App
 1. **Create EmptyAbility Project**
-   Follow official guide: [Building the First ArkTS Application in Stage Model](https://developer.huawei.com/consumer/en/doc/harmonyos-guides-V5/start-with-ets-stage-V5)
+  Follow official guide: [Building the First ArkTS Application in Stage Model](https://developer.huawei.com/consumer/en/doc/harmonyos-guides-V5/start-with-ets-stage-V5)
 
 2. **Install Cloak Framework**
-   ```bash
-   ohpm install @wisdomgarden/cloak
-   ```
-   The built-in demo will be automatically available.
+  ```bash
+  ohpm install @wisdomgarden/cloak
+  ```
+  The built-in demo will be automatically available.
 
 ---
 
 ### Integrate Your Web App
 3. **Create Config File**
-   Add `entry/src/main/resources/rawfile/config.json`:
-   ```json
-   {
-     "APP_FOLDER": "www",
-     "APP_HOST": "http://localhost",
-     "APP_IDENTITY_USER_AGENT": "YourAppName/HarmonyOS",
-     "IS_DEBUG": false
-   }
-   ```
+  Add `entry/src/main/resources/rawfile/config.json`:
+  ```json
+  {
+    "APP_FOLDER": "www",
+    "APP_HOST": "http://localhost",
+    "APP_IDENTITY_USER_AGENT": "YourAppName/HarmonyOS",
+    "IS_DEBUG": false,
+    "WEB_VIEW_USE_APP_PERMISSION": true
+  }
+  ```
 
 4. **Deploy Web Assets**
-   Copy your web app (must contain **index.html**) to `entry/src/main/resources/rawfile/www`
+  Copy your web app (must contain **index.html**) to `entry/src/main/resources/rawfile/www`
 
 5. **Debug & Run**
-   Use DevEco Studio for real-time debugging
+  Use DevEco Studio for real-time debugging
 
 6. **Plugin Development**
-   Develop custom plugins or find community plugins via [OHPM registry](https://ohpm.openharmony.cn)
+  Develop custom plugins or find community plugins via [OHPM registry](https://ohpm.openharmony.cn)
 
 ## Example
 

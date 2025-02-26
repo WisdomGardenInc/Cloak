@@ -1,4 +1,4 @@
-<!-- [**English Version**](./README-EN.md) | [中文版](./README.md) -->
+[**English Version**](./README-EN.md) | [中文版](./README.md)
 
 # **Cloak** - HarmonyOS 混合开发框架
 
@@ -21,42 +21,49 @@
 
 - **兼容性说明**：与现有 Cordova 或 Capacitor 插件 **不兼容**，所有插件需基于 HarmonyOS 原生能力 **重新开发**。
 
+### 现有插件
+
+- **[CloakPluginPermission](./plugins/CloakPluginPermission/README.md)** `ohpm i @wisdomgarden/cloak-plugin-permission`
+  
+  用于检查、请求 HarmonyOS 权限。
+
 ---
 
 ## 使用方法
 
 ### 运行示例应用
 1. **创建 EmptyAbility 应用**
-   参考华为官方文档：[构建第一个ArkTS应用（Stage模型）](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/start-with-ets-stage-V5)
+  参考华为官方文档：[构建第一个ArkTS应用（Stage模型）](https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/start-with-ets-stage-V5)
 
 2. **安装 Cloak 框架**
-   ```bash
-   ohpm install @wisdomgarden/cloak
-   ```
-   安装完成后即可运行内置示例应用。
+  ```bash
+  ohpm install @wisdomgarden/cloak
+  ```
+  安装完成后即可运行内置示例应用。
 
 ---
 
 ### 集成你的 H5 应用
 3. **创建配置文件**
-   在资源目录新建 `entry/src/main/resources/rawfile/config.json`：
-   ```json
-   {
-     "APP_FOLDER": "www",
-     "APP_HOST": "http://localhost",
-     "APP_IDENTITY_USER_AGENT": "YourAppName/HarmonyOS",
-     "IS_DEBUG": false
-   }
-   ```
+  在资源目录新建 `entry/src/main/resources/rawfile/config.json`：
+  ```json
+  {
+    "APP_FOLDER": "www",
+    "APP_HOST": "http://localhost",
+    "APP_IDENTITY_USER_AGENT": "YourAppName/HarmonyOS",
+    "IS_DEBUG": false,
+    "WEB_VIEW_USE_APP_PERMISSION": true
+  }
+  ```
 
 4. **部署 H5 资源**
-   将 H5 应用文件（**以 index.html 为入口**）复制至 `entry/src/main/resources/rawfile/www`
+  将 H5 应用文件（**以 index.html 为入口**）复制至 `entry/src/main/resources/rawfile/www`
 
 5. **调试与运行**
-   通过 DevEco Studio 进行编译和实时调试。
+  通过 DevEco Studio 进行编译和实时调试。
 
 6. **插件开发**
-   根据需求开发自定义插件，或通过[社区](https://ohpm.openharmony.cn)获取适配 HarmonyOS 的插件。
+  根据需求开发自定义插件，或通过[社区](https://ohpm.openharmony.cn)获取适配 HarmonyOS 的插件。
 
 ## 示例
 

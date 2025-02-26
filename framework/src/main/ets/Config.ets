@@ -6,15 +6,16 @@ export interface APPConfig {
   APP_IDENTITY_USER_AGENT: string;
   CLOAK_IDENTITY_USER_AGENT: string;
   IS_DEBUG: boolean;
+  WEB_VIEW_USE_APP_PERMISSION: boolean;
 }
 
 const config: APPConfig = {
   APP_FOLDER: 'www',
   APP_HOST: 'http://localhost',
   APP_IDENTITY_USER_AGENT: 'Cloak/HarmonyOS',
-  // version should read from oh-package.json5 in module
   CLOAK_IDENTITY_USER_AGENT: `Cloak/${BuildProfile.HAR_VERSION}`,
-  IS_DEBUG: true
+  IS_DEBUG: true,
+  WEB_VIEW_USE_APP_PERMISSION: true,
 }
 
 

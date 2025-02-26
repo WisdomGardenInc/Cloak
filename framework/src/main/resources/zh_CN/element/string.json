@@ -1,6 +1,26 @@
 {
   "string": [
     {
+      "name": "permission_location_reason",
+      "value": "我们需要访问您的位置以提供个性化的考勤服务，使您无论身在何处都能轻松签到。"
+    },
+    {
+      "name": "permission_network_reason",
+      "value": "为确保最佳服务质量，我们请求监控您的网络状态。这有助于我们根据您的连接类型优化您的体验。"
+    },
+    {
+      "name": "permission_internet_reason",
+      "value": "我们的应用需要互联网访问以提供最新的信息和服务。您的隐私和安全是我们的首要任务。"
+    },
+    {
+      "name": "permission_camera_reason",
+      "value": "允许相机访问，以便您可以使用扫描二维码或在应用内直接拍摄照片等视觉功能。"
+    },
+    {
+      "name": "permission_microphone_reason",
+      "value": "授予麦克风访问权限以启用语音交互功能，使您在使用应用时能够享受免提体验。"
+    },
+    {
       "name": "common_ui_dialog_request_permission_title",
       "value": "请求权限"
     },
