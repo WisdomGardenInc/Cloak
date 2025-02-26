@@ -11,6 +11,8 @@
     "@wisdomgarden/cloak": "file:../framework",
     "@wisdomgarden/cloak-plugin-device": "file:../plugins/CloakPluginDevice",
     "@wisdomgarden/cloak-plugin-geolocation": "file:../plugins/CloakPluginGeolocation",
-  }
+    "@wisdomgarden/cloak-plugin-permission": "^1.0.0"
+  },
+  "devDependencies": {},
+  "dynamicDependencies": {}
 }
-
