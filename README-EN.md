@@ -31,7 +31,7 @@ Enables rapid conversion of web applications to native HarmonyOS apps with plugi
 
 ### Existing Plugins
 
-- **[CloakPluginPermission](./plugins/CloakPluginPermission/README.md)** `ohpm i @wisdomgarden/cloak-plugin-permission`
+- **[CloakPluginPermission](https://github.com/WisdomGardenInc/CloakPlugins/blob/master/plugins/CloakPluginPermission/README-EN.md)** `ohpm i @wisdomgarden/cloak-plugin-permission`
   
   Used to check and request HarmonyOS permissions.
 
