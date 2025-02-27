@@ -7,6 +7,7 @@ export interface APPConfig {
   CLOAK_IDENTITY_USER_AGENT: string;
   IS_DEBUG: boolean;
   WEB_VIEW_USE_APP_PERMISSION: boolean;
+  APP_USE_REAL_HOST_RESOURCE: boolean;
 }
 
 const config: APPConfig = {
@@ -14,8 +15,9 @@ const config: APPConfig = {
   APP_HOST: 'http://localhost',
   APP_IDENTITY_USER_AGENT: 'Cloak/HarmonyOS',
   CLOAK_IDENTITY_USER_AGENT: `Cloak/${BuildProfile.HAR_VERSION}`,
-  IS_DEBUG: true,
   WEB_VIEW_USE_APP_PERMISSION: true,
+  IS_DEBUG: false,
+  APP_USE_REAL_HOST_RESOURCE: false,
 }
 
 

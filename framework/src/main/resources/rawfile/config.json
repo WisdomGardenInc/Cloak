@@ -1,6 +1,7 @@
 {
   "APP_FOLDER": "www",
   "APP_HOST": "http://localhost",
+  "APP_USE_REAL_HOST_RESOURCE": false,
   "APP_IDENTITY_USER_AGENT": "Cloak/HarmonyOS",
   "IS_DEBUG": false,
   "WEB_VIEW_USE_APP_PERMISSION": true

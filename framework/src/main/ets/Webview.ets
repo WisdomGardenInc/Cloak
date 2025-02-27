@@ -118,6 +118,9 @@ export default struct CloakWebview {
           if (!event) {
             return null;
           }
+          if (Config.APP_USE_REAL_HOST_RESOURCE) {
+            return null;
+          }
           const requestUrl = event.request.getRequestUrl()
 
 
