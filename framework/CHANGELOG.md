@@ -14,3 +14,4 @@
 
 ## 1.0.3 (2025-02-27)
 - 配置文件增加 `APP_USE_REAL_HOST_RESOURCE`，控制是否加载真实 `APP_HOST` 所配置的远程资源，否则用 `APP_FOLDER` 配置的本地资源目录
+- 若请求路径不存在静态资源，则自动回退到加载 index.html

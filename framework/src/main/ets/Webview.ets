@@ -130,11 +130,11 @@ export default struct CloakWebview {
 
           try {
             const pathname = url.URL.parseURL(requestUrl, Config.APP_HOST).pathname
-            const resourcePath = Utils.getResourcePath(pathname)
-            const mimeType = Utils.getMimeType(resourcePath)
+            const resourceInfo = Utils.getResourceInfo(pathname)
+            const mimeType = Utils.getMimeType(resourceInfo.extension)
 
             let response = new WebResourceResponse()
-            response.setResponseData($rawfile(resourcePath));
+            response.setResponseData($rawfile(resourceInfo.resourcePath));
             response.setResponseEncoding('utf-8')
             response.setResponseMimeType(mimeType)
             response.setResponseCode(200)
