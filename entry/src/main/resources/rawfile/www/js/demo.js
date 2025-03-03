@@ -181,8 +181,7 @@ const startWatchLocation = () => {
       (position) => {
         document.getElementById(
           "locationInfo"
-        ).textContent =
-          `Real-time location - Latitude: ${position.coords.latitude}, Longitude: ${position.coords.longitude}`;
+        ).textContent = `Real-time location - Latitude: ${position.coords.latitude}, Longitude: ${position.coords.longitude}`;
       },
       (error) => {
         console.error("Watch location error:", error);
@@ -337,11 +336,15 @@ const displayPluginsInfo = () => {
 
 // permission
 const queryPermissions = async (permissions) => {
-  const result = await Cloak.plugins.Permission.query(permissions)
+  const result = await Cloak.plugins.Permission.query(permissions);
   alert(JSON.stringify(result, null, 2));
-}
+};
 
 const requestPermissions = async (permissions) => {
-  const result = await Cloak.plugins.Permission.request(permissions)
+  const result = await Cloak.plugins.Permission.request(permissions);
   alert(JSON.stringify(result, null, 2));
-}
+};
+
+const onOpenUrl = (url) => {
+  Cloak.plugins.InAppBrowser.open(url);
+};

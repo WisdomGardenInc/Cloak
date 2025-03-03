@@ -5,6 +5,7 @@ import { Cloak } from '@wisdomgarden/cloak';
 import { CloakPluginDevice } from '@wisdomgarden/cloak-plugin-device';
 import { CloakPluginPermission } from '@wisdomgarden/cloak-plugin-permission'
 import { CloakPluginGeolocation } from '@wisdomgarden/cloak-plugin-geolocation';
+import { CloakPluginInAppBrowser } from '@wisdomgarden/cloak-plugin-inappbrowser';
 
 export default class EntryAbility extends UIAbility {
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
@@ -14,7 +15,8 @@ export default class EntryAbility extends UIAbility {
     new Cloak(this.context.getApplicationContext(), [
       new CloakPluginPermission(),
       new CloakPluginDevice(),
-      new CloakPluginGeolocation()
+      new CloakPluginGeolocation(),
+      new CloakPluginInAppBrowser(),
     ])
   }
 
