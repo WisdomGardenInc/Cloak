@@ -7,7 +7,6 @@ import * as Utils from './Utils';
 import PluginManager from './plugin/PluginManager';
 
 
-// should expose webview, controller, context to plugins
 @Component
 export default struct CloakWebview {
   webviewController = new webview.WebviewController();
@@ -80,16 +79,14 @@ export default struct CloakWebview {
         })
         .zoomAccess(false)
         .overviewModeAccess(false)
-        .mediaPlayGestureAccess(true)// 在新窗口中打开页面
-          // https://developer.huawei.com/consumer/cn/doc/harmonyos-guides-V5/web-open-in-new-window-V5
-        .multiWindowAccess(true)
-        .allowWindowOpenMethod(true)// .onWindowNew()
+        .mediaPlayGestureAccess(true)
+        .multiWindowAccess(false)
+        .allowWindowOpenMethod(false)
         .horizontalScrollBarAccess(false)
         .verticalScrollBarAccess(false)// .keyboardAvoidMode()
         .cacheMode(CacheMode.None)
         .copyOptions(CopyOptions.LocalDevice)
         .blockNetwork(false)
-        .allowWindowOpenMethod(true)// ?
         .horizontalScrollBarAccess(false)
         .verticalScrollBarAccess(false)
         .mediaOptions({
@@ -158,6 +155,8 @@ export default struct CloakWebview {
           } catch (error) {
             console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
           }
+
+          PluginManager.setUIContext(this.getUIContext());
           PluginManager.setWebviewController(this.webviewController);
           PluginManager.registerPlugins();
 

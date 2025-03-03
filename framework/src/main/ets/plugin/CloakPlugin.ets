@@ -23,13 +23,14 @@ export interface ICloakPlugin {
 
   getMetadata(): PluginMetadata;
 
-  register(context: common.ApplicationContext, webviewController: WebviewController): void;
+  register(context: common.ApplicationContext, uiContext: UIContext, webviewController: WebviewController): void;
 }
 
 export abstract class CloakPlugin implements ICloakPlugin {
   private static pluginNamePrefix = "_cloak_plugin_"
   protected static applicationContext: common.ApplicationContext;
   protected static webviewController: WebviewController;
+  protected static uiContext: UIContext;
   private static pluginsMethodsMap = new Map<string, string[]>();
   protected _name: string = this.constructor.name;
   protected abstract _version: string;
@@ -58,8 +59,9 @@ export abstract class CloakPlugin implements ICloakPlugin {
     return this._pluginMethods.slice();
   }
 
-  public register(context: common.ApplicationContext, webviewController: WebviewController) {
+  public register(context: common.ApplicationContext, uiContext: UIContext, webviewController: WebviewController) {
     CloakPlugin.applicationContext = context;
+    CloakPlugin.uiContext = uiContext;
     CloakPlugin.webviewController = webviewController;
     try {
       webviewController.registerJavaScriptProxy(this, `${CloakPlugin.pluginNamePrefix}${this._name}`,
