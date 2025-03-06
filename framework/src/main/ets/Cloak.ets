@@ -1,7 +1,7 @@
-import { CloakPlugin } from "./plugin/CloakPlugin";
-import PluginManager from "./plugin/PluginManager";
-import { common } from "@kit.AbilityKit";
-import { util } from "@kit.ArkTS";
+import { CloakPlugin } from './plugin/CloakPlugin';
+import PluginManager from './plugin/PluginManager';
+import { common } from '@kit.AbilityKit';
+import { util } from '@kit.ArkTS';
 import Config, { APPConfig } from './Config';
 
 export default class Cloak {
@@ -10,7 +10,6 @@ export default class Cloak {
   constructor(context: common.ApplicationContext, plugins: CloakPlugin[]) {
     Cloak.APP_CONTEXT = context;
     this.parseConfig();
-    PluginManager.setApplicationContext(context);
     plugins.forEach(plugin => {
       PluginManager.addPlugin(plugin)
     })

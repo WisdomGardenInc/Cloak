@@ -1,6 +1,7 @@
 window.document.addEventListener(
   "CloakReady",
   () => {
+    installCloakPluginClient();
     displayPluginsInfo();
   },
   { once: true }
@@ -345,6 +346,71 @@ const requestPermissions = async (permissions) => {
   alert(JSON.stringify(result, null, 2));
 };
 
-const onOpenUrl = (url) => {
-  Cloak.plugins.InAppBrowser.open(url);
+const postMessageObject = () => {
+  Cloak.plugins.Device.sendMessage({ aaa: "test" });
+};
+
+const onOpenUrl = async (url) => {
+  const browser = Cloak.plugins.InAppBrowser.create(url, "_blank", { clearcache: true, footer: false });
+
+  browser.open();
+
+  browser.addEventListener('loadstart', function (event) {
+    alert("addEventListener loadstart: " + event.url);
+  });
+
+  browser.on("loadstart").subscribe(({ url }) => {
+    alert("on loadstart: " + url);
+  });
+
+
+  browser.on("loadstop").subscribe(({ url }) => {
+    browser.executeScript({ code: "document.querySelector('.core-card .card-title').innerText = '和 Wisdom Garden 一起开启 OpenHarmony 之旅吧！';document.querySelector('.core-card .card-title').style.fontSize = '2rem';document.querySelector('.core-card .card-title').style.color = 'red';" });
+    browser.insertCSS({ code: ".card-summary {color: purple !important;}" });
+    alert("on loadstop: " + url);
+  });
+
+  browser.on("exit").subscribe(() => {
+    alert("closed");
+  });
+};
+const installCloakPluginClient = () => {
+  Cloak.plugins.InAppBrowser.currentBrowser = null;
+  Cloak.plugins.InAppBrowser.create = function (url, target, options) {
+    const browser = Cloak.plugins.InAppBrowser.createBrowser(url, target, options);
+    Cloak.plugins.InAppBrowser.currentBrowser = browser;
+    browser._events = {};
+
+    browser.on = (eventName) => {
+      if (!browser._events[eventName]) {
+        browser._events[eventName] = [];
+      }
+      browser.addEventListener(eventName);
+
+      return {
+        subscribe: (callback) => {
+          browser._events[eventName].push(callback);
+        },
+      };
+    };
+
+    browser._triggerEvent = (eventName, data) => {
+      if (browser._events[eventName]) {
+        browser._events[eventName].forEach((callback) => callback(data));
+      }
+    };
+
+    return browser;
+  };
+
+  Cloak.plugins.InAppBrowser.setMessageHandler((message) => {
+    const { event } = message;
+    if (event && Cloak.plugins.InAppBrowser.currentBrowser._events[event]) {
+      Cloak.plugins.InAppBrowser.currentBrowser._triggerEvent(event, message);
+      if (event === "exit") {
+        Cloak.plugins.InAppBrowser._events = undefined;
+        Cloak.plugins.InAppBrowser.currentBrowser = undefined;
+      }
+    }
+  });
 };

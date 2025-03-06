@@ -5,15 +5,39 @@ import Config from './Config';
 import * as DialogUtils from './DialogUtils';
 import * as Utils from './Utils';
 import PluginManager from './plugin/PluginManager';
+import { IChannelMessage } from './types';
 
 
 @Component
 export default struct CloakWebview {
   webviewController = new webview.WebviewController();
+  channelCloakPort?: webview.WebMessagePort;
+  channelClientPort?: webview.WebMessagePort;
 
   aboutToAppear(): void {
     try {
       webview.WebviewController.setWebDebuggingAccess(Config.IS_DEBUG);
+    } catch (error) {
+      console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+    }
+  }
+
+  initMessageChannel() {
+    try {
+      const ports = this.webviewController.createWebMessagePorts();
+      this.channelClientPort = ports[0];
+      this.channelCloakPort = ports[1];
+
+      this.channelCloakPort.onMessageEvent((result: webview.WebMessage) => {
+
+        if (typeof result !== 'string') {
+          return;
+        }
+
+        const message: IChannelMessage = JSON.parse(result);
+
+        PluginManager.onMessage(message);
+      })
     } catch (error) {
       console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
     }
@@ -156,15 +180,50 @@ export default struct CloakWebview {
             console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
           }
 
-          PluginManager.setUIContext(this.getUIContext());
-          PluginManager.setWebviewController(this.webviewController);
+          this.initMessageChannel();
+
+          if (!this.channelCloakPort) {
+            console.error('Cloak Webview init failed');
+            return;
+          }
+
+          PluginManager.setContext({
+            applicationContext: getContext().getApplicationContext(),
+            uiContext: this.getUIContext(),
+            webviewController: this.webviewController,
+            channelCloakPort: this.channelCloakPort,
+          });
           PluginManager.registerPlugins();
 
           // in onControllerAttached function don't need refresh
           // this.webviewController.refresh();
+
+
+        })
+        .onPageBegin((event) => {
+          if (this.channelCloakPort) {
+            this.channelCloakPort.close();
+            this.channelCloakPort = undefined;
+            this.channelClientPort = undefined;
+          }
         })
         .onPageEnd((event) => {
-          PluginManager.initCloakClient();
+          // when page reload post message will not work, so must re-ini it again
+          PluginManager.initCloakClient().then(() => {
+            if (!this.channelCloakPort) {
+              this.initMessageChannel();
+              if(this.channelCloakPort) {
+                PluginManager.updateContext(this.channelCloakPort)
+              }
+            }
+            try {
+              this.webviewController.postMessage('Cloak__init_port__', [this.channelClientPort], '*');
+
+            } catch (e) {
+              console.error(`ErrorCode: ${(e as BusinessError).code},  Message: ${(e as BusinessError).message}`);
+            }
+
+          });
         })
     }
     .width("100%")

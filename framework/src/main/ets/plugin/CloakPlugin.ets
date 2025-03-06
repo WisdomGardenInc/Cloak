@@ -1,4 +1,6 @@
-import { common } from "@kit.AbilityKit";
+import { common } from '@kit.AbilityKit';
+import { webview } from '@kit.ArkWeb';
+import { ICloakContext } from '../types';
 
 
 export interface PluginMetadata {
@@ -32,6 +34,7 @@ export abstract class CloakPlugin implements ICloakPlugin {
   protected static webviewController: WebviewController;
   protected static uiContext: UIContext;
   private static pluginsMethodsMap = new Map<string, string[]>();
+  protected static channelCloakPort: webview.WebMessagePort;
   protected _name: string = this.constructor.name;
   protected abstract _version: string;
   protected _description: string = '';
@@ -59,12 +62,21 @@ export abstract class CloakPlugin implements ICloakPlugin {
     return this._pluginMethods.slice();
   }
 
-  public register(context: common.ApplicationContext, uiContext: UIContext, webviewController: WebviewController) {
-    CloakPlugin.applicationContext = context;
-    CloakPlugin.uiContext = uiContext;
-    CloakPlugin.webviewController = webviewController;
+
+  public static setContext(context: ICloakContext) {
+    CloakPlugin.applicationContext = context.applicationContext;
+    CloakPlugin.uiContext = context.uiContext;
+    CloakPlugin.webviewController = context.webviewController;
+    CloakPlugin.channelCloakPort = context.channelCloakPort;
+  }
+
+  public static updateContext(channelCloakPort: webview.WebMessagePort) {
+    CloakPlugin.channelCloakPort = channelCloakPort;
+  }
+
+  public register() {
     try {
-      webviewController.registerJavaScriptProxy(this, `${CloakPlugin.pluginNamePrefix}${this._name}`,
+      CloakPlugin.webviewController.registerJavaScriptProxy(this, `${CloakPlugin.pluginNamePrefix}${this._name}`,
         this._pluginMethods.concat('getMetadata'))
     } catch (error) {
       console.error(`registerJavaScriptProxy error: ${error}`);
@@ -78,5 +90,20 @@ export abstract class CloakPlugin implements ICloakPlugin {
       description: this._description,
       methods: this._pluginMethods
     }
+  }
+
+  public  onMessage(payload: ESObject) {
+    //
+  }
+
+  protected wrapMessage(payload: ESObject) {
+    return JSON.stringify({
+      pluginName: this._name,
+      payload: payload
+    })
+  }
+
+  protected _sendMessage(payload: ESObject) {
+    CloakPlugin.channelCloakPort.postMessageEvent(this.wrapMessage(payload));
   }
 }

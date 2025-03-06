@@ -2,24 +2,30 @@ import CloakGlobalObject from './CloakGlobalObject';
 import { CloakPlugin } from './CloakPlugin';
 import { common } from '@kit.AbilityKit';
 import { util } from '@kit.ArkTS';
+import { IChannelMessage, ICloakContext } from '../types';
+import { webview } from '@kit.ArkWeb';
+
 
 export default class PluginManager {
   private static _plugins = new Map<string, CloakPlugin>();
   private static _applicationContext: common.ApplicationContext;
   private static _uiContext: UIContext;
   private static _webviewController: WebviewController;
+  private static _channelCloakPort: webview.WebMessagePort;
   private static cloakClientJS: string;
 
-  public static setApplicationContext(context: common.ApplicationContext) {
-    PluginManager._applicationContext = context;
+  public static setContext(context: ICloakContext) {
+    PluginManager._applicationContext = context.applicationContext;
+    PluginManager._uiContext = context.uiContext;
+    PluginManager._webviewController = context.webviewController;
+    PluginManager._channelCloakPort = context.channelCloakPort;
+
+    CloakPlugin.setContext(context)
   }
 
-  public static setWebviewController(controller: WebviewController) {
-    PluginManager._webviewController = controller;
-  }
-
-  public static setUIContext(uiContext: UIContext) {
-    PluginManager._uiContext = uiContext;
+  public static updateContext(channelCloakPort: webview.WebMessagePort) {
+    PluginManager._channelCloakPort = channelCloakPort;
+    CloakPlugin.updateContext(channelCloakPort)
   }
 
   public static get applicationContext(): common.ApplicationContext {
@@ -34,13 +40,17 @@ export default class PluginManager {
     return PluginManager._webviewController;
   }
 
+  public static get channelCloakPort(): webview.WebMessagePort {
+    return PluginManager._channelCloakPort;
+  }
+
   public static addPlugin(plugin: CloakPlugin) {
     PluginManager._plugins.set(plugin.name, plugin)
   }
 
   public static registerPlugins() {
     PluginManager._plugins.forEach(plugin => {
-      plugin.register(PluginManager._applicationContext, PluginManager._uiContext, PluginManager._webviewController);
+      plugin.register();
     })
 
     // process global Cloak
@@ -49,7 +59,7 @@ export default class PluginManager {
       ["getMetadata", "registerPlugins"])
   }
 
-  public static initCloakClient() {
+  public static async initCloakClient() {
 
     if (!PluginManager.cloakClientJS) {
       const content = PluginManager._applicationContext.resourceManager.getRawFileContentSync('CloakClient.js');
@@ -63,7 +73,12 @@ export default class PluginManager {
     }
 
     if (PluginManager.cloakClientJS) {
-      PluginManager._webviewController.runJavaScript(PluginManager.cloakClientJS);
+      await PluginManager._webviewController.runJavaScript(PluginManager.cloakClientJS);
     }
+  }
+
+  public static onMessage(message: IChannelMessage) {
+    const plugin = PluginManager._plugins.get(message.pluginName);
+    plugin?.onMessage(message?.payload)
   }
 }
