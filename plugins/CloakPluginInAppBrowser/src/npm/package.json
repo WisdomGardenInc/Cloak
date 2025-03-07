@@ -1,0 +1,26 @@
+{
+  "name": "@wisdomgarden/cloak-plugin-inappbrowser",
+  "version": "0.0.3",
+  "description": "Open an in-app browser window for Cloak Framework",
+  "author": "WisdomGarden",
+  "repository": "https://github.com/WisdomGardenInc/Cloak",
+  "homepage": "https://tronclass.com.cn/",
+  "license": "Apache-2.0",
+  "main": "index.js",
+  "module": "index.js",
+  "type": "module",
+  "scripts": {
+    "prepack": "cp ../../README.md . && cp ../../LICENSE . && cp ../../README-EN.md ."
+  },
+  "keywords": [
+    "Cloak",
+    "HarmonyOS",
+    "Cordova",
+    "Capacitor",
+    "Hybrid",
+    "H5",
+    "Webview",
+    "inappbrowser",
+    "in-app-browser"
+  ]
+}

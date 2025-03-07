@@ -1,7 +1,6 @@
 window.document.addEventListener(
   "CloakReady",
   () => {
-    installCloakPluginClient();
     displayPluginsInfo();
   },
   { once: true }
@@ -372,45 +371,5 @@ const onOpenUrl = async (url) => {
 
   browser.on("exit").subscribe(() => {
     alert("closed");
-  });
-};
-const installCloakPluginClient = () => {
-  Cloak.plugins.InAppBrowser.currentBrowser = null;
-  Cloak.plugins.InAppBrowser.create = function (url, target, options) {
-    const browser = Cloak.plugins.InAppBrowser.createBrowser(url, target, options);
-    Cloak.plugins.InAppBrowser.currentBrowser = browser;
-    browser._events = {};
-
-    browser.on = (eventName) => {
-      if (!browser._events[eventName]) {
-        browser._events[eventName] = [];
-      }
-      browser.addEventListener(eventName);
-
-      return {
-        subscribe: (callback) => {
-          browser._events[eventName].push(callback);
-        },
-      };
-    };
-
-    browser._triggerEvent = (eventName, data) => {
-      if (browser._events[eventName]) {
-        browser._events[eventName].forEach((callback) => callback(data));
-      }
-    };
-
-    return browser;
-  };
-
-  Cloak.plugins.InAppBrowser.setMessageHandler((message) => {
-    const { event } = message;
-    if (event && Cloak.plugins.InAppBrowser.currentBrowser._events[event]) {
-      Cloak.plugins.InAppBrowser.currentBrowser._triggerEvent(event, message);
-      if (event === "exit") {
-        Cloak.plugins.InAppBrowser._events = undefined;
-        Cloak.plugins.InAppBrowser.currentBrowser = undefined;
-      }
-    }
   });
 };

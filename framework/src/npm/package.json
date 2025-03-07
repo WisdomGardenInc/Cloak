@@ -1,0 +1,23 @@
+{
+  "name": "@wisdomgarden/cloak",
+  "version": "0.0.3",
+  "description": "Cloak is a hybrid development framework for HarmonyOS, enabling quick packaging of H5 applications and native capability access",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "prepack": "cp ../../README.md . && cp ../../LICENSE . && cp ../../README-EN.md ."
+  },
+  "author": "WisdomGarden",
+  "repository": "https://github.com/WisdomGardenInc/Cloak",
+  "homepage": "https://tronclass.com.cn/",
+  "license": "Apache-2.0",
+  "keywords": [
+    "Cloak",
+    "HarmonyOS",
+    "Cordova",
+    "Capacitor",
+    "Hybrid",
+    "H5",
+    "Webview"
+  ]
+}

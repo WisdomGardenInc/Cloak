@@ -42,8 +42,4 @@ export default class CloakGlobalObject extends CloakPlugin {
       platform: "HarmonyOS",
     };
   }
-
-  registerPlugins() {
-    // move to client logic
-  }
 }
