@@ -15,7 +15,7 @@ const register = (plugin) => {
       if (!browser._events[eventName]) {
         this._events[eventName] = [];
       }
-      this.addEventListener(eventName);
+      plugin.addMessage(eventName);
 
       return {
         subscribe: (callback) => {

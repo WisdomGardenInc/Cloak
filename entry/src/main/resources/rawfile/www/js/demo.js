@@ -379,12 +379,14 @@ const onOpenUrl = async (url) => {
 const callback = (event) => {
   alert("addEventListener alert: " + event.data);
 }
+let handlerId = null;
+
 const addEvent = () => {
-  Cloak.plugins.Device.addEventListener("test", callback);
+  handlerId = Cloak.plugins.Device.addEventListener("test", callback);
 }
 
 const removeEvent = () => {
-  Cloak.plugins.Device.removeEventListener("test", callback);
+  Cloak.plugins.Device.removeEventListener("test", handlerId);
 }
 
 const removeAllevent = () => {

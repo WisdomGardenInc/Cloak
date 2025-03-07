@@ -32,6 +32,6 @@ export default class Device extends CloakPlugin {
 
   @PluginMethod()
   public sendTestEvent() {
-    this.sendEvent("test", { data: "test~~~~"})
+    this._sendEvent("test", { data: "test~~~~"})
   }
 }

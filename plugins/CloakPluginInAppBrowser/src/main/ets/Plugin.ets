@@ -57,8 +57,8 @@ export default class InAppBrowser extends CloakPlugin {
       return null;
     }
 
-    this.browserEventHandlers.clear();
-
+    this.clearAllEvents();
+    this.clearAllMessages();
 
     const options: ICreateBrowserOptions = getBrowserOptions(clientOptions);
 
@@ -109,12 +109,9 @@ export default class InAppBrowser extends CloakPlugin {
         this.isOpened = false;
         this.isShowing = false;
 
-        const eventType = 'exit';
-        if (!this.hasEvent(eventType)) {
-          return;
-        }
-        this.sendBrowserEvent(eventType)
-        this.browserEventHandlers.clear();
+        this.sendBrowserEventAndMessage('exit')
+        this.clearAllEvents();
+        this.clearAllMessages();
       }
     })
 
@@ -232,30 +229,33 @@ export default class InAppBrowser extends CloakPlugin {
   }
 
   private onPageBegin(event: OnPageBeginEvent) {
-    const eventType = 'loadstart';
-    if (!this.hasEvent(eventType)) {
-      return;
-    }
-    this.sendBrowserEvent(eventType, event.url)
+    this.sendBrowserEventAndMessage('loadstart', event.url)
   }
 
   private onPageEnd(event: OnPageBeginEvent) {
-    const eventType = 'loadstop';
-    if (!this.hasEvent(eventType)) {
-      return;
-    }
-    this.sendBrowserEvent(eventType, event.url)
+    this.sendBrowserEventAndMessage('loadstop', event.url)
+  }
+
+
+  private sendBrowserEventAndMessage(eventType: IBrowserEvent, url?: string) {
+    this.sendBrowserEvent(eventType, url);
+    this.sendBrowserMessage(eventType, url);
   }
 
   private sendBrowserEvent(eventType: IBrowserEvent, url?: string) {
-    // send massage & callback event handler
     const eventData: IBrowserEventPayload = {
       event: eventType,
       url: url ?? ''
     }
-    this._sendMessage(eventData)
+    this._sendEvent(eventType, eventData);
+  }
 
-    super.sendEvent(eventType, eventData);
+  private sendBrowserMessage(eventType: IBrowserEvent, url?: string) {
+    const eventData: IBrowserEventPayload = {
+      event: eventType,
+      url: url ?? ''
+    }
+    this._sendMessage(eventType, eventData)
   }
 }
 
@@ -291,7 +291,7 @@ class Browser implements IBrowser {
     return this.browser.insertCSS(payload);
   }
 
-  addEventListener(event: IBrowserEvent, handler?: (event: IBrowserEventPayload) => void) {
+  addEventListener(event: IBrowserEvent, handler: (event: IBrowserEventPayload) => void) {
     this.browser.addEventListener(event, handler);
   }
 }

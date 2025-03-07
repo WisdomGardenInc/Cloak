@@ -1,6 +1,7 @@
 import { common } from '@kit.AbilityKit';
 import { webview } from '@kit.ArkWeb';
 import { ICloakContext } from '../types';
+import { util } from '@kit.ArkTS';
 
 
 export interface PluginMetadata {
@@ -39,7 +40,8 @@ export abstract class CloakPlugin implements ICloakPlugin {
   protected abstract _version: string;
   protected _description: string = '';
   private _pluginMethods: string[];
-  protected browserEventHandlers = new Map<string, Array<(event: ESObject) => void>>();
+  protected browserEventsHandlers = new Map<string, Map<string, (event: ESObject) => void>>();
+  protected browserMessages = new Set<string>();
 
   public addPluginMethodName(methodName: string) {
     // Decorator before class instance constructor
@@ -78,7 +80,8 @@ export abstract class CloakPlugin implements ICloakPlugin {
   public register() {
     try {
       CloakPlugin.webviewController.registerJavaScriptProxy(this, `${CloakPlugin.pluginNamePrefix}${this._name}`,
-        this._pluginMethods.concat('getMetadata', 'addEventListener', 'removeEventListener', 'clearAllEvents'))
+        this._pluginMethods.concat('getMetadata', 'addEventListener', 'removeEventListener', 'clearAllEvents',
+          'addMessage', 'removeMessage', 'clearAllMessages'))
     } catch (error) {
       console.error(`registerJavaScriptProxy error: ${error}`);
     }
@@ -93,6 +96,80 @@ export abstract class CloakPlugin implements ICloakPlugin {
     }
   }
 
+  public addEventListener(event: string, handler: (event: ESObject) => void) {
+    if (!handler) {
+      return;
+    }
+    if (!this.browserEventsHandlers.has(event)) {
+      this.browserEventsHandlers.set(event, new Map());
+    }
+    // let handlerId = Reflect.get(handler, 'handlerId') as string;
+    // if (!handlerId?.length) {
+    //   handlerId = util.generateRandomUUID();
+    // }
+
+    const handlerId = util.generateRandomUUID();
+
+    if (this.browserEventsHandlers.get(event)?.has(handlerId)) {
+      return;
+    }
+
+    this.browserEventsHandlers.get(event)?.set(handlerId, handler)
+
+    return handlerId;
+  }
+
+  public removeEventListener(event: string, handlerId?: string) {
+    const handlers = this.browserEventsHandlers.get(event);
+    if (!handlers?.size) {
+      return;
+    }
+
+    if (!handlerId) {
+      this.browserEventsHandlers.delete(event);
+      return;
+    }
+
+    this.browserEventsHandlers.get(event)?.delete(handlerId)
+  }
+
+  public clearAllEvents() {
+    this.browserEventsHandlers.clear();
+  }
+
+  protected hasEvent(event: string): boolean {
+    return this.browserEventsHandlers.has(event)
+  }
+
+  protected _sendEvent(eventType: string, payload: ESObject) {
+    if (!this.hasEvent(eventType)) {
+      return;
+    }
+    const handlers = this.browserEventsHandlers.get(eventType);
+    handlers?.forEach((handler) => {
+      handler(payload)
+    })
+  }
+
+  public addMessage(messageType: string) {
+    if (!messageType) {
+      return;
+    }
+    this.browserMessages.add(messageType)
+  }
+
+  public removeMessage(messageType: string) {
+    this.browserMessages.delete(messageType)
+  }
+
+  public clearAllMessages() {
+    this.browserMessages.clear();
+  }
+
+  public hasMessage(messageType: string) {
+    return this.browserMessages.has(messageType)
+  }
+
   public onMessage(payload: ESObject) {
     //
   }
@@ -104,49 +181,10 @@ export abstract class CloakPlugin implements ICloakPlugin {
     })
   }
 
-  protected _sendMessage(payload: ESObject) {
+  protected _sendMessage(messageType: string, payload: ESObject) {
+    if (!this.hasMessage(messageType)) {
+      return;
+    }
     CloakPlugin.channelCloakPort.postMessageEvent(this.wrapMessage(payload));
-  }
-
-  public addEventListener(event: string, handler?: (event: ESObject) => void) {
-    if (!this.browserEventHandlers.has(event)) {
-      this.browserEventHandlers.set(event, []);
-    }
-    if (!handler) {
-      return;
-    }
-    if (this.browserEventHandlers.get(event)?.includes(handler)) {
-      return;
-    }
-    this.browserEventHandlers.get(event)?.push(handler);
-  }
-
-  public removeEventListener(event: string, handler?: (event: ESObject) => void) {
-    const handlers = this.browserEventHandlers.get(event);
-    if (!handlers?.length) {
-      return;
-    }
-
-    if (!handler) {
-      this.browserEventHandlers.delete(event);
-      return;
-    }
-
-    this.browserEventHandlers.set(event, handlers.filter((item) => item !== handler))
-  }
-
-  public clearAllEvents() {
-    this.browserEventHandlers.clear();
-  }
-
-  protected hasEvent(event: string): boolean {
-    return this.browserEventHandlers.has(event)
-  }
-
-  protected sendEvent(eventType: string, payload: ESObject) {
-    const handlers = this.browserEventHandlers.get(eventType);
-    handlers?.forEach((handler) => {
-      handler(payload)
-    })
   }
 }

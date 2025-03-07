@@ -45,7 +45,7 @@ export interface IBrowser {
   hide: () => boolean,
   executeScript: (payload: IBrowserExecutePayload) => Promise<ESObject>,
   insertCSS: (payload: IBrowserExecutePayload) => Promise<ESObject>,
-  addEventListener: (event: IBrowserEvent, handler?: (event: IBrowserEventPayload) => void) => void,
+  addEventListener: (event: IBrowserEvent, handler: (event: IBrowserEventPayload) => void) => void,
 }
 
 export interface IWebviewHooks {
