@@ -10,5 +10,8 @@
     "@ohos/hypium": "1.0.19",
     "@ohos/hamock": "1.0.0"
   },
-  "dynamicDependencies": {}
+  "dynamicDependencies": {},
+  "overrides": {
+    "@wisdomgarden/cloak": "file:./framework"
+  }
 }

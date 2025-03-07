@@ -22,7 +22,6 @@ export default class InAppBrowser extends CloakPlugin {
   protected _description = ''
   private isOpened = false;
   private isShowing = false;
-  private browserEventHandlers = new Map<IBrowserEvent, Array<(event: IBrowserEventPayload) => void>>();
   private inappbrowserContent?: ComponentContent<Object>;
   private inAppWebviewController?: webview.WebviewController;
 
@@ -111,7 +110,7 @@ export default class InAppBrowser extends CloakPlugin {
         this.isShowing = false;
 
         const eventType = 'exit';
-        if (!this.browserEventHandlers.has(eventType)) {
+        if (!this.hasEvent(eventType)) {
           return;
         }
         this.sendBrowserEvent(eventType)
@@ -232,20 +231,9 @@ export default class InAppBrowser extends CloakPlugin {
     }
   }
 
-  // exposed to client
-  private addEventListener(event: IBrowserEvent, handler?: (event: IBrowserEventPayload) => void) {
-    if (!this.browserEventHandlers.has(event)) {
-      this.browserEventHandlers.set(event, []);
-    }
-    if (!handler) {
-      return;
-    }
-    this.browserEventHandlers.get(event)?.push(handler);
-  }
-
   private onPageBegin(event: OnPageBeginEvent) {
     const eventType = 'loadstart';
-    if (!this.browserEventHandlers.has(eventType)) {
+    if (!this.hasEvent(eventType)) {
       return;
     }
     this.sendBrowserEvent(eventType, event.url)
@@ -253,23 +241,21 @@ export default class InAppBrowser extends CloakPlugin {
 
   private onPageEnd(event: OnPageBeginEvent) {
     const eventType = 'loadstop';
-    if (!this.browserEventHandlers.has(eventType)) {
+    if (!this.hasEvent(eventType)) {
       return;
     }
     this.sendBrowserEvent(eventType, event.url)
   }
 
   private sendBrowserEvent(eventType: IBrowserEvent, url?: string) {
+    // send massage & callback event handler
     const eventData: IBrowserEventPayload = {
       event: eventType,
       url: url ?? ''
     }
     this._sendMessage(eventData)
 
-    const handlers = this.browserEventHandlers.get(eventType);
-    handlers?.forEach((handler) => {
-      handler(eventData)
-    })
+    super.sendEvent(eventType, eventData);
   }
 }
 

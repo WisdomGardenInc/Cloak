@@ -29,4 +29,9 @@ export default class Device extends CloakPlugin {
       platform: "HarmonyOS"
     };
   }
+
+  @PluginMethod()
+  public sendTestEvent() {
+    this.sendEvent("test", { data: "test~~~~"})
+  }
 }

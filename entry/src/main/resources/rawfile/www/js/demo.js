@@ -373,3 +373,24 @@ const onOpenUrl = async (url) => {
     alert("closed");
   });
 };
+
+
+
+const callback = (event) => {
+  alert("addEventListener alert: " + event.data);
+}
+const addEvent = () => {
+  Cloak.plugins.Device.addEventListener("test", callback);
+}
+
+const removeEvent = () => {
+  Cloak.plugins.Device.removeEventListener("test", callback);
+}
+
+const removeAllevent = () => {
+  Cloak.plugins.Device.clearAllEvents();
+}
+
+const triggerEvent = () => {
+  Cloak.plugins.Device.sendTestEvent();
+}

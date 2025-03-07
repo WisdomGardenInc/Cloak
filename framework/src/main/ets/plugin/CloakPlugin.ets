@@ -39,6 +39,7 @@ export abstract class CloakPlugin implements ICloakPlugin {
   protected abstract _version: string;
   protected _description: string = '';
   private _pluginMethods: string[];
+  protected browserEventHandlers = new Map<string, Array<(event: ESObject) => void>>();
 
   public addPluginMethodName(methodName: string) {
     // Decorator before class instance constructor
@@ -77,7 +78,7 @@ export abstract class CloakPlugin implements ICloakPlugin {
   public register() {
     try {
       CloakPlugin.webviewController.registerJavaScriptProxy(this, `${CloakPlugin.pluginNamePrefix}${this._name}`,
-        this._pluginMethods.concat('getMetadata'))
+        this._pluginMethods.concat('getMetadata', 'addEventListener', 'removeEventListener', 'clearAllEvents'))
     } catch (error) {
       console.error(`registerJavaScriptProxy error: ${error}`);
     }
@@ -92,7 +93,7 @@ export abstract class CloakPlugin implements ICloakPlugin {
     }
   }
 
-  public  onMessage(payload: ESObject) {
+  public onMessage(payload: ESObject) {
     //
   }
 
@@ -105,5 +106,47 @@ export abstract class CloakPlugin implements ICloakPlugin {
 
   protected _sendMessage(payload: ESObject) {
     CloakPlugin.channelCloakPort.postMessageEvent(this.wrapMessage(payload));
+  }
+
+  public addEventListener(event: string, handler?: (event: ESObject) => void) {
+    if (!this.browserEventHandlers.has(event)) {
+      this.browserEventHandlers.set(event, []);
+    }
+    if (!handler) {
+      return;
+    }
+    if (this.browserEventHandlers.get(event)?.includes(handler)) {
+      return;
+    }
+    this.browserEventHandlers.get(event)?.push(handler);
+  }
+
+  public removeEventListener(event: string, handler?: (event: ESObject) => void) {
+    const handlers = this.browserEventHandlers.get(event);
+    if (!handlers?.length) {
+      return;
+    }
+
+    if (!handler) {
+      this.browserEventHandlers.delete(event);
+      return;
+    }
+
+    this.browserEventHandlers.set(event, handlers.filter((item) => item !== handler))
+  }
+
+  public clearAllEvents() {
+    this.browserEventHandlers.clear();
+  }
+
+  protected hasEvent(event: string): boolean {
+    return this.browserEventHandlers.has(event)
+  }
+
+  protected sendEvent(eventType: string, payload: ESObject) {
+    const handlers = this.browserEventHandlers.get(eventType);
+    handlers?.forEach((handler) => {
+      handler(payload)
+    })
   }
 }
