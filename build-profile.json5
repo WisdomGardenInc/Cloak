@@ -62,10 +62,6 @@
     {
       "name": "CloakPluginGeolocation",
       "srcPath": "./plugins/CloakPluginGeolocation",
-    },
-    {
-      "name": "CloakPluginInAppBrowser",
-      "srcPath": "./plugins/CloakPluginInAppBrowser",
     }
   ]
 }

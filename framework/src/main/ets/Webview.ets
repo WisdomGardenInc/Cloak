@@ -108,7 +108,7 @@ export default struct CloakWebview {
         .allowWindowOpenMethod(false)
         .horizontalScrollBarAccess(false)
         .verticalScrollBarAccess(false)// .keyboardAvoidMode()
-        .cacheMode(CacheMode.None)
+        .cacheMode(!Config.IS_DEBUG ? CacheMode.Default : CacheMode.Online)
         .copyOptions(CopyOptions.LocalDevice)
         .blockNetwork(false)
         .horizontalScrollBarAccess(false)
