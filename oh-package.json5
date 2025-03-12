@@ -11,7 +11,4 @@
     "@ohos/hamock": "1.0.0"
   },
   "dynamicDependencies": {},
-  "overrides": {
-    "@wisdomgarden/cloak": "file:./framework"
-  }
 }

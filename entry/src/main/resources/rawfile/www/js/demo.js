@@ -389,7 +389,7 @@ const removeEvent = () => {
   Cloak.plugins.Device.removeEventListener("test", handlerId);
 }
 
-const removeAllevent = () => {
+const removeAllEvents = () => {
   Cloak.plugins.Device.clearAllEvents();
 }
 

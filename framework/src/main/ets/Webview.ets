@@ -8,6 +8,9 @@ import PluginManager from './plugin/PluginManager';
 import { IChannelMessage } from './types';
 
 
+// https://developer.huawei.com/consumer/cn/doc/harmonyos-references-V13/ts-basic-components-web-V13
+// https://developer.huawei.com/consumer/cn/doc/harmonyos-references-V5/js-apis-webview-V5
+
 @Component
 export default struct CloakWebview {
   webviewController = new webview.WebviewController();
