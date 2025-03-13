@@ -6,6 +6,9 @@ import * as DialogUtils from './DialogUtils';
 import * as Utils from './Utils';
 import PluginManager from './plugin/PluginManager';
 import { IChannelMessage } from './types';
+import { window } from '@kit.ArkUI';
+import { common } from '@kit.AbilityKit';
+import Cloak from './Cloak';
 
 
 // https://developer.huawei.com/consumer/cn/doc/harmonyos-references-V13/ts-basic-components-web-V13
@@ -22,6 +25,21 @@ export default struct CloakWebview {
       webview.WebviewController.setWebDebuggingAccess(Config.IS_DEBUG);
     } catch (error) {
       console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+    }
+    this.initSafeArea(getContext() as common.UIAbilityContext)
+  }
+
+  private async initSafeArea(context: common.UIAbilityContext): Promise<void> {
+    try {
+      const mainWindow = await window.getLastWindow(context);
+
+      const avoidAreaTop = mainWindow.getWindowAvoidArea(window.AvoidAreaType.TYPE_SYSTEM);
+      Cloak.SAFE_TOP = px2vp(avoidAreaTop.topRect.height);
+
+      const avoidAreaBottom = mainWindow.getWindowAvoidArea(window.AvoidAreaType.TYPE_NAVIGATION_INDICATOR);
+      Cloak.SAFE_BOTTOM = px2vp(avoidAreaBottom.bottomRect.height);
+    } catch (e) {
+      console.log('getWindowAvoidArea fail');
     }
   }
 

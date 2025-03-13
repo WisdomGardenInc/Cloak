@@ -5,7 +5,9 @@ import { util } from '@kit.ArkTS';
 import Config, { APPConfig } from './Config';
 
 export default class Cloak {
-  private static APP_CONTEXT: common.ApplicationContext
+  private static APP_CONTEXT: common.ApplicationContext;
+  public static SAFE_TOP = 32;
+  public static SAFE_BOTTOM = 28;
 
   constructor(context: common.ApplicationContext, plugins: CloakPlugin[]) {
     Cloak.APP_CONTEXT = context;

@@ -3,7 +3,7 @@ import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
 import { Cloak } from '@wisdomgarden/cloak';
 import { CloakPluginDevice } from '@wisdomgarden/cloak-plugin-device';
-import { CloakPluginPermission } from '@wisdomgarden/cloak-plugin-permission'
+import { CloakPluginPermission } from '@wisdomgarden/cloak-plugin-permission';
 import { CloakPluginGeolocation } from '@wisdomgarden/cloak-plugin-geolocation';
 import { CloakPluginInAppBrowser } from '@wisdomgarden/cloak-plugin-inappbrowser';
 
