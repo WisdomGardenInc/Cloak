@@ -1,1 +1,3 @@
-cp -f framework/README.md framework/README-EN.md .
+#!/bin/bash
+
+cp ./README*.md ./framework && cp ./CHANGELOG*.md ./framework && cp ./LICENSE ./framework
