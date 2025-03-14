@@ -5,6 +5,9 @@
   "repository": "https://github.com/WisdomGardenInc/Cloak",
   "homepage": "https://tronclass.com.cn/",
   "license": "Apache-2.0",
+  "scripts": {
+    "prepack": "cp ./README*.md ./framework && cp ./CHANGELOG*.md ./framework && cp ./LICENSE ./framework"
+  },
   "dependencies": {},
   "devDependencies": {
     "@ohos/hypium": "1.0.19",

@@ -7,6 +7,9 @@
   "repository": "https://github.com/WisdomGardenInc/Cloak",
   "homepage": "https://tronclass.com.cn/",
   "license": "Apache-2.0",
+  "scripts": {
+    "prepack": "cp ../README*.md . && cp ../CHANGELOG*.md . && cp ../LICENSE ."
+  },
   "dependencies": {
     "mime": "^3.0.0"
   },

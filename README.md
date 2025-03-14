@@ -25,7 +25,18 @@
 
 - **[CloakPluginPermission](https://github.com/WisdomGardenInc/CloakPlugins/blob/master/plugins/CloakPluginPermission/README.md)** `ohpm i @wisdomgarden/cloak-plugin-permission`
   
-   用于检查、请求 HarmonyOS 权限。
+  用于检查、请求 HarmonyOS 权限。
+
+- **[CloakPluginHttp](https://github.com/WisdomGardenInc/CloakPlugins/blob/master/plugins/CloakPluginHttp/README.md)** `ohpm i @wisdomgarden/cloak-plugin-http`
+  
+  用于在 Cloak 应用中进行 Native HTTP 请求。
+
+- **[CloakPluginInAppBrowser](https://github.com/WisdomGardenInc/CloakPlugins/blob/master/plugins/CloakPluginInAppBrowser/README.md)** `ohpm i @wisdomgarden/cloak-plugin-inappbrowser`
+  
+  用于在 Cloak 应用中打再开内部浏览器，执行操作。
+
+
+更多插件即将推出，敬请期待。
 
 ---
 

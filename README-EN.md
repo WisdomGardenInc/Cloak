@@ -35,6 +35,16 @@ Enables rapid conversion of web applications to native HarmonyOS apps with plugi
   
   Used to check and request HarmonyOS permissions.
 
+- **[CloakPluginHttp](https://github.com/WisdomGardenInc/CloakPlugins/blob/master/plugins/CloakPluginHttp/README-EN.md)** `ohpm i @wisdomgarden/cloak-plugin-http`
+  
+  Used to make Native HTTP requests within Cloak applications.
+
+- **[CloakPluginInAppBrowser](https://github.com/WisdomGardenInc/CloakPlugins/blob/master/plugins/CloakPluginInAppBrowser/README-EN.md)** `ohpm i @wisdomgarden/cloak-plugin-inappbrowser`
+  
+  Used to open internal browsers in Cloak applications and perform operations.
+
+More plugins are coming soon, stay tuned.
+
 ---
 
 ## Getting Started
