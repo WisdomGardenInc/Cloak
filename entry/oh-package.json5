@@ -11,8 +11,9 @@
     "@wisdomgarden/cloak": "file:../framework",
     "@wisdomgarden/cloak-plugin-device": "file:../plugins/CloakPluginDevice",
     "@wisdomgarden/cloak-plugin-geolocation": "file:../plugins/CloakPluginGeolocation",
-    "@wisdomgarden/cloak-plugin-permission": "^1.0.0",
-    "@wisdomgarden/cloak-plugin-inappbrowser": "file:../local_hars/CloakPluginInAppBrowser.har"
+    "@wisdomgarden/cloak-plugin-permission": "^1.0.1",
+    "@wisdomgarden/cloak-plugin-inappbrowser": "^1.0.0",
+    "@wisdomgarden/cloak-plugin-http": "^1.0.0"
   },
   "devDependencies": {},
   "dynamicDependencies": {}
