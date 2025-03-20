@@ -43,6 +43,10 @@ Enables rapid conversion of web applications to native HarmonyOS apps with plugi
   
   Used to open internal browsers in Cloak applications and perform operations.
 
+- **[CloakPluginOpenNativeSettings](https://github.com/WisdomGardenInc/CloakPlugins/blob/master/plugins/CloakPluginOpenNativeSettings/README-EN.md)** `ohpm i @wisdomgarden/cloak-plugin-open-native-settings`
+
+  used for opening native settings pages within Cloak applications
+
 More plugins are coming soon, stay tuned.
 
 ---

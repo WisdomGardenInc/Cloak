@@ -35,6 +35,10 @@
   
   用于在 Cloak 应用中打再开内部浏览器，执行操作。
 
+- **[CloakPluginOpenNativeSettings](https://github.com/WisdomGardenInc/CloakPlugins/blob/master/plugins/CloakPluginOpenNativeSettings/README.md)** `ohpm i @wisdomgarden/cloak-plugin-open-native-settings`
+
+  用于在 Cloak 应用中打开原生设置页面。
+
 
 更多插件即将推出，敬请期待。
 

@@ -10,6 +10,9 @@
   "scripts": {
     "prepack": "cp ../README*.md . && cp ../CHANGELOG*.md . && cp ../LICENSE ."
   },
+  "hooks": {
+    "preInstall": "cp ../README*.md . && cp ../CHANGELOG*.md . && cp ../LICENSE ."
+  },
   "dependencies": {
     "mime": "^3.0.0"
   },
