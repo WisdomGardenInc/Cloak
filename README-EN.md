@@ -31,23 +31,45 @@ Enables rapid conversion of web applications to native HarmonyOS apps with plugi
 
 ### Existing Plugins
 
-- **[CloakPluginPermission](https://github.com/WisdomGardenInc/CloakPlugins/blob/master/plugins/CloakPluginPermission/README-EN.md)** `ohpm i @wisdomgarden/cloak-plugin-permission`
+  Each plugin also has a corresponding `npm` package with the same name, making it convenient for `TypeScript` and frontend **extensions**.
+
+- **[CloakPluginPermission](./plugins/CloakPluginPermission/README-EN.md)**
   
   Used to check and request HarmonyOS permissions.
 
-- **[CloakPluginHttp](https://github.com/WisdomGardenInc/CloakPlugins/blob/master/plugins/CloakPluginHttp/README-EN.md)** `ohpm i @wisdomgarden/cloak-plugin-http`
+  ```bash
+  ohpm i @wisdomgarden/cloak-plugin-permission
+  npm i @wisdomgarden/cloak-plugin-permission # optional
+  ```
+
+- **[CloakPluginHttp](./plugins/CloakPluginHttp/README-EN.md)**
   
   Used to make Native HTTP requests within Cloak applications.
 
-- **[CloakPluginInAppBrowser](https://github.com/WisdomGardenInc/CloakPlugins/blob/master/plugins/CloakPluginInAppBrowser/README-EN.md)** `ohpm i @wisdomgarden/cloak-plugin-inappbrowser`
+  ```bash
+  ohpm i @wisdomgarden/cloak-plugin-http
+  npm i @wisdomgarden/cloak-plugin-http # optional
+  ```
+
+- **[CloakPluginInAppBrowser](./plugins/CloakPluginInAppBrowser/README-EN.md)**
   
   Used to open internal browsers in Cloak applications and perform operations.
 
-- **[CloakPluginOpenNativeSettings](https://github.com/WisdomGardenInc/CloakPlugins/blob/master/plugins/CloakPluginOpenNativeSettings/README-EN.md)** `ohpm i @wisdomgarden/cloak-plugin-open-native-settings`
+  ```bash
+  ohpm i @wisdomgarden/cloak-plugin-inappbrowser
+  npm i @wisdomgarden/cloak-plugin-inappbrowser # optional
+  ```
+
+- **[CloakPluginOpenNativeSettings](https://github.com/WisdomGardenInc/CloakPlugins/blob/master/plugins/CloakPluginOpenNativeSettings/README-EN.md)**
 
   used for opening native settings pages within Cloak applications
 
-More plugins are coming soon, stay tuned.
+  ```bash
+  ohpm i @wisdomgarden/cloak-plugin-open-native-settings
+  npm i @wisdomgarden/cloak-plugin-open-native-settings # optional
+  ```
+
+***✨✨✨ More plugins are coming soon, stay tuned. ✨✨✨***
 
 ---
 
