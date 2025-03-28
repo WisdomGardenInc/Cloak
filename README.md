@@ -22,10 +22,9 @@
 - **兼容性说明**：与现有 Cordova 或 Capacitor 插件 **不兼容**，所有插件需基于 HarmonyOS 原生能力 **重新开发**。
 
 ### 现有插件
-   
   每个插件还有配套的同名 `npm` 包，方便 `Typescript` 和前端**扩展**。   
 
-- **[CloakPluginPermission](./plugins/CloakPluginPermission/README.md)**
+- **[CloakPluginPermission](https://github.com/WisdomGardenInc/CloakPlugins/blob/master/plugins/CloakPluginPermission/README.md)**
   
   用于检查、请求 HarmonyOS 权限。
   
@@ -34,7 +33,7 @@
   npm i @wisdomgarden/cloak-plugin-permission # optional
   ```
 
-- **[CloakPluginHttp](./plugins/CloakPluginHttp/README.md)**
+- **[CloakPluginHttp](https://github.com/WisdomGardenInc/CloakPlugins/blob/master/plugins/CloakPluginHttp/README.md)**
   
   用于在 Cloak 应用中进行 Native HTTP 请求。
 
@@ -43,7 +42,7 @@
   npm i @wisdomgarden/cloak-plugin-http # optional
   ```
 
-- **[CloakPluginInAppBrowser](./plugins/CloakPluginInAppBrowser/README.md)**
+- **[CloakPluginInAppBrowser](https://github.com/WisdomGardenInc/CloakPlugins/blob/master/plugins/CloakPluginInAppBrowser/README.md)**
   
   用于在 Cloak 应用中打再开内部浏览器，执行操作。
 

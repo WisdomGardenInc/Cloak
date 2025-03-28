@@ -33,7 +33,7 @@ Enables rapid conversion of web applications to native HarmonyOS apps with plugi
 
   Each plugin also has a corresponding `npm` package with the same name, making it convenient for `TypeScript` and frontend **extensions**.
 
-- **[CloakPluginPermission](./plugins/CloakPluginPermission/README-EN.md)**
+- **[CloakPluginPermission](https://github.com/WisdomGardenInc/CloakPlugins/blob/master/plugins/CloakPluginPermission/README-EN.md)**
   
   Used to check and request HarmonyOS permissions.
 
@@ -42,7 +42,7 @@ Enables rapid conversion of web applications to native HarmonyOS apps with plugi
   npm i @wisdomgarden/cloak-plugin-permission # optional
   ```
 
-- **[CloakPluginHttp](./plugins/CloakPluginHttp/README-EN.md)**
+- **[CloakPluginHttp](https://github.com/WisdomGardenInc/CloakPlugins/blob/master/plugins/CloakPluginHttp/README-EN.md)**
   
   Used to make Native HTTP requests within Cloak applications.
 
@@ -51,7 +51,7 @@ Enables rapid conversion of web applications to native HarmonyOS apps with plugi
   npm i @wisdomgarden/cloak-plugin-http # optional
   ```
 
-- **[CloakPluginInAppBrowser](./plugins/CloakPluginInAppBrowser/README-EN.md)**
+- **[CloakPluginInAppBrowser](https://github.com/WisdomGardenInc/CloakPlugins/blob/master/plugins/CloakPluginInAppBrowser/README-EN.md)**
   
   Used to open internal browsers in Cloak applications and perform operations.
 
