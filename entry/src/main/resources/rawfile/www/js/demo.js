@@ -350,7 +350,7 @@ const postMessageObject = () => {
 };
 
 const onOpenUrl = async (url) => {
-  const browser = Cloak.plugins.InAppBrowser.create(url, "_blank", { clearcache: true, footer: false });
+  const browser = Cloak.plugins.InAppBrowser.create(url, "_blank", { clearcache: true, footer: true });
 
   browser.open();
 

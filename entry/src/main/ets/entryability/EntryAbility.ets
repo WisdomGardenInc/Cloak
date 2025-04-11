@@ -12,7 +12,8 @@ export default class EntryAbility extends UIAbility {
     this.context.getApplicationContext().setColorMode(ConfigurationConstant.ColorMode.COLOR_MODE_NOT_SET);
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onCreate');
 
-    new Cloak(this.context.getApplicationContext(), [
+    const cloak = new Cloak(this)
+    cloak.addPlugins([
       new CloakPluginPermission(),
       new CloakPluginDevice(),
       new CloakPluginGeolocation(),

@@ -2,6 +2,8 @@ import { common } from '@kit.AbilityKit';
 import { webview } from '@kit.ArkWeb';
 import { ICloakContext } from '../types';
 import { util } from '@kit.ArkTS';
+import { BusinessError } from '@kit.BasicServicesKit';
+import logger from '../logger';
 
 
 export interface PluginMetadata {
@@ -83,7 +85,11 @@ export abstract class CloakPlugin implements ICloakPlugin {
         this._pluginMethods.concat('getMetadata', 'addEventListener', 'removeEventListener', 'clearAllEvents',
           'addMessage', 'removeMessage', 'clearAllMessages'))
     } catch (error) {
-      console.error(`registerJavaScriptProxy error: ${error}`);
+      logger.error(
+        'registerJavaScriptProxy error. ErrorCode: %{public}s,  Message: %{public}s',
+        (error as BusinessError).code,
+        (error as BusinessError).message,
+      );
     }
   }
 

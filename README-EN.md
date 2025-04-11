@@ -109,17 +109,54 @@ Enables rapid conversion of web applications to native HarmonyOS apps with plugi
    Copy your web app (must contain **index.html**) to `entry/src/main/resources/rawfile/www`
 
 
-5. **Debug & Run**
+5. **Initialize Framework**
+   
+   Modify `entry/src/main/ets/entryability/EntryAbility.ets`, add following code to `onCreate` method:
+   
+   ```typescript
+   import { Cloak } from '@wisdomgarden/cloak';
+   
+   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
+      // ...
+      
+      const cloak = new Cloak(this)
+      // cloak.addPlugins([
+      //   new CloakPluginPermission(),
+      //   new CloakPluginDevice(),
+      //   new CloakPluginGeolocation(),
+      //   new CloakPluginInAppBrowser(),
+      // ])
+   }
+   ```
+   
+   Modify `entry/src/main/ets/pages/Index.ets`, show the webview:
+   
+   ```typescript
+   import { CloakWebview } from "@wisdomgarden/cloak"
+   
+   @Entry
+   @Component
+   struct CloakIndex {
+      build() {
+         Column() {
+            CloakWebview()
+         }
+      }
+   }
+   ```
+
+
+6. **Debug & Run**
 
    Use DevEco Studio for real-time debugging
 
 
-6. **Adapting H5 Capabilities**
+7. **Adapting H5 Capabilities**
 
    At this point, with the help of **[CloakPluginPermission](https://github.com/WisdomGardenInc/CloakPlugins/blob/master/plugins/CloakPluginPermission/README-EN.md)** to obtain system permissions, Cloak can now adapt to the majority of capabilities required by H5 applications. For example, `navigator.mediaDevices`, `input (capture, file)`, `navigator.geolocation`, `indexedDB`, etc. Please refer to the [Demo](https://github.com/WisdomGardenInc/Cloak/tree/master/entry/src/main/resources/rawfile/www) for more details.
 
 
-7. **Plugin Development**
+8. **Plugin Development**
 
    Develop custom plugins or find community plugins via [OHPM registry](https://ohpm.openharmony.cn)
 

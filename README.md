@@ -77,11 +77,47 @@
    ```
    安装完成后即可运行内置示例应用。
 
+3. **引入框架**
+   
+   修改 `entry/src/main/ets/entryability/EntryAbility.ets` 的 `onCreate` 方法，添加以下代码：
+   
+   ```typescript
+   import { Cloak } from '@wisdomgarden/cloak';
+   
+   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
+      // ...
+      
+      const cloak = new Cloak(this)
+      // cloak.addPlugins([
+      //   new CloakPluginPermission(),
+      //   new CloakPluginDevice(),
+      //   new CloakPluginGeolocation(),
+      //   new CloakPluginInAppBrowser(),
+      // ])
+   }
+   ```
+   
+   修改 entry/src/main/ets/pages/Index.ets， 展示 webview
+   
+   ```typescript
+   import { CloakWebview } from "@wisdomgarden/cloak"
+   
+   @Entry
+   @Component
+   struct CloakIndex {
+      build() {
+         Column() {
+            CloakWebview()
+         }
+      }
+   }
+   ```
+
 ---
 
 ### 集成你的 H5 应用
 
-3. **创建配置文件**
+4. **创建配置文件**
    在资源目录新建 `entry/src/main/resources/rawfile/config.json`：
    ```json
    {
@@ -95,23 +131,23 @@
    ```
 
 
-4. **部署 H5 资源**
+5. **部署 H5 资源**
   
    将 H5 应用文件（**以 index.html 为入口**）复制至 `entry/src/main/resources/rawfile/www`
 
 
-5. **调试与运行**
+6. **调试与运行**
 
    通过 DevEco Studio 进行编译和实时调试。
 
 
-6. **适配 H5 能力**
+7. **适配 H5 能力**
    
    至此，配合 **[CloakPluginPermission](https://github.com/WisdomGardenInc/CloakPlugins/blob/master/plugins/CloakPluginPermission/README.md)** 获得系统权限， 
    Cloak 已经可以适配绝大多数 H5 应用所需的能力。比如 `navigator.mediaDevices`, `input (capture, file)`, `navigator.geolocation`, `indexedDB` 等。可参见 [Demo](https://github.com/WisdomGardenInc/Cloak/tree/master/entry/src/main/resources/rawfile/www)
 
 
-7. **插件开发**
+8. **插件开发**
 
    根据需求开发自定义插件，或通过[社区](https://ohpm.openharmony.cn)获取适配 HarmonyOS 的插件。
 

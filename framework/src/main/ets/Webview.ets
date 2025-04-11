@@ -9,6 +9,7 @@ import { IChannelMessage } from './types';
 import { window } from '@kit.ArkUI';
 import { common } from '@kit.AbilityKit';
 import Cloak from './Cloak';
+import logger from './logger';
 
 
 // https://developer.huawei.com/consumer/cn/doc/harmonyos-references-V13/ts-basic-components-web-V13
@@ -21,11 +22,18 @@ export default struct CloakWebview {
   channelClientPort?: webview.WebMessagePort;
 
   aboutToAppear(): void {
-    try {
-      webview.WebviewController.setWebDebuggingAccess(Config.IS_DEBUG);
-    } catch (error) {
-      console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+    if (Config.IS_DEBUG) {
+      try {
+        webview.WebviewController.setWebDebuggingAccess(Config.IS_DEBUG);
+      } catch (error) {
+        logger.warn(
+          'setWebDebuggingAccess error. ErrorCode: %{public}s,  Message: %{public}s',
+          (error as BusinessError).code,
+          (error as BusinessError).message,
+        );
+      }
     }
+
     this.initSafeArea(getContext() as common.UIAbilityContext)
   }
 
@@ -38,8 +46,12 @@ export default struct CloakWebview {
 
       const avoidAreaBottom = mainWindow.getWindowAvoidArea(window.AvoidAreaType.TYPE_NAVIGATION_INDICATOR);
       Cloak.SAFE_BOTTOM = px2vp(avoidAreaBottom.bottomRect.height);
-    } catch (e) {
-      console.log('getWindowAvoidArea fail');
+    } catch (error) {
+      logger.error(
+        'getWindowAvoidArea error. ErrorCode: %{public}s,  Message: %{public}s',
+        (error as BusinessError).code,
+        (error as BusinessError).message,
+      );
     }
   }
 
@@ -60,7 +72,11 @@ export default struct CloakWebview {
         PluginManager.onMessage(message);
       })
     } catch (error) {
-      console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+      logger.fatal(
+        'initMessageChannel error. ErrorCode: %{public}s,  Message: %{public}s',
+        (error as BusinessError).code,
+        (error as BusinessError).message,
+      );
     }
   }
 
@@ -184,7 +200,12 @@ export default struct CloakWebview {
             response.setResponseIsReady(true)
             return response
           } catch (error) {
-            console.error(`Error loading h5 resource: ${requestUrl}`, error)
+            logger.warn(
+              'Loading h5 resource error. URL: %{public}s, ErrorCode: %{public}s, Message: %{public}s',
+              requestUrl,
+              (error as BusinessError).code,
+              (error as BusinessError).message,
+            );
             return null
           }
         })
@@ -198,13 +219,17 @@ export default struct CloakWebview {
             let userAgent = this.webviewController.getUserAgent() + " " + custom_agent_items.join(" ");
             this.webviewController.setCustomUserAgent(userAgent);
           } catch (error) {
-            console.error(`ErrorCode: ${(error as BusinessError).code},  Message: ${(error as BusinessError).message}`);
+            logger.error(
+              'onControllerAttached set userAgent error. ErrorCode: %{public}s,  Message: %{public}s',
+              (error as BusinessError).code,
+              (error as BusinessError).message,
+            );
           }
 
           this.initMessageChannel();
 
           if (!this.channelCloakPort) {
-            console.error('Cloak Webview init failed');
+            logger.fatal('Cloak Webview init failed');
             return;
           }
 
@@ -218,8 +243,7 @@ export default struct CloakWebview {
 
           // in onControllerAttached function don't need refresh
           // this.webviewController.refresh();
-
-
+          logger.info('Cloak Webview init success')
         })
         .onPageBegin((event) => {
           if (this.channelCloakPort) {
@@ -233,15 +257,20 @@ export default struct CloakWebview {
           PluginManager.initCloakClient().then(() => {
             if (!this.channelCloakPort) {
               this.initMessageChannel();
-              if(this.channelCloakPort) {
+              if (this.channelCloakPort) {
                 PluginManager.updateContext(this.channelCloakPort)
               }
             }
             try {
               this.webviewController.postMessage('Cloak__init_port__', [this.channelClientPort], '*');
+              logger.info('Cloak Webview initCloakClient success')
+            } catch (error) {
+              logger.fatal(
+                'initCloakClient error. errorCode: %{public}s,  Message: %{public}s',
+                (error as BusinessError).code,
+                (error as BusinessError).message,
+              );
 
-            } catch (e) {
-              console.error(`ErrorCode: ${(e as BusinessError).code},  Message: ${(e as BusinessError).message}`);
             }
 
           });
