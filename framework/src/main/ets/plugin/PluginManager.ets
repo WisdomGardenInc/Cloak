@@ -4,6 +4,7 @@ import { common } from '@kit.AbilityKit';
 import { util } from '@kit.ArkTS';
 import { IChannelMessage, ICloakContext } from '../types';
 import { webview } from '@kit.ArkWeb';
+import { Cloak } from '../../../../Index';
 
 
 export default class PluginManager {
@@ -50,7 +51,9 @@ export default class PluginManager {
 
   public static registerPlugins() {
     PluginManager._plugins.forEach(plugin => {
+      plugin.beforeRegister();
       plugin.register();
+      plugin.afterRegister();
     })
 
     // process global Cloak
@@ -73,8 +76,15 @@ export default class PluginManager {
     }
 
     if (PluginManager.cloakClientJS) {
+      // window.event `CloakReady` will be triggered
       await PluginManager._webviewController.runJavaScript(PluginManager.cloakClientJS);
     }
+
+
+    PluginManager._plugins.forEach(plugin => {
+      plugin.onAttach();
+    })
+    Cloak.setStartupCompleted()
   }
 
   public static onMessage(message: IChannelMessage) {

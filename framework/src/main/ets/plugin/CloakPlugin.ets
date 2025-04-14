@@ -44,6 +44,7 @@ export abstract class CloakPlugin implements ICloakPlugin {
   private _pluginMethods: string[];
   protected browserEventsHandlers = new Map<string, Map<string, (event: ESObject) => void>>();
   protected browserMessages = new Set<string>();
+  protected isAttached = false;
 
   public addPluginMethodName(methodName: string) {
     // Decorator before class instance constructor
@@ -192,5 +193,22 @@ export abstract class CloakPlugin implements ICloakPlugin {
       return;
     }
     CloakPlugin.channelCloakPort.postMessageEvent(this.wrapMessage(payload));
+  }
+
+  public beforeRegister() {
+  }
+
+  public afterRegister() {
+  }
+
+  protected _onAttach() {
+  }
+
+  public onAttach() {
+    if (this.isAttached) {
+      return;
+    }
+    this.isAttached = true;
+    this._onAttach();
   }
 }

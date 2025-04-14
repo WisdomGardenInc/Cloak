@@ -9,11 +9,12 @@ export default class Cloak {
   public static SAFE_TOP = 32;
   public static SAFE_BOTTOM = 28;
   private static CONFIG: APPConfig;
+  private static IS_STARTUP_COMPLETED = false;
 
   constructor(uiAbility: UIAbility, plugins?: CloakPlugin[]) {
     Cloak.APP_ABILITY = uiAbility;
     this.parseConfig();
-    if(plugins) {
+    if (plugins) {
       this.addPlugins(plugins);
     }
   }
@@ -24,6 +25,14 @@ export default class Cloak {
 
   public static getConfig() {
     return Cloak.CONFIG;
+  }
+
+  public static setStartupCompleted() {
+    Cloak.IS_STARTUP_COMPLETED = true;
+  }
+
+  public static isStartupCompleted() {
+    return Cloak.IS_STARTUP_COMPLETED;
   }
 
   public addPlugins(plugins: CloakPlugin[]) {

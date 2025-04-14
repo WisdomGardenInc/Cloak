@@ -5,6 +5,8 @@
 ## 1.0.5 (2025-04-11)
 - Added static property `Cloak.CONFIG` for retrieving the current configuration
 - Changed static property `Cloak.APP_CONTEXT` to `Cloak.APP_ABILITY`; the original context can now be accessed via `Cloak.getAbility().context`
+- Added static method `Cloak.isStartupCompleted()` to determine whether the application has completed startup
+- Added lifecycle methods `beforeRegister`, `afterRegister`, and `onAttach` to `CloakPlugin`
 - Introduced a logging module
 
 ## 1.0.4 (2025-03-13)

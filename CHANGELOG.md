@@ -5,6 +5,8 @@
 ## 1.0.5 (2025-04-11)
 - 增加静态属性 `Cloak.CONFIG`，用于获取当前配置
 - 改变静态属性 `Cloak.APP_CONTEXT`，为 `Cloak.APP_ABILITY` 原 context 可通过 `Cloak.getAbility().context` 获得
+- 增加静态方法 `Cloak.isStartupCompleted()`，用于判断应用是否启动完成
+- `CloakPlugin` 增加生命周期函数 `beforeRegister`, `afterRegister`, `onAttach`
 - 增加日志模块
 
 
