@@ -60,6 +60,15 @@
   npm i @wisdomgarden/cloak-plugin-open-native-settings # optional
   ```
 
+- **[CloakPluginJpush](https://github.com/WisdomGardenInc/CloakPlugins/blob/master/plugins/CloakPluginJpush/README.md)**
+
+  用于在 Cloak 应用中集成极光推送，实现消息推送功能。
+
+  ```bash
+  ohpm install @wisdomgarden/cloak-plugin-jpush
+  npm install @wisdomgarden/cloak-plugin-jpush # optional
+  ```
+
 ***✨✨✨ 更多插件即将推出，敬请期待。 ✨✨✨***
 
 ---
