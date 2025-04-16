@@ -5,7 +5,7 @@ export const LOG_DOMAIN = 0xC000;
 export const LOG_TAG = 'CloakFramework';
 
 
-interface ILogger {
+export interface ILogger {
   debug: (format: string, ...args: (string | number | boolean)[]) => void;
   info: (format: string, ...args: (string | number | boolean)[]) => void;
   warn: (format: string, ...args: (string | number | boolean)[]) => void;
