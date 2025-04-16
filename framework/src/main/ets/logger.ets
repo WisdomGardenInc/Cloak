@@ -14,21 +14,24 @@ interface ILogger {
 }
 
 export const getLogger = (domain: number, tag: string): ILogger => {
+
+  let tagInFormat = `[${tag}] `;
+
   const logger: ILogger = {
     debug: (format: string, ...args: (string | number | boolean)[]) => {
-      hilog.debug(domain, tag, format, ...args);
+      hilog.debug(domain, tag, tagInFormat + format, ...args);
     },
     info: (format: string, ...args: (string | number | boolean)[]) => {
-      hilog.info(domain, tag, format, ...args);
+      hilog.info(domain, tag, tagInFormat + format, ...args);
     },
     warn: (format: string, ...args: (string | number | boolean)[]) => {
-      hilog.warn(domain, tag, format, ...args);
+      hilog.warn(domain, tag,  tagInFormat + format, ...args);
     },
     error: (format: string, ...args: (string | number | boolean)[]) => {
-      hilog.error(domain, tag, format, ...args);
+      hilog.error(domain, tag,  tagInFormat + format, ...args);
     },
     fatal: (format: string, ...args: (string | number | boolean)[]) => {
-      hilog.debug(domain, tag, format, ...args);
+      hilog.debug(domain, tag,  tagInFormat + format, ...args);
     }
   };
 
