@@ -4,7 +4,7 @@
 /build
 /.cxx
 /.test
-
+.gitignore.bak
 LICENSE
 CHANGELOG-EN.md
 CHANGELOG.md

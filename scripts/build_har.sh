@@ -22,8 +22,23 @@ function restore_JDK() {
 }
 
 function build_har() {
+    # Backup and modify .gitignore
+    local gitignore_file="framework/.gitignore"
+    local gitignore_backup="framework/.gitignore.bak"
+
+    cp "$gitignore_file" "$gitignore_backup"
+
+    sed -i '' '/^LICENSE$/d' "$gitignore_file"
+    sed -i '' '/^CHANGELOG-EN.md$/d' "$gitignore_file"
+    sed -i '' '/^CHANGELOG.md$/d' "$gitignore_file"
+    sed -i '' '/^README-EN.md$/d' "$gitignore_file"
+    sed -i '' '/^README.md$/d' "$gitignore_file"
+
     local module="framework"
     hvigorw assembleHar --mode module -p product=default -p module=$module@default -p buildMode=release -p debuggable=false --analyze=normal --parallel --incremental --no-daemon
+
+    # Restore .gitignore
+    mv "$gitignore_backup" "$gitignore_file"
 
     local har_file="${module}/build/default/outputs/default/${module}.har"
     if [ ! -f "$har_file" ]; then
