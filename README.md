@@ -69,6 +69,16 @@
   npm install @wisdomgarden/cloak-plugin-jpush # optional
   ```
 
+- **[CloakPluginCodeScanner](https://github.com/WisdomGardenInc/CloakPlugins/blob/master/plugins/CloakPluginCodeScanner/README.md)**
+
+  用于在 Cloak 应用中进行二维码扫描。
+
+  ```bash
+  ohpm install @wisdomgarden/cloak-plugin-code-scanner
+  npm install @wisdomgarden/cloak-plugin-code-scanner # optional
+  ```
+
+
 ***✨✨✨ 更多插件即将推出，敬请期待。 ✨✨✨***
 
 ---
