@@ -3,6 +3,7 @@ import PluginManager from './plugin/PluginManager';
 import { UIAbility } from '@kit.AbilityKit';
 import { util } from '@kit.ArkTS';
 import Config, { APPConfig } from './Config';
+import AppPlugin from './plugin/App';
 
 export default class Cloak {
   private static APP_ABILITY: UIAbility;
@@ -33,6 +34,15 @@ export default class Cloak {
 
   public static isStartupCompleted() {
     return Cloak.IS_STARTUP_COMPLETED;
+  }
+
+  public static onBackPress(): boolean {
+    const plugin = PluginManager.getPlugin<AppPlugin>('App');
+    if (plugin) {
+      plugin.fireBackButton();
+      return true;
+    }
+    return false;
   }
 
   public addPlugins(plugins: CloakPlugin[]) {

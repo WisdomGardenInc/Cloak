@@ -5,7 +5,7 @@ import { util } from '@kit.ArkTS';
 import { IChannelMessage, ICloakContext } from '../types';
 import { webview } from '@kit.ArkWeb';
 import { Cloak } from '../../../../Index';
-
+import App from './App';
 
 export default class PluginManager {
   private static _plugins = new Map<string, CloakPlugin>();
@@ -46,10 +46,27 @@ export default class PluginManager {
   }
 
   public static addPlugin(plugin: CloakPlugin) {
-    PluginManager._plugins.set(plugin.name, plugin)
+    if (!PluginManager._plugins.has(plugin.name)) {
+      PluginManager._plugins.set(plugin.name, plugin)
+    }
+  }
+
+  public static getPlugin<T extends CloakPlugin>(name: string): T | undefined {
+    const plugin = PluginManager._plugins.get(name);
+    if (!plugin) {
+      return undefined;
+    }
+    return plugin as T;
+  }
+
+  private static registerBuiltinPlugins() {
+    PluginManager.addPlugin(new App());
   }
 
   public static registerPlugins() {
+    // register builtin plugins
+    PluginManager.registerBuiltinPlugins();
+
     PluginManager._plugins.forEach(plugin => {
       plugin.beforeRegister();
       plugin.register();

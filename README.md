@@ -21,6 +21,12 @@
 
 - **兼容性说明**：与现有 Cordova 或 Capacitor 插件 **不兼容**，所有插件需基于 HarmonyOS 原生能力 **重新开发**。
 
+### 内置插件
+
+- **[App](https://github.com/WisdomGardenInc/Cloak/blob/master/docs/plugins/App/README.md)**
+
+  提供应用生命周期和硬件事件处理能力，无需单独安装。
+  
 ### 现有插件
   每个插件还有配套的同名 `npm` 包，方便 `Typescript` 和前端**扩展**。   
 
