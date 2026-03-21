@@ -6,6 +6,7 @@ import { IChannelMessage, ICloakContext } from '../types';
 import { webview } from '@kit.ArkWeb';
 import { Cloak } from '../../../../Index';
 import App from './App';
+import Device from './Device';
 
 export default class PluginManager {
   private static _plugins = new Map<string, CloakPlugin>();
@@ -61,6 +62,7 @@ export default class PluginManager {
 
   private static registerBuiltinPlugins() {
     PluginManager.addPlugin(new App());
+    PluginManager.addPlugin(new Device())
   }
 
   public static registerPlugins() {
