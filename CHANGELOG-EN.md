@@ -2,6 +2,13 @@
 
 # Changelog
 
+## 1.0.6 (2026-03-21)
+- Added built-in plugin `App` for physical back button handling and app exit
+- Added built-in plugin `Device` for device information and system language
+- Added `Cloak.onBackPress()` static method for handling physical back button
+- `PluginManager` added generic method `getPlugin<T>()`
+ 
+  
 ## 1.0.5 (2025-04-11)
 - Added static property `Cloak.CONFIG` for retrieving the current configuration
 - Changed static property `Cloak.APP_CONTEXT` to `Cloak.APP_ABILITY`; the original context can now be accessed via `Cloak.getAbility().context`

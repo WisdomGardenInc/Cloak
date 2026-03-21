@@ -2,6 +2,13 @@
 
 # 更新日志
 
+## 1.0.6 (2026-03-21)
+- 新增内置插件 `App`，提供物理返回键处理和应用退出能力
+- 新增内置插件 `Device`，提供设备信息和系统语言获取能力
+- 新增 `Cloak.onBackPress()` 静态方法，用于处理物理返回键
+- `PluginManager` 新增 `getPlugin<T>()` 泛型方法
+
+
 ## 1.0.5 (2025-04-11)
 - 增加静态属性 `Cloak.CONFIG`，用于获取当前配置
 - 改变静态属性 `Cloak.APP_CONTEXT`，为 `Cloak.APP_ABILITY` 原 context 可通过 `Cloak.getAbility().context` 获得
