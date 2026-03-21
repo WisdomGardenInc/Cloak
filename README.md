@@ -26,6 +26,10 @@
 - **[App](https://github.com/WisdomGardenInc/Cloak/blob/master/docs/plugins/App/README.md)**
 
   提供应用生命周期和硬件事件处理能力，无需单独安装。
+
+- **[Device](https://github.com/WisdomGardenInc/Cloak/blob/master/docs/plugins/Device/README.md)**
+
+  提供设备信息和系统语言获取能力，无需单独安装。
   
 ### 现有插件
   每个插件还有配套的同名 `npm` 包，方便 `Typescript` 和前端**扩展**。   

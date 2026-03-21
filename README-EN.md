@@ -29,6 +29,16 @@ Enables rapid conversion of web applications to native HarmonyOS apps with plugi
 - **No Compatibility** with existing Cordova/Capacitor plugins
   All plugins must be **redeveloped** using HarmonyOS native APIs
 
+### Built-in Plugins
+
+- **[App](https://github.com/WisdomGardenInc/Cloak/blob/master/docs/plugins/App/README-EN.md)**
+
+  Provides app lifecycle and hardware event handling. No separate installation required.
+
+- **[Device](https://github.com/WisdomGardenInc/Cloak/blob/master/docs/plugins/Device/README-EN.md)**
+
+  Provides device information and system language. No separate installation required.
+  
 ### Existing Plugins
 
   Each plugin also has a corresponding `npm` package with the same name, making it convenient for `TypeScript` and frontend **extensions**.
