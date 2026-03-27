@@ -23,7 +23,7 @@ export interface AppPlugin extends Plugin {
    * @param handler - Callback invoked when the event fires.
    * @returns Handler ID, used to remove the listener later.
    */
-  addListener(event: "backButton", handler: BackButtonHandler): string;
+  addEventListener(event: "backButton", handler: BackButtonHandler): string;
 
   /**
    * Removes a registered event listener.
