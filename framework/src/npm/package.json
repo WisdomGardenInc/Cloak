@@ -1,9 +1,9 @@
 {
   "name": "@wisdomgarden/cloak",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Cloak is a hybrid development framework for HarmonyOS, enabling quick packaging of H5 applications and native capability access",
   "main": "index.js",
-  "types": "index.d.ts",
+  "types": "types/index.d.ts",
   "scripts": {
     "prepack": "cp ../../../README*.md . && cp ../../../LICENSE ."
   },

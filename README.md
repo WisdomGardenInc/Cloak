@@ -88,6 +88,14 @@
   npm install @wisdomgarden/cloak-plugin-code-scanner # optional
   ```
 
+- **[CloakPluginDarkMode](https://github.com/WisdomGardenInc/CloakPlugins/blob/master/plugins/CloakPluginDarkMode/README.md)**
+
+  在 Cloak 应用中监听系统深色模式状态变化并动态切换主题。
+  
+  ```bash
+  ohpm install @wisdomgarden/cloak-plugin-darkmode
+  npm install @wisdomgarden/cloak-plugin-darkmode # optional
+  ```
 
 ***✨✨✨ 更多插件即将推出，敬请期待。 ✨✨✨***
 

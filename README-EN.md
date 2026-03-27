@@ -98,6 +98,15 @@ Enables rapid conversion of web applications to native HarmonyOS apps with plugi
   npm install @wisdomgarden/cloak-plugin-code-scanner # optional
   ```
 
+- **[CloakPluginDarkMode](https://github.com/WisdomGardenInc/CloakPlugins/blob/master/plugins/CloakPluginDarkMode/README.md)**
+  
+  Monitor system dark mode state and switch themes dynamically in Cloak apps.
+
+  ```bash
+  ohpm install @wisdomgarden/cloak-plugin-darkmode
+  npm install @wisdomgarden/cloak-plugin-darkmode # optional
+  ```
+
 ***✨✨✨ More plugins are coming soon, stay tuned. ✨✨✨***
 
 ---
