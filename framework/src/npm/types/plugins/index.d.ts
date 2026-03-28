@@ -7,4 +7,8 @@ import type { DevicePlugin } from "./device";
 export interface CloakPlugins {
   App: AppPlugin;
   Device: DevicePlugin;
+
+  [pluginName: string]: {
+    [prop: string]: any
+  };
 }
