@@ -6,6 +6,16 @@ import { BusinessError } from '@kit.BasicServicesKit';
 import logger from '../logger';
 
 
+const BASE_METHODS: string[] = [
+  'getMetadata',
+  'addEventListener',
+  'removeEventListener',
+  'clearAllEvents',
+  'addMessage',
+  'removeMessage',
+  'clearAllMessages'
+];
+
 export interface PluginMetadata {
   name: string;
   version: string;
@@ -38,7 +48,7 @@ export abstract class CloakPlugin implements ICloakPlugin {
   protected static uiContext: UIContext;
   private static pluginsMethodsMap = new Map<string, string[]>();
   protected static channelCloakPort: webview.WebMessagePort;
-  protected _name: string = this.constructor.name;
+  protected _name?: string;
   protected abstract _version: string;
   protected _description: string = '';
   private _pluginMethods: string[];
@@ -56,16 +66,15 @@ export abstract class CloakPlugin implements ICloakPlugin {
   }
 
   constructor() {
-    this._pluginMethods = CloakPlugin.pluginsMethodsMap.get(this.constructor.name) ?? [];
+    this._pluginMethods = (CloakPlugin.pluginsMethodsMap.get(this.constructor.name) ?? []).slice();
   }
 
-  public get name() {
-    return this._name;
+  public get name(): string {
+    return this._name || this.constructor.name;
   }
-
 
   public pluginMethods(): string[] {
-    return this._pluginMethods.slice();
+    return this._pluginMethods;
   }
 
 
@@ -82,9 +91,8 @@ export abstract class CloakPlugin implements ICloakPlugin {
 
   public register() {
     try {
-      CloakPlugin.webviewController.registerJavaScriptProxy(this, `${CloakPlugin.pluginNamePrefix}${this._name}`,
-        this._pluginMethods.concat('getMetadata', 'addEventListener', 'removeEventListener', 'clearAllEvents',
-          'addMessage', 'removeMessage', 'clearAllMessages'))
+      CloakPlugin.webviewController.registerJavaScriptProxy(this, `${CloakPlugin.pluginNamePrefix}${this.name}`,
+        this._pluginMethods.concat(BASE_METHODS))
     } catch (error) {
       logger.error(
         'registerJavaScriptProxy error. ErrorCode: %{public}s,  Message: %{public}s',
@@ -96,7 +104,7 @@ export abstract class CloakPlugin implements ICloakPlugin {
 
   public getMetadata(): PluginMetadata {
     return {
-      name: this._name,
+      name: this.name,
       version: this._version,
       description: this._description,
       methods: this._pluginMethods
@@ -183,7 +191,7 @@ export abstract class CloakPlugin implements ICloakPlugin {
 
   protected wrapMessage(payload: ESObject) {
     return JSON.stringify({
-      pluginName: this._name,
+      pluginName: this.name,
       payload: payload
     })
   }
