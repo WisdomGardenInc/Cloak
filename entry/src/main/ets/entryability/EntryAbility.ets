@@ -2,9 +2,7 @@ import { AbilityConstant, ConfigurationConstant, UIAbility, Want } from '@kit.Ab
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
 import { Cloak } from '@wisdomgarden/cloak';
-import { CloakPluginDevice } from '@wisdomgarden/cloak-plugin-device';
 import { CloakPluginPermission } from '@wisdomgarden/cloak-plugin-permission';
-import { CloakPluginGeolocation } from '@wisdomgarden/cloak-plugin-geolocation';
 import { CloakPluginInAppBrowser } from '@wisdomgarden/cloak-plugin-inappbrowser';
 
 export default class EntryAbility extends UIAbility {
@@ -15,8 +13,6 @@ export default class EntryAbility extends UIAbility {
     const cloak = new Cloak(this)
     cloak.addPlugins([
       new CloakPluginPermission(),
-      new CloakPluginDevice(),
-      new CloakPluginGeolocation(),
       new CloakPluginInAppBrowser(),
     ])
   }

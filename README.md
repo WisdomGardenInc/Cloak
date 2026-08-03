@@ -127,8 +127,6 @@
       const cloak = new Cloak(this)
       // cloak.addPlugins([
       //   new CloakPluginPermission(),
-      //   new CloakPluginDevice(),
-      //   new CloakPluginGeolocation(),
       //   new CloakPluginInAppBrowser(),
       // ])
    }

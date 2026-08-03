@@ -25,11 +25,16 @@
             <div class="demo"></div>
         </section>
 
+        <section id="device-section">
+            <h2>Device Info</h2>
+            <button onclick="getDeviceInfo()">Device.getInfo</button>
+            <pre id="deviceInfo"></pre>
+        </section>
+
         <section id="common-section">
             <h2>Common Operations</h2>
             <button onclick="onOpenUrl('https://www.openharmony.cn/')">InAppBrowser.open</button>
             <button onclick="window.location.reload()">reload</button>
-            <button onclick="triggerEvent()">triggerEvent</button>
             <button onclick="addEvent()">addEvent</button>
             <button onclick="removeEvent()">removeEvent</button>
             <button onclick="removeAllEvents()">removeAllEvents</button>
@@ -65,8 +70,6 @@
             <button onclick="getLocation()">Get Location</button>
             <button onclick="startWatchLocation()">Start Watching Location</button>
             <button onclick="stopWatchLocation()">Stop Watching Location</button>
-            <hr />
-            <button onclick="getLocationNative()">Get Location Native</button>
             <div id="locationInfo"></div>
         </section>
 

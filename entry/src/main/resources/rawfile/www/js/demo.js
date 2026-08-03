@@ -168,13 +168,6 @@ const getLocation = () => {
   }
 };
 
-const getLocationNative = async () => {
-  if (Cloak?.plugins?.Geolocation) {
-    const result = await Cloak.plugins.Geolocation.getLocation();
-    document.getElementById("locationInfo").textContent = JSON.stringify(result, null, 2);
-  }
-};
-
 const startWatchLocation = () => {
   if (navigator.geolocation && !watchId) {
     watchId = navigator.geolocation.watchPosition(
@@ -345,10 +338,6 @@ const requestPermissions = async (permissions) => {
   alert(JSON.stringify(result, null, 2));
 };
 
-const postMessageObject = () => {
-  Cloak.plugins.Device.sendMessage({ aaa: "test" });
-};
-
 const onOpenUrl = async (url) => {
   const browser = Cloak.plugins.InAppBrowser.create(url, "_blank", { clearcache: true, footer: true });
 
@@ -376,23 +365,33 @@ const onOpenUrl = async (url) => {
 
 
 
-const callback = (event) => {
-  alert("addEventListener alert: " + event.data);
-}
+// Built-in Device plugin
+const getDeviceInfo = async () => {
+  const [info, language] = await Promise.all([
+    Cloak.plugins.Device.getInfo(),
+    Cloak.plugins.Device.getSystemLanguage(),
+  ]);
+  document.getElementById("deviceInfo").textContent = JSON.stringify({ ...info, language }, null, 2);
+};
+
+// Built-in App plugin: while a backButton listener is registered the framework stops
+// handling the hardware back key itself, so navigation/exit is up to this handler.
+const onBackButton = (event) => {
+  alert("backButton event, canGoBack: " + event.canGoBack);
+};
 let handlerId = null;
 
 const addEvent = () => {
-  handlerId = Cloak.plugins.Device.addEventListener("test", callback);
-}
+  handlerId = Cloak.plugins.App.addEventListener("backButton", onBackButton);
+  alert("listening on backButton, handlerId: " + handlerId);
+};
 
 const removeEvent = () => {
-  Cloak.plugins.Device.removeEventListener("test", handlerId);
-}
+  Cloak.plugins.App.removeEventListener("backButton", handlerId);
+  handlerId = null;
+};
 
 const removeAllEvents = () => {
-  Cloak.plugins.Device.clearAllEvents();
-}
-
-const triggerEvent = () => {
-  Cloak.plugins.Device.sendTestEvent();
-}
+  Cloak.plugins.App.clearAllEvents();
+  handlerId = null;
+};

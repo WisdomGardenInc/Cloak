@@ -160,8 +160,6 @@ Enables rapid conversion of web applications to native HarmonyOS apps with plugi
       const cloak = new Cloak(this)
       // cloak.addPlugins([
       //   new CloakPluginPermission(),
-      //   new CloakPluginDevice(),
-      //   new CloakPluginGeolocation(),
       //   new CloakPluginInAppBrowser(),
       // ])
    }
