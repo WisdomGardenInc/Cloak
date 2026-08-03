@@ -1,4 +1,4 @@
-[**中文版**](./CHANGELOG.md) | [English Version](./CHANGELOG-EN.md)
+[**English Version**](./CHANGELOG-EN.md) | [中文版](./CHANGELOG.md)
 
 # Changelog
 

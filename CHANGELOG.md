@@ -1,4 +1,4 @@
-[**English Version**](./CHANGELOG-EN.md) | [中文版](./CHANGELOG.md)
+[English Version](./CHANGELOG-EN.md) | [**中文版**](./CHANGELOG.md)
 
 # 更新日志
 

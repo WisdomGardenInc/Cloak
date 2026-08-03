@@ -1,4 +1,4 @@
-[**English Version**](./README-EN.md) | [中文版](./README.md)
+[English Version](./README-EN.md) | [**中文版**](./README.md)
 
 # **Cloak** - HarmonyOS 混合开发框架
 
