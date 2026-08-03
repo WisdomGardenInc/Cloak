@@ -2,6 +2,12 @@
 
 # Changelog
 
+## 1.0.7 (2026-08-03)
+- Fixed the promise returned by an `async` plugin method not following the Promise spec once it crossed into JS: a throw inside a `.then()` callback was swallowed and the derived object resolved to `null`, so code relying on chained `.then(onOk, onErr)` — a custom axios adapter, for instance — lost every non-2xx response
+- `Cloak.plugins[name]` now exposes a facade so plugin methods always return a native promise; `window._cloak_plugin_*` is still the raw object injected by the bridge and should not be used directly
+- `CloakPlugin._name` is now optional and falls back to the class name
+
+
 ## 1.0.6 (2026-03-21)
 - Added built-in plugin `App` for physical back button handling and app exit
 - Added built-in plugin `Device` for device information and system language

@@ -2,6 +2,12 @@
 
 # 更新日志
 
+## 1.0.7 (2026-08-03)
+- 修复 ArkTS `async` 插件方法返回的 Promise 跨到 JS 后不符合 Promise 规范的问题：`.then()` 回调里抛出的异常会被吞掉，派生对象 resolve 成 `null`，导致依赖链式 `.then(onOk, onErr)` 的代码（例如自定义 axios adapter）丢失全部非 2xx 响应
+- `Cloak.plugins[name]` 改为暴露一层 facade，插件方法的返回值统一为原生 Promise；`window._cloak_plugin_*` 仍是桥注入的原始对象，不要直接使用
+- `CloakPlugin` 的 `_name` 改为可选，未赋值时回退到类名
+
+
 ## 1.0.6 (2026-03-21)
 - 新增内置插件 `App`，提供物理返回键处理和应用退出能力
 - 新增内置插件 `Device`，提供设备信息和系统语言获取能力
