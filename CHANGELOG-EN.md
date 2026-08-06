@@ -2,6 +2,13 @@
 
 # Changelog
 
+## 1.0.8 (2026-08-06)
+- Fixed a plugin still treating an event as having listeners, and going on sending it to H5, after its last listener was removed
+- Added log level control, defaulting to `Config.IS_DEBUG`, so `debug()` no longer emits in a release build; adjust it with `ILogger.setLevel(LogLevel.X)`
+- Fixed the logger's `fatal()` actually emitting at debug level
+- `getLogger` accepts a tag on its own
+
+
 ## 1.0.7 (2026-08-03)
 - Fixed the promise returned by an `async` plugin method not following the Promise spec once it crossed into JS: a throw inside a `.then()` callback was swallowed and the derived object resolved to `null`, so code relying on chained `.then(onOk, onErr)` — a custom axios adapter, for instance — lost every non-2xx response
 - `Cloak.plugins[name]` now exposes a facade so plugin methods always return a native promise; `window._cloak_plugin_*` is still the raw object injected by the bridge and should not be used directly

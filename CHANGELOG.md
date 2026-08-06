@@ -2,6 +2,13 @@
 
 # 更新日志
 
+## 1.0.8 (2026-08-06)
+- 修复移除某事件最后一个监听器后，插件仍把该事件当作有监听者，继续向 H5 发送
+- 日志增加级别控制，默认跟随 `Config.IS_DEBUG`，release 包中 `debug()` 不再输出，可用 `ILogger.setLevel(LogLevel.X)` 调整
+- 修复日志 `fatal()` 实际以 debug 级别输出的问题
+- `getLogger` 支持只传 tag
+
+
 ## 1.0.7 (2026-08-03)
 - 修复 ArkTS `async` 插件方法返回的 Promise 跨到 JS 后不符合 Promise 规范的问题：`.then()` 回调里抛出的异常会被吞掉，派生对象 resolve 成 `null`，导致依赖链式 `.then(onOk, onErr)` 的代码（例如自定义 axios adapter）丢失全部非 2xx 响应
 - `Cloak.plugins[name]` 改为暴露一层 facade，插件方法的返回值统一为原生 Promise；`window._cloak_plugin_*` 仍是桥注入的原始对象，不要直接使用
