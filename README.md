@@ -32,72 +32,8 @@
   提供设备信息和系统语言获取能力，无需单独安装。
   
 ### 现有插件
-  每个插件还有配套的同名 `npm` 包，方便 `Typescript` 和前端**扩展**。   
 
-- **[CloakPluginPermission](https://github.com/WisdomGardenInc/CloakPlugins/blob/master/plugins/CloakPluginPermission/README.md)**
-  
-  用于检查、请求 HarmonyOS 权限。
-  
-  ```bash
-  ohpm i @wisdomgarden/cloak-plugin-permission
-  npm i @wisdomgarden/cloak-plugin-permission # optional
-  ```
-
-- **[CloakPluginHttp](https://github.com/WisdomGardenInc/CloakPlugins/blob/master/plugins/CloakPluginHttp/README.md)**
-  
-  用于在 Cloak 应用中进行 Native HTTP 请求。
-
-  ```bash
-  ohpm i @wisdomgarden/cloak-plugin-http
-  npm i @wisdomgarden/cloak-plugin-http # optional
-  ```
-
-- **[CloakPluginInAppBrowser](https://github.com/WisdomGardenInc/CloakPlugins/blob/master/plugins/CloakPluginInAppBrowser/README.md)**
-  
-  用于在 Cloak 应用中打再开内部浏览器，执行操作。
-
-  ```bash
-  ohpm i @wisdomgarden/cloak-plugin-inappbrowser
-  npm i @wisdomgarden/cloak-plugin-inappbrowser # optional
-  ```
-
-- **[CloakPluginOpenNativeSettings](https://github.com/WisdomGardenInc/CloakPlugins/blob/master/plugins/CloakPluginOpenNativeSettings/README.md)**
-
-  用于在 Cloak 应用中打开原生设置页面。
-
-  ```bash
-  ohpm i @wisdomgarden/cloak-plugin-open-native-settings
-  npm i @wisdomgarden/cloak-plugin-open-native-settings # optional
-  ```
-
-- **[CloakPluginJpush](https://github.com/WisdomGardenInc/CloakPlugins/blob/master/plugins/CloakPluginJpush/README.md)**
-
-  用于在 Cloak 应用中集成极光推送，实现消息推送功能。
-
-  ```bash
-  ohpm install @wisdomgarden/cloak-plugin-jpush
-  npm install @wisdomgarden/cloak-plugin-jpush # optional
-  ```
-
-- **[CloakPluginCodeScanner](https://github.com/WisdomGardenInc/CloakPlugins/blob/master/plugins/CloakPluginCodeScanner/README.md)**
-
-  用于在 Cloak 应用中进行二维码扫描。
-
-  ```bash
-  ohpm install @wisdomgarden/cloak-plugin-code-scanner
-  npm install @wisdomgarden/cloak-plugin-code-scanner # optional
-  ```
-
-- **[CloakPluginDarkMode](https://github.com/WisdomGardenInc/CloakPlugins/blob/master/plugins/CloakPluginDarkMode/README.md)**
-
-  在 Cloak 应用中监听系统深色模式状态变化并动态切换主题。
-  
-  ```bash
-  ohpm install @wisdomgarden/cloak-plugin-darkmode
-  npm install @wisdomgarden/cloak-plugin-darkmode # optional
-  ```
-
-***✨✨✨ 更多插件即将推出，敬请期待。 ✨✨✨***
+官方插件清单与安装说明见 **[CloakPlugins](https://github.com/WisdomGardenInc/CloakPlugins#插件列表)**。
 
 ---
 
