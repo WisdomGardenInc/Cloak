@@ -118,10 +118,6 @@ export abstract class CloakPlugin implements ICloakPlugin {
     if (!this.browserEventsHandlers.has(event)) {
       this.browserEventsHandlers.set(event, new Map());
     }
-    // let handlerId = Reflect.get(handler, 'handlerId') as string;
-    // if (!handlerId?.length) {
-    //   handlerId = util.generateRandomUUID();
-    // }
 
     const handlerId = util.generateRandomUUID();
 
@@ -145,7 +141,11 @@ export abstract class CloakPlugin implements ICloakPlugin {
       return;
     }
 
-    this.browserEventsHandlers.get(event)?.delete(handlerId)
+    handlers.delete(handlerId);
+
+    if (!handlers.size) {
+      this.browserEventsHandlers.delete(event);
+    }
   }
 
   public clearAllEvents() {
@@ -153,7 +153,8 @@ export abstract class CloakPlugin implements ICloakPlugin {
   }
 
   protected hasEvent(event: string): boolean {
-    return this.browserEventsHandlers.has(event)
+    const handlers = this.browserEventsHandlers.get(event);
+    return Boolean(handlers?.size && handlers.size > 0);
   }
 
   protected _sendEvent(eventType: string, payload: ESObject) {
