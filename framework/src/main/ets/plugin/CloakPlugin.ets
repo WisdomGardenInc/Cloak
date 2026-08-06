@@ -3,7 +3,7 @@ import { webview } from '@kit.ArkWeb';
 import { ICloakContext } from '../types';
 import { util } from '@kit.ArkTS';
 import { BusinessError } from '@kit.BasicServicesKit';
-import logger from '../logger';
+import logger from '../logger/framework';
 
 
 const BASE_METHODS: string[] = [

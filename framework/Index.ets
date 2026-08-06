@@ -1,8 +1,5 @@
-import CloakWebview from './src/main/ets/Webview'
-import Cloak from './src/main/ets/Cloak'
-import { CloakPlugin, PluginMethod, PluginMetadata, ICloakPlugin } from './src/main/ets/plugin/CloakPlugin'
-import PluginManager from './src/main/ets/plugin/PluginManager';
-import { getLogger } from './src/main/ets/logger'
-
-
-export { Cloak, CloakWebview, CloakPlugin, ICloakPlugin, PluginMethod, PluginMetadata, PluginManager, getLogger }
+export { default as CloakWebview } from './src/main/ets/Webview'
+export { default as Cloak } from './src/main/ets/Cloak'
+export { CloakPlugin, PluginMethod, PluginMetadata, ICloakPlugin } from './src/main/ets/plugin/CloakPlugin'
+export { default as PluginManager } from './src/main/ets/plugin/PluginManager'
+export { getLogger, ILogger, LogLevel, BASE_LOG_DOMAIN } from './src/main/ets/logger/index'

@@ -9,7 +9,7 @@ import { IChannelMessage } from './types';
 import { window } from '@kit.ArkUI';
 import { common } from '@kit.AbilityKit';
 import Cloak from './Cloak';
-import logger from './logger';
+import logger from './logger/framework';
 
 
 // https://developer.huawei.com/consumer/cn/doc/harmonyos-references-V13/ts-basic-components-web-V13

@@ -1,6 +1,6 @@
 import Cloak from '../Cloak';
 import { CloakPlugin, PluginMethod } from './CloakPlugin';
-import { getLogger } from '../logger';
+import { getLogger } from '../logger/index';
 import BuildProfile from '../../../../BuildProfile';
 
 
@@ -8,7 +8,7 @@ export default class App extends CloakPlugin {
   protected _name = 'App';
   protected _version = BuildProfile.HAR_VERSION;
   protected _description = 'Built-in app lifecycle and hardware events plugin';
-  private logger = getLogger(0xC000, 'AppPlugin');
+  private logger = getLogger('AppPlugin');
   private EVENT_BACK_BUTTON = "backButton";
 
   public get hasBackButtonListeners() {
