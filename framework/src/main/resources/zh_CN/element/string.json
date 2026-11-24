@@ -39,6 +39,10 @@
     {
       "name": "common_ui_dialog_cancel",
       "value": "取消"
+    },
+    {
+      "name": "external_link_open_failed",
+      "value": "无法在浏览器中打开此链接。"
     }
   ]
 }

@@ -3,6 +3,7 @@ import BuildProfile from '../../../BuildProfile';
 export interface APPConfig {
   APP_FOLDER: string;
   APP_HOST: string;
+  APP_ALLOW_NAVIGATION?: string[];
   APP_IDENTITY_USER_AGENT: string;
   CLOAK_IDENTITY_USER_AGENT: string;
   IS_DEBUG: boolean;

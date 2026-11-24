@@ -63,6 +63,10 @@ export default class Cloak {
 
     Config.APP_FOLDER = config.APP_FOLDER ?? Config.APP_FOLDER;
     Config.APP_HOST = config.APP_HOST ?? Config.APP_HOST;
+    const allowedHosts = config.APP_ALLOW_NAVIGATION;
+    Config.APP_ALLOW_NAVIGATION = Array.isArray(allowedHosts)
+      ? allowedHosts.filter(host => typeof host === 'string').map(host => host.trim().toLowerCase())
+      : undefined;
     Config.APP_IDENTITY_USER_AGENT = config.APP_IDENTITY_USER_AGENT ?? Config.APP_IDENTITY_USER_AGENT;
     Config.IS_DEBUG = config.IS_DEBUG ?? Config.IS_DEBUG;
     Config.WEB_VIEW_USE_APP_PERMISSION = config.WEB_VIEW_USE_APP_PERMISSION ?? Config.WEB_VIEW_USE_APP_PERMISSION;

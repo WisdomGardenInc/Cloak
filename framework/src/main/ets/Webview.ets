@@ -7,7 +7,7 @@ import * as Utils from './Utils';
 import PluginManager from './plugin/PluginManager';
 import { IChannelMessage } from './types';
 import { window } from '@kit.ArkUI';
-import { common } from '@kit.AbilityKit';
+import { common, Want } from '@kit.AbilityKit';
 import Cloak from './Cloak';
 import logger from './logger/framework';
 
@@ -77,6 +77,51 @@ export default struct CloakWebview {
         (error as BusinessError).code,
         (error as BusinessError).message,
       );
+    }
+  }
+
+  private interceptExternalLink(request: WebResourceRequest): boolean {
+    if (!request.isMainFrame() || !request.isRequestGesture() || request.isRedirect() ||
+      request.getRequestMethod() !== 'GET') {
+      return false;
+    }
+
+    try {
+      const destination = url.URL.parseURL(request.getRequestUrl());
+      if (destination.protocol !== 'http:' && destination.protocol !== 'https:') {
+        return false;
+      }
+      if (destination.origin === url.URL.parseURL(Config.APP_HOST).origin ||
+        Config.APP_ALLOW_NAVIGATION?.includes(destination.hostname)) {
+        return false;
+      }
+
+      this.openExternalLink(destination.href);
+      return true;
+    } catch (error) {
+      logger.warn('Unable to parse WebView navigation URL: %{public}s', String(error));
+      return false;
+    }
+  }
+
+  private async openExternalLink(uri: string): Promise<void> {
+    const want: Want = {
+      uri,
+      action: 'ohos.want.action.viewData',
+      entities: ['entity.system.browsable'],
+    };
+
+    try {
+      await Cloak.getAbility().context.startAbility(want);
+    } catch (error) {
+      const failure = error as BusinessError;
+      logger.error('Unable to open external link. Code: %{public}s, message: %{private}s',
+        String(failure.code), failure.message);
+      try {
+        this.getUIContext().getPromptAction().showToast({ message: $r('app.string.external_link_open_failed') });
+      } catch (toastError) {
+        logger.warn('Unable to display external link error: %{public}s', String(toastError));
+      }
     }
   }
 
@@ -172,6 +217,9 @@ export default struct CloakWebview {
         .onPrompt(() => {
           return false;
         })
+        .onLoadIntercept((event) => {
+          return event ? this.interceptExternalLink(event.data) : false;
+        })
         .onInterceptRequest((event) => {
           if (!event) {
             return null;
@@ -187,8 +235,11 @@ export default struct CloakWebview {
           }
 
           try {
-            const pathname = url.URL.parseURL(requestUrl, Config.APP_HOST).pathname
-            const resourceInfo = Utils.getResourceInfo(pathname)
+            const request = url.URL.parseURL(requestUrl, Config.APP_HOST);
+            if (request.origin !== url.URL.parseURL(Config.APP_HOST).origin) {
+              return null;
+            }
+            const resourceInfo = Utils.getResourceInfo(request.pathname)
             const mimeType = Utils.getMimeType(resourceInfo.extension)
 
             let response = new WebResourceResponse()

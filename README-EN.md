@@ -63,7 +63,9 @@ See **[CloakPlugins](https://github.com/WisdomGardenInc/CloakPlugins/blob/master
 
 ### Integrate Your Web App
 3. **Create Config File**
-  Add `entry/src/main/resources/rawfile/config.json`:
+
+   Add any fields you want to customize to `entry/src/main/resources/rawfile/config.json`. Use `{}` to keep the defaults.
+
    ```json
    {
      "APP_FOLDER": "www",
@@ -74,6 +76,16 @@ See **[CloakPlugins](https://github.com/WisdomGardenInc/CloakPlugins/blob/master
      "APP_USE_REAL_HOST_RESOURCE": false
    }
    ```
+
+   | Field | Type | Default | Description |
+   | --- | --- | --- | --- |
+   | `APP_FOLDER` | `string` | `"www"` | Directory under `rawfile` containing the bundled web assets. |
+   | `APP_HOST` | `string` | `"http://localhost"` | WebView entry URL. Pages on this origin can open in the WebView. |
+   | `APP_ALLOW_NAVIGATION` | `string[]` | None | Optional. Keeps specified external hosts, such as `["help.example.com"]`, in the WebView. Hostnames match exactly. Enter them without a scheme, port, or path. Other intercepted links are handed to the system. |
+   | `APP_IDENTITY_USER_AGENT` | `string` | `"Cloak/HarmonyOS"` | App identifier appended to the WebView User-Agent, such as `"YourAppName/HarmonyOS"`. |
+   | `IS_DEBUG` | `boolean` | `false` | Set to `true` to enable WebView debugging and debug-level logging. |
+   | `WEB_VIEW_USE_APP_PERMISSION` | `boolean` | `true` | When `true`, WebView geolocation and other permission requests proceed directly to authorization. When `false`, Cloak shows a confirmation dialog first. |
+   | `APP_USE_REAL_HOST_RESOURCE` | `boolean` | `false` | When `true`, the WebView requests resources from `APP_HOST`. When `false`, Cloak tries to load them from the bundled `APP_FOLDER`. |
 
 
 4. **Deploy Web Assets**

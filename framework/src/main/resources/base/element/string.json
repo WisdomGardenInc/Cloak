@@ -39,6 +39,10 @@
     {
       "name": "common_ui_dialog_cancel",
       "value": "Cancel"
+    },
+    {
+      "name": "external_link_open_failed",
+      "value": "Unable to open the link in a browser."
     }
   ]
 }

@@ -89,7 +89,9 @@
 ### 集成你的 H5 应用
 
 4. **创建配置文件**
-   在资源目录新建 `entry/src/main/resources/rawfile/config.json`：
+
+   在 `entry/src/main/resources/rawfile/config.json` 中填写需要自定义的字段。使用默认设置时，文件内容可写为 `{}`。
+
    ```json
    {
      "APP_FOLDER": "www",
@@ -100,6 +102,16 @@
      "APP_USE_REAL_HOST_RESOURCE": false
    }
    ```
+
+   | 字段 | 类型 | 默认值 | 说明 |
+   | --- | --- | --- | --- |
+   | `APP_FOLDER` | `string` | `"www"` | `rawfile` 下存放本地 H5 资源的目录。 |
+   | `APP_HOST` | `string` | `"http://localhost"` | WebView 的入口地址。与该地址同源的页面可在 WebView 内打开。 |
+   | `APP_ALLOW_NAVIGATION` | `string[]` | 无 | 可选。让指定的外部域名留在 WebView，例如 `["help.example.com"]`。按域名精确匹配，填写时省略协议、端口和路径。其他命中外链拦截规则的链接交给系统处理。 |
+   | `APP_IDENTITY_USER_AGENT` | `string` | `"Cloak/HarmonyOS"` | 附加到 WebView User-Agent 的应用标识，例如 `"YourAppName/HarmonyOS"`。 |
+   | `IS_DEBUG` | `boolean` | `false` | 设为 `true` 时启用 WebView 调试和调试级日志。 |
+   | `WEB_VIEW_USE_APP_PERMISSION` | `boolean` | `true` | 设为 `true` 时，WebView 的定位及其他权限请求直接走授权流程。设为 `false` 时，Cloak 先显示确认弹窗。 |
+   | `APP_USE_REAL_HOST_RESOURCE` | `boolean` | `false` | 设为 `true` 时，由 WebView 向 `APP_HOST` 请求资源。设为 `false` 时，Cloak 尝试从本地 `APP_FOLDER` 加载。 |
 
 
 5. **部署 H5 资源**
