@@ -2,6 +2,12 @@
 
 # Changelog
 
+## 1.0.9 (2026-11-24)
+- Added `App.openAppGallery()` to open the current app's listing in AppGallery. The promise rejects with a readable error message if the launch fails
+- Open external HTTP(S) links clicked in the WebView through the system browser while preserving the current page. Set the optional `APP_ALLOW_NAVIGATION` option to keep specific hosts in the WebView
+- Handle failures when registering WebView JavaScript proxies and reading or executing the client script. Send the message port after client initialization succeeds
+
+
 ## 1.0.8 (2026-08-06)
 - Fixed a plugin still treating an event as having listeners, and going on sending it to H5, after its last listener was removed
 - Added log level control, defaulting to `Config.IS_DEBUG`, so `debug()` no longer emits in a release build; adjust it with `ILogger.setLevel(LogLevel.X)`

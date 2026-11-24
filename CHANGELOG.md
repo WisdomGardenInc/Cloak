@@ -2,6 +2,12 @@
 
 # 更新日志
 
+## 1.0.9 (2026-11-24)
+- App 插件新增 `openAppGallery()`，可打开当前应用的 AppGallery 详情页，调用失败时 Promise 会被拒绝，并附带可读的错误消息
+- 点击站外 HTTP(S) 链接时，可交给系统浏览器打开并保留原页面。使用可选配置 `APP_ALLOW_NAVIGATION` 让指定域名留在 WebView
+- 处理 WebView 注册 JS 代理、读取和执行客户端脚本时的失败。脚本初始化成功后再发送消息端口握手
+
+
 ## 1.0.8 (2026-08-06)
 - 修复移除某事件最后一个监听器后，插件仍把该事件当作有监听者，继续向 H5 发送
 - 日志增加级别控制，默认跟随 `Config.IS_DEBUG`，release 包中 `debug()` 不再输出，可用 `ILogger.setLevel(LogLevel.X)` 调整
