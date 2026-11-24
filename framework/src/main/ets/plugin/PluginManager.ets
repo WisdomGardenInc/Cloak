@@ -4,7 +4,7 @@ import { common } from '@kit.AbilityKit';
 import { util } from '@kit.ArkTS';
 import { IChannelMessage, ICloakContext } from '../types';
 import { webview } from '@kit.ArkWeb';
-import { Cloak } from '../../../../Index';
+import logger from '../logger/framework';
 import App from './App';
 import Device from './Device';
 
@@ -65,45 +65,50 @@ export default class PluginManager {
     PluginManager.addPlugin(new Device())
   }
 
-  public static registerPlugins() {
-    // register builtin plugins
-    PluginManager.registerBuiltinPlugins();
+  public static registerPlugins(): boolean {
+    try {
+      // register builtin plugins
+      PluginManager.registerBuiltinPlugins();
+      PluginManager._plugins.forEach(plugin => {
+        plugin.beforeRegister();
+        plugin.register();
+        plugin.afterRegister();
+      });
 
-    PluginManager._plugins.forEach(plugin => {
-      plugin.beforeRegister();
-      plugin.register();
-      plugin.afterRegister();
-    })
-
-    // process global Cloak
-    const cloakGlobalObject = new CloakGlobalObject();
-    PluginManager._webviewController.registerJavaScriptProxy(cloakGlobalObject, "Cloak",
-      ["getMetadata"])
+      // process global Cloak
+      const cloakGlobalObject = new CloakGlobalObject();
+      PluginManager._webviewController.registerJavaScriptProxy(cloakGlobalObject, 'Cloak', ['getMetadata']);
+      return true;
+    } catch (error) {
+      logger.fatal('Unable to register Cloak JavaScript proxies: %{public}s', String(error));
+      return false;
+    }
   }
 
-  public static async initCloakClient() {
-
+  public static async initCloakClient(): Promise<void> {
     if (!PluginManager.cloakClientJS) {
-      const content = PluginManager._applicationContext.resourceManager.getRawFileContentSync('CloakClient.js');
-
-      const textDecoder = util.TextDecoder.create('utf-8', {
-        ignoreBOM: true
-      });
-      const contentStr = textDecoder.decodeToString(content)
-
-      PluginManager.cloakClientJS = contentStr;
+      try {
+        const content = PluginManager._applicationContext.resourceManager.getRawFileContentSync('CloakClient.js');
+        const textDecoder = util.TextDecoder.create('utf-8', { ignoreBOM: true });
+        PluginManager.cloakClientJS = textDecoder.decodeToString(content);
+      } catch (error) {
+        throw new Error(`Unable to read CloakClient.js: ${String(error)}`);
+      }
     }
 
-    if (PluginManager.cloakClientJS) {
-      // window.event `CloakReady` will be triggered
-      await PluginManager._webviewController.runJavaScript(PluginManager.cloakClientJS);
+    let result: string;
+    try {
+      result = await PluginManager._webviewController.runJavaScript(PluginManager.cloakClientJS);
+    } catch (error) {
+      throw new Error(`Unable to execute CloakClient.js: ${String(error)}`);
     }
-
-
+    // ArkWeb can resolve the Promise with null when the script fails.
+    if (String(result) !== 'true') {
+      throw new Error('CloakClient.js did not finish initializing.');
+    }
     PluginManager._plugins.forEach(plugin => {
       plugin.onAttach();
-    })
-    Cloak.setStartupCompleted()
+    });
   }
 
   public static onMessage(message: IChannelMessage) {

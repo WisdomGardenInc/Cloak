@@ -20,6 +20,7 @@ export default struct CloakWebview {
   webviewController = new webview.WebviewController();
   channelCloakPort?: webview.WebMessagePort;
   channelClientPort?: webview.WebMessagePort;
+  private pluginsRegistered: boolean = false;
 
   aboutToAppear(): void {
     if (Config.IS_DEBUG) {
@@ -261,6 +262,7 @@ export default struct CloakWebview {
           }
         })
         .onControllerAttached(() => {
+          this.pluginsRegistered = false;
           // user agent
           try {
             const custom_agent_items = [Config.CLOAK_IDENTITY_USER_AGENT]
@@ -290,11 +292,13 @@ export default struct CloakWebview {
             webviewController: this.webviewController,
             channelCloakPort: this.channelCloakPort,
           });
-          PluginManager.registerPlugins();
+          this.pluginsRegistered = PluginManager.registerPlugins();
 
           // in onControllerAttached function don't need refresh
           // this.webviewController.refresh();
-          logger.info('Cloak Webview init success')
+          if (this.pluginsRegistered) {
+            logger.info('Cloak Webview init success');
+          }
         })
         .onPageBegin((event) => {
           if (this.channelCloakPort) {
@@ -304,6 +308,9 @@ export default struct CloakWebview {
           }
         })
         .onPageEnd((event) => {
+          if (!this.pluginsRegistered) {
+            return;
+          }
           // when page reload post message will not work, so must re-ini it again
           PluginManager.initCloakClient().then(() => {
             if (!this.channelCloakPort) {
@@ -312,18 +319,14 @@ export default struct CloakWebview {
                 PluginManager.updateContext(this.channelCloakPort)
               }
             }
-            try {
-              this.webviewController.postMessage('Cloak__init_port__', [this.channelClientPort], '*');
-              logger.info('Cloak Webview initCloakClient success')
-            } catch (error) {
-              logger.fatal(
-                'initCloakClient error. errorCode: %{public}s,  Message: %{public}s',
-                (error as BusinessError).code,
-                (error as BusinessError).message,
-              );
-
+            if (!this.channelCloakPort || !this.channelClientPort) {
+              throw new Error('Unable to initialize the Cloak message channel.');
             }
-
+            this.webviewController.postMessage('Cloak__init_port__', [this.channelClientPort], '*');
+            Cloak.setStartupCompleted();
+            logger.info('Cloak Webview initCloakClient success');
+          }).catch((error: Error) => {
+            logger.fatal('Unable to initialize the Cloak WebView bridge: %{public}s', String(error));
           });
         })
     }

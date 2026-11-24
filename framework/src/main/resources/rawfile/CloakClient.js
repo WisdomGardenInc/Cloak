@@ -35,27 +35,6 @@
     }
   }
 
-  // IChannelMessage
-  window.addEventListener(
-    "message",
-    function (event) {
-      if (event.data === "Cloak__init_port__") {
-        if (event.ports[0] !== null) {
-          Cloak.channel = event.ports[0];
-
-          Cloak.channel.onmessage = function (event) {
-            const data = JSON.parse(event.data);
-
-            const plugin = Cloak.plugins[data.pluginName];
-            plugin.onMessage(data.payload);
-          };
-          window.document.dispatchEvent(new Event("CloakReady"));
-        }
-      }
-    },
-    { once: true },
-  );
-
   // Keep this. What the bridge returns for an async ArkTS method is not a real promise:
   // a throw inside a .then() handler is swallowed and the derived object resolves to null.
   function adoptThenable(value) {
@@ -147,4 +126,28 @@
 
     facade.register();
   });
+
+  // IChannelMessage
+  window.addEventListener(
+    "message",
+    function (event) {
+      if (event.data === "Cloak__init_port__") {
+        if (event.ports[0] !== null) {
+          Cloak.channel = event.ports[0];
+
+          Cloak.channel.onmessage = function (event) {
+            const data = JSON.parse(event.data);
+
+            const plugin = Cloak.plugins[data.pluginName];
+            plugin.onMessage(data.payload);
+          };
+          // CloakReady is triggered after the native message port is attached.
+          window.document.dispatchEvent(new Event("CloakReady"));
+        }
+      }
+    },
+    { once: true },
+  );
+
+  return true;
 })();
