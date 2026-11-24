@@ -78,6 +78,23 @@ Exit the app.
 
 ---
 
+### `openAppGallery(): Promise<void>`
+
+Opens the current app's AppGallery details page using its bundle name. The method takes no arguments. The promise resolves on launch and rejects with a readable message if retrieving the bundle name or launching AppGallery fails.
+
+```typescript
+async function openCurrentAppInAppGallery() {
+  try {
+    await window.Cloak.plugins.App.openAppGallery();
+  } catch (error) {
+    const message = (error as { message?: string } | undefined)?.message;
+    console.error(message ?? 'Unable to open the AppGallery details page');
+  }
+}
+```
+
+---
+
 ### `addEventListener(event, handler)`
 
 Register an event listener.

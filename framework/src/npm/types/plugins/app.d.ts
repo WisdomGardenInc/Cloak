@@ -17,6 +17,12 @@ export interface AppPlugin extends Plugin {
   exitApp(): Promise<void>;
 
   /**
+   * Opens the current application's details page in AppGallery.
+   * Rejects with an error message if AppGallery cannot be launched.
+   */
+  openAppGallery(): Promise<void>;
+
+  /**
    * Registers a handler for app events.
    *
    * @param event - The event to listen for (e.g., "backButton").

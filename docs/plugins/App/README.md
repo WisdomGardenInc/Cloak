@@ -78,6 +78,23 @@ window.Cloak.plugins.App.exitApp();
 
 ---
 
+### `openAppGallery(): Promise<void>`
+
+根据当前应用的包名拉起 AppGallery 详情页，无需传参。拉起成功时 Promise 完成。获取包名或拉起应用市场失败时，Promise 会被拒绝，错误包含可读的提示。
+
+```typescript
+async function openCurrentAppInAppGallery() {
+  try {
+    await window.Cloak.plugins.App.openAppGallery();
+  } catch (error) {
+    const message = (error as { message?: string } | undefined)?.message;
+    console.error(message ?? '无法打开 AppGallery 详情页');
+  }
+}
+```
+
+---
+
 ### `addEventListener(event, handler)`
 
 监听事件。

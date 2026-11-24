@@ -1,3 +1,4 @@
+import { bundleManager, Want } from '@kit.AbilityKit';
 import Cloak from '../Cloak';
 import { CloakPlugin, PluginMethod } from './CloakPlugin';
 import { getLogger } from '../logger/index';
@@ -38,6 +39,23 @@ export default class App extends CloakPlugin {
   exitApp() {
     Cloak.getAbility().context.terminateSelf().catch(() => {
     });
+  }
+
+  @PluginMethod()
+  async openAppGallery(): Promise<void> {
+    try {
+      const bundleInfo = await bundleManager.getBundleInfoForSelf(
+        bundleManager.BundleFlag.GET_BUNDLE_INFO_DEFAULT
+      );
+      const want: Want = {
+        action: 'ohos.want.action.appdetail',
+        uri: `store://appgallery.huawei.com/app/detail?id=${bundleInfo.name}`,
+      };
+      await Cloak.getAbility().context.startAbility(want);
+    } catch (error) {
+      this.logger.error('openAppGallery error: %{public}s', String(error));
+      throw new Error('Unable to open the current app in AppGallery.');
+    }
   }
 
   @PluginMethod()
