@@ -142,6 +142,10 @@ See **[CloakPlugins](https://github.com/WisdomGardenInc/CloakPlugins/blob/master
 
    Develop custom plugins or find community plugins via [OHPM registry](https://ohpm.openharmony.cn)
 
+## Building and Testing
+
+For demo checks, HAR and npm build commands, and publishing steps, see the [build, test, and release guide](https://github.com/WisdomGardenInc/Cloak/blob/master/docs/RELEASING.md#building-testing-and-releasing-cloak).
+
 ## Example
 
 Complete the [Getting Started](#getting-started) steps, and refer to: https://github.com/WisdomGardenInc/Cloak for more details.

@@ -134,6 +134,10 @@
 
    根据需求开发自定义插件，或通过[社区](https://ohpm.openharmony.cn)获取适配 HarmonyOS 的插件。
 
+## 打包与测试
+
+查看 Demo 验收项、HAR 和 npm 打包命令，以及两个包的发布步骤。[打包、测试与发版指南](https://github.com/WisdomGardenInc/Cloak/blob/master/docs/RELEASING.md)
+
 ## 示例
 
 完成[使用方法](#使用方法)步骤，其他可参照: https://github.com/WisdomGardenInc/Cloak
